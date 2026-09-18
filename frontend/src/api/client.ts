@@ -76,17 +76,24 @@ export async function api<T>(
     throw new ApiError(401, 'Session expired. Please log in again.');
   }
 
-  const isJson = response.headers.get('content-type')?.includes('application/json');
+  const isJson = Boolean(response.headers.get('content-type')?.includes('application/json'));
   const data = isJson ? await response.json().catch(() => null) : await response.text().catch(() => null);
 
   if (!response.ok) {
-    const message =
-      data && typeof data === 'object' && 'detail' in data
-        ? typeof data.detail === 'string'
-          ? data.detail
-          : String(JSON.stringify(data.detail))
-        : `Request failed with status ${response.status}`;
-    throw new ApiError(response.status, message, message);
+    // A non-JSON 5xx (e.g. Vite/nginx proxy "can't connect to backend", or a
+    // crash dump) means the API is unreachable rather than reporting a real
+    // error. Normalize it to a network error so callers fall back to demo data.
+    const infraFailure = !isJson && response.status >= 500;
+    const status = infraFailure ? 0 : response.status;
+    let message: string;
+    if (isJson && data && typeof data === 'object' && 'detail' in data) {
+      message = typeof data.detail === 'string' ? data.detail : String(JSON.stringify(data.detail));
+    } else if (infraFailure) {
+      message = 'Network error — unable to reach the API (backend unreachable).';
+    } else {
+      message = typeof data === 'string' && data ? data : `Request failed with status ${response.status}`;
+    }
+    throw new ApiError(status, message, message);
   }
 
   return data as T;

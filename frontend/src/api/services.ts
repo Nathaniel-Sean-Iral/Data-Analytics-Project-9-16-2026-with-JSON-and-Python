@@ -18,13 +18,16 @@ import type {
 } from './types';
 
 /**
- * True when the API is not yet able to serve a request: no network access, or
- * the backend responded with a status meaning "endpoint not implemented"
- * (404 / 405 / 501). In those cases we fall back to bundled sample data so the
- * UI stays fully usable during development.
+ * True when the API is not yet able to serve a request: no network access, a
+ * proxy/gateway failure (502/503/504), or the backend responded with a status
+ * meaning "endpoint not implemented" (404 / 405 / 501). In those cases we fall
+ * back to bundled sample data so the UI stays fully usable during development.
  */
 function backendUnavailable(err: unknown): boolean {
-  return err instanceof ApiError && (err.status === 0 || err.status === 404 || err.status === 405 || err.status === 501);
+  return (
+    err instanceof ApiError &&
+    (err.status === 0 || err.status === 404 || err.status === 405 || err.status === 501 || err.status === 502 || err.status === 503 || err.status === 504)
+  );
 }
 
 async function withMock<T>(request: Promise<T>, fallback: T | (() => T)): Promise<T> {
