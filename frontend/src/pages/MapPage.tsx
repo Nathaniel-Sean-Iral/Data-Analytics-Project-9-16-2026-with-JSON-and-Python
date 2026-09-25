@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Marker, Popup, Tooltip } from 'react-leaflet';
-import { divIcon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import * as maplibregl from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { Building2, Users, Siren, Layers, MapPin } from 'lucide-react';
 import { PageHeader } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Spinner } from '@/components/ui/button';
 import { useAsync } from '@/lib/useAsync';
 import { fetchHouseholds, fetchCenters, fetchIncidents } from '@/api/services';
 import { cn } from '@/lib/cn';
-import {
-  INCIDENT_TYPE_LABELS,
-  INCIDENT_TYPE_TONES,
-  SEVERITY_TONES,
-  STATUS_LABELS,
-  STATUS_TONES,
-  formatDateTime,
-} from '@/lib/labels';
+import { formatDateTime } from '@/lib/labels';
 import type { IncidentSeverity } from '@/api/types';
+
+maplibregl.setWorkerUrl(workerUrl);
+
+const MAP_STYLES = [
+  'https://tiles.openfreemap.org/styles/liberty',
+  'https://demotiles.maplibre.org/style.json',
+] as const;
+const DEFAULT_CENTER: [number, number] = [121.15, 14.092];
 
 const SEVERITY_COLOR: Record<IncidentSeverity, string> = {
   low: '#10b981',
@@ -26,45 +26,85 @@ const SEVERITY_COLOR: Record<IncidentSeverity, string> = {
   critical: '#e11d3f',
 };
 
-const SEVERITY_RADIUS: Record<IncidentSeverity, number> = {
-  low: 300,
-  moderate: 350,
-  high: 400,
-  critical: 450,
-};
-
-function centerIcon() {
-  return divIcon({
-    className: '',
-    html: `<div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:#1d6cf5;border:2px solid #fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.4)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"/></svg></div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
-  });
-}
-
-function incidentIcon(severity: IncidentSeverity) {
-  const color = SEVERITY_COLOR[severity];
-  return divIcon({
-    className: '',
-    html: `<div style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;background:${color};border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.4)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-  });
-}
-
 interface LayerState {
   households: boolean;
   centers: boolean;
   incidents: boolean;
 }
 
+type MapPointItem = { id: number; lat?: number; lng?: number };
+
+function buildPointsGeoJson<T extends MapPointItem>(
+  items: T[],
+  kind: 'household' | 'center' | 'incident',
+  extraBuilder: (item: T) => Record<string, string | number | boolean | null | undefined>,
+) {
+  return {
+    type: 'FeatureCollection' as const,
+    features: items.map((item) => ({
+      type: 'Feature' as const,
+      geometry: {
+        type: 'Point' as const,
+        coordinates: [item.lng, item.lat] as [number, number],
+      },
+      properties: {
+        id: item.id,
+        kind,
+        ...extraBuilder(item),
+      },
+    })),
+  };
+}
+
 export function MapPage() {
   const households = useAsync(() => fetchHouseholds());
   const centers = useAsync(() => fetchCenters());
   const incidents = useAsync(() => fetchIncidents());
+  const mapContainer = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<maplibregl.Map | null>(null);
   const [layers, setLayers] = useState<LayerState>({ households: true, centers: true, incidents: true });
 
   const loading = households.loading || centers.loading || incidents.loading;
+  const validHouseholds = (households.data?.items ?? []).filter((h) => Number.isFinite(h.lat) && Number.isFinite(h.lng));
+  const validCenters = (centers.data ?? []).filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng));
+  const validIncidents = (incidents.data ?? []).filter((inc) => Number.isFinite(inc.lat) && Number.isFinite(inc.lng));
+
+  const householdGeoJson = useMemo(
+    () =>
+      buildPointsGeoJson(validHouseholds, 'household', (h) => ({
+        household_no: h.household_no,
+        head_name: h.head_name,
+        address: h.address,
+        barangay: h.barangay,
+        size: h.size,
+      })),
+    [validHouseholds],
+  );
+
+  const centerGeoJson = useMemo(
+    () =>
+      buildPointsGeoJson(validCenters, 'center', (c) => ({
+        name: c.name,
+        address: c.address,
+        barangay: c.barangay,
+        current_occupants: c.current_occupants,
+        capacity: c.capacity,
+      })),
+    [validCenters],
+  );
+
+  const incidentGeoJson = useMemo(
+    () =>
+      buildPointsGeoJson(validIncidents, 'incident', (inc) => ({
+        title: inc.title,
+        severity: inc.severity,
+        status: inc.status,
+        barangay: inc.barangay,
+        type: inc.type,
+        reported_at: inc.reported_at,
+      })),
+    [validIncidents],
+  );
 
   const toggle = (key: keyof LayerState) =>
     setLayers((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -75,11 +115,208 @@ export function MapPage() {
     { key: 'incidents', label: 'Incidents', icon: <Siren className="h-3.5 w-3.5" /> },
   ];
 
+  useEffect(() => {
+    if (!mapContainer.current || mapRef.current) return;
+
+    const map = new maplibregl.Map({
+      container: mapContainer.current,
+      style: MAP_STYLES[0],
+      center: DEFAULT_CENTER,
+      zoom: 12,
+      attributionControl: { compact: true },
+    });
+
+    mapRef.current = map;
+    map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true }), 'top-right');
+    map.addControl(new maplibregl.ScaleControl(), 'bottom-left');
+
+    let activeStyleIndex = 0;
+
+    const addMapLayers = () => {
+      if (!map.getSource('households')) {
+        map.addSource('households', { type: 'geojson', data: householdGeoJson });
+      } else {
+        (map.getSource('households') as maplibregl.GeoJSONSource | undefined)?.setData(householdGeoJson as GeoJSON.GeoJSON);
+      }
+
+      if (!map.getSource('centers')) {
+        map.addSource('centers', { type: 'geojson', data: centerGeoJson });
+      } else {
+        (map.getSource('centers') as maplibregl.GeoJSONSource | undefined)?.setData(centerGeoJson as GeoJSON.GeoJSON);
+      }
+
+      if (!map.getSource('incidents')) {
+        map.addSource('incidents', { type: 'geojson', data: incidentGeoJson });
+      } else {
+        (map.getSource('incidents') as maplibregl.GeoJSONSource | undefined)?.setData(incidentGeoJson as GeoJSON.GeoJSON);
+      }
+
+      if (!map.getLayer('households-layer')) {
+        map.addLayer({
+          id: 'households-layer',
+          type: 'circle',
+          source: 'households',
+          paint: {
+            'circle-radius': 6,
+            'circle-color': '#0f172a',
+            'circle-opacity': 0.9,
+            'circle-stroke-color': '#ffffff',
+            'circle-stroke-width': 1,
+          },
+        });
+      }
+
+      if (!map.getLayer('centers-layer')) {
+        map.addLayer({
+          id: 'centers-layer',
+          type: 'circle',
+          source: 'centers',
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#2563eb',
+            'circle-opacity': 0.9,
+            'circle-stroke-color': '#ffffff',
+            'circle-stroke-width': 1,
+          },
+        });
+      }
+
+      if (!map.getLayer('incidents-layer')) {
+        map.addLayer({
+          id: 'incidents-layer',
+          type: 'circle',
+          source: 'incidents',
+          paint: {
+            'circle-radius': ['case', ['==', ['get', 'severity'], 'critical'], 16, ['==', ['get', 'severity'], 'high'], 12, ['==', ['get', 'severity'], 'moderate'], 10, 8],
+            'circle-color': ['match', ['get', 'severity'], 'low', '#10b981', 'moderate', '#f59e0b', 'high', '#f97316', 'critical', '#e11d3f', '#94a3b8'],
+            'circle-opacity': 0.35,
+            'circle-stroke-color': ['match', ['get', 'severity'], 'low', '#10b981', 'moderate', '#f59e0b', 'high', '#f97316', 'critical', '#e11d3f', '#94a3b8'],
+            'circle-stroke-width': 1.5,
+          },
+        });
+      }
+
+      const showPopup = (layerId: string, sourceName: 'households' | 'centers' | 'incidents') => {
+        map.on('click', layerId, (event: any) => {
+          const feature = event.features?.[0];
+          if (!feature?.properties) return;
+
+          const props = feature.properties as Record<string, string | number | undefined>;
+          let html = '';
+
+          if (sourceName === 'households') {
+            html = `
+              <div style="min-width:220px; font-family: system-ui, sans-serif;">
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">${props.head_name ?? 'Household'}</div>
+                <div style="font-size: 11px; color: #475569; margin-bottom: 6px;">${props.household_no ?? ''}</div>
+                <div style="font-size: 12px; color: #334155; line-height: 1.5;">${props.address ?? ''}</div>
+                <div style="font-size: 11px; color: #475569; margin-top: 6px;">Size: ${props.size ?? 0} · ${props.barangay ?? ''}</div>
+              </div>
+            `;
+          }
+
+          if (sourceName === 'centers') {
+            const occupancy = Number(props.current_occupants ?? 0);
+            const capacity = Number(props.capacity ?? 0);
+            const load = capacity > 0 ? Math.round((occupancy / capacity) * 100) : 0;
+            html = `
+              <div style="min-width:220px; font-family: system-ui, sans-serif;">
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">${props.name ?? 'Evacuation Center'}</div>
+                <div style="font-size: 12px; color: #334155; line-height: 1.5;">${props.barangay ?? ''} · ${props.address ?? ''}</div>
+                <div style="font-size: 11px; color: #475569; margin-top: 6px;">Occupancy: <b>${occupancy}</b> / ${capacity} · Load: <b>${load}%</b></div>
+              </div>
+            `;
+          }
+
+          if (sourceName === 'incidents') {
+            const severity = String(props.severity ?? 'low');
+            const color = SEVERITY_COLOR[severity as IncidentSeverity] ?? '#94a3b8';
+            html = `
+              <div style="min-width:220px; font-family: system-ui, sans-serif;">
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">${props.title ?? 'Incident'}</div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px;">
+                  <span style="display:inline-block; border-radius:9999px; background:${color}22; color:${color}; font-weight:600; font-size:10px; padding:3px 8px; text-transform:capitalize;">${severity}</span>
+                  <span style="display:inline-block; border-radius:9999px; background:#e2e8f0; color:#334155; font-weight:600; font-size:10px; padding:3px 8px; text-transform:capitalize;">${String(props.status ?? 'reported')}</span>
+                </div>
+                <div style="font-size: 12px; color: #334155;">${props.barangay ?? ''}</div>
+                <div style="font-size: 11px; color: #475569; margin-top: 4px;">${formatDateTime(String(props.reported_at ?? ''))}</div>
+              </div>
+            `;
+          }
+
+          new maplibregl.Popup({ closeButton: true, closeOnClick: true })
+            .setLngLat(event.lngLat)
+            .setHTML(html)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', layerId, () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', layerId, () => {
+          map.getCanvas().style.cursor = '';
+        });
+      };
+
+      showPopup('households-layer', 'households');
+      showPopup('centers-layer', 'centers');
+      showPopup('incidents-layer', 'incidents');
+    };
+
+    const maybeFallbackStyle = (event: any) => {
+      const message = event?.error?.message ?? event?.message ?? '';
+      if (activeStyleIndex === 0 && /style|tile|fetch|network/i.test(message)) {
+        activeStyleIndex = 1;
+        map.setStyle(MAP_STYLES[1]);
+      }
+    };
+
+    map.on('style.load', addMapLayers);
+    map.on('error', maybeFallbackStyle);
+    map.once('load', addMapLayers);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, [householdGeoJson, centerGeoJson, incidentGeoJson]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const layerOrder: Array<keyof LayerState> = ['households', 'centers', 'incidents'];
+    layerOrder.forEach((key) => {
+      const id = `${key}-layer`;
+      const visibility = layers[key] ? 'visible' : 'none';
+      if (map.getLayer(id)) {
+        map.setLayoutProperty(id, 'visibility', visibility);
+      }
+    });
+  }, [layers]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const updateSource = (id: 'households' | 'centers' | 'incidents', data: unknown) => {
+      const source = map.getSource(id) as maplibregl.GeoJSONSource | undefined;
+      if (source) {
+        source.setData(data as GeoJSON.GeoJSON);
+      }
+    };
+
+    updateSource('households', householdGeoJson);
+    updateSource('centers', centerGeoJson);
+    updateSource('incidents', incidentGeoJson);
+  }, [householdGeoJson, centerGeoJson, incidentGeoJson]);
+
   return (
     <div className="flex h-full flex-col">
       <PageHeader
         title="Operations Map"
-        description="Households, evacuation centers and incident zones. Click markers for details."
+        description="Households, evacuation centers and incident zones mapped on OpenFreeMap with MapLibre."
         icon={<MapPin className="h-5 w-5" />}
       />
 
@@ -90,107 +327,7 @@ export function MapPage() {
           </div>
         )}
 
-        <MapContainer
-          center={[14.092, 121.15]}
-          zoom={13}
-          scrollWheelZoom
-          className="absolute inset-0 h-full w-full"
-        >
-          <TileLayer
-            attribution='&copy; OpenStreetMap contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
-          {layers.incidents &&
-            (incidents.data ?? []).map((inc) =>
-              inc.lat !== undefined && inc.lng !== undefined ? (
-                <CircleMarker
-                  key={`incident-zone-${inc.id}`}
-                  center={[inc.lat, inc.lng]}
-                  pathOptions={{ color: SEVERITY_COLOR[inc.severity], fillColor: SEVERITY_COLOR[inc.severity], fillOpacity: 0.1, weight: 1.5, dashArray: '6' }}
-                  radius={SEVERITY_RADIUS[inc.severity]}
-                >
-                  <Popup>
-                    <div className="min-w-[180px]">
-                      <p className="mb-1 text-sm font-semibold text-slate-900">{inc.title}</p>
-                      <div className="mb-1.5 flex flex-wrap gap-1">
-                        <Badge tone={INCIDENT_TYPE_TONES[inc.type]}>{INCIDENT_TYPE_LABELS[inc.type]}</Badge>
-                        <Badge tone={SEVERITY_TONES[inc.severity]}>{inc.severity}</Badge>
-                        <Badge tone={STATUS_TONES[inc.status]}>{STATUS_LABELS[inc.status]}</Badge>
-                      </div>
-                      <p className="text-xs text-slate-500">{inc.barangay} · {formatDateTime(inc.reported_at)}</p>
-                    </div>
-                  </Popup>
-                </CircleMarker>
-              ) : null,
-            )}
-
-          {layers.incidents &&
-            (incidents.data ?? []).map((inc) =>
-              inc.lat !== undefined && inc.lng !== undefined ? (
-                <Marker
-                  key={`incident-pin-${inc.id}`}
-                  position={[inc.lat, inc.lng]}
-                  icon={incidentIcon(inc.severity)}
-                >
-                  <Popup>
-                    <div className="min-w-[180px]">
-                      <p className="mb-1 text-sm font-semibold text-slate-900">{inc.title}</p>
-                      <div className="mb-1.5 flex flex-wrap gap-1">
-                        <Badge tone={INCIDENT_TYPE_TONES[inc.type]}>{INCIDENT_TYPE_LABELS[inc.type]}</Badge>
-                        <Badge tone={SEVERITY_TONES[inc.severity]}>{inc.severity}</Badge>
-                        <Badge tone={STATUS_TONES[inc.status]}>{STATUS_LABELS[inc.status]}</Badge>
-                      </div>
-                      <p className="text-xs text-slate-500">{inc.barangay} · {formatDateTime(inc.reported_at)}</p>
-                    </div>
-                  </Popup>
-                  <Tooltip direction="top" offset={[0, -12]}>
-                    {inc.title}
-                  </Tooltip>
-                </Marker>
-              ) : null,
-            )}
-
-          {layers.centers &&
-            (centers.data ?? []).map((c) => (
-              <Marker key={`center-${c.id}`} position={[c.lat, c.lng]} icon={centerIcon()}>
-                <Popup>
-                  <div className="min-w-[180px]">
-                    <p className="text-sm font-semibold text-slate-900">{c.name}</p>
-                    <div className="mt-1 space-y-0.5 text-xs text-slate-600">
-                      <p>{c.barangay} · {c.address}</p>
-                      <p>Occupancy: <b>{c.current_occupants}</b> / {c.capacity}</p>
-                      <p>Load: <b>{Math.round((c.current_occupants / c.capacity) * 100)}%</b></p>
-                    </div>
-                  </div>
-                </Popup>
-                <Tooltip direction="top" offset={[0, -12]}>
-                  {c.name}
-                </Tooltip>
-              </Marker>
-            ))}
-
-          {layers.households &&
-            (households.data?.items ?? []).map((h) => (
-              <CircleMarker
-                key={`household-${h.id}`}
-                center={[h.lat, h.lng]}
-                pathOptions={{ color: '#cbd5e1', fillColor: '#0f172a', fillOpacity: 0.8, weight: 1 }}
-                radius={5}
-              >
-                <Popup>
-                  <div className="max-w-[220px]">
-                    <p className="text-sm font-semibold text-slate-900">{h.head_name}</p>
-                    <p className="text-xs text-slate-500">{h.household_no}</p>
-                    <div className="mt-1 space-y-0.5 text-xs text-slate-600">
-                      <p>{h.address}</p>
-                      <p>Size: {h.size} ({h.children_count} children, {h.elderly_count} elderly, {h.pwd_count} PWD)</p>
-                    </div>
-                  </div>
-                </Popup>
-              </CircleMarker>
-            ))}
-        </MapContainer>
+        <div ref={mapContainer} className="absolute inset-0 h-full w-full" />
 
         <div className="absolute left-3 top-3 z-[600] rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">

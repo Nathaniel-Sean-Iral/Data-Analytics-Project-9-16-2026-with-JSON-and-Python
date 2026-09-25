@@ -6,9 +6,9 @@ import { Button, Spinner } from '@/components/ui/button';
 import { Input, FormField } from '@/components/ui/form';
 
 const DEMO_ACCOUNTS = [
-  { username: 'admin', password: 'admin', label: 'Admin', desc: 'Full access', icon: <ShieldAlert className="h-4 w-4" /> },
-  { username: 'responder', password: 'responder', label: 'Responder', desc: 'Field operations', icon: <Radio className="h-4 w-4" /> },
-  { username: 'viewer', password: 'viewer', label: 'Viewer', desc: 'Read-only', icon: <Eye className="h-4 w-4" /> },
+  { username: 'admin', password: 'password', label: 'Admin', desc: 'Full access', icon: <ShieldAlert className="h-4 w-4" /> },
+  { username: 'responder', password: 'password', label: 'Responder', desc: 'Field operations', icon: <Radio className="h-4 w-4" /> },
+  { username: 'viewer', password: 'password', label: 'Viewer', desc: 'Read-only', icon: <Eye className="h-4 w-4" /> },
 ];
 
 export function LoginPage() {
@@ -110,7 +110,7 @@ export function LoginPage() {
             ))}
           </div>
           <p className="mt-2.5 text-center text-[11px] text-slate-400">
-            Click a card to fill credentials, then press sign in. Works offline with sample data.
+            Click a card to fill credentials, then press sign in. This uses the live local API when available.
           </p>
           {loading && (
             <div className="mt-2 flex items-center justify-center gap-2 text-xs text-slate-300">

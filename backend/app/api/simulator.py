@@ -1,12 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
+from app.core.deps import require_roles
 from app.services.store import run_scenario
 
 router = APIRouter(tags=["simulator"])
 
 
 @router.post("/simulator/run")
-def run_simulator(payload: dict):
+def run_simulator(payload: dict, _user=Depends(require_roles("admin", "responder"))):
     barangay = payload.get("barangay")
     affected_households = payload.get("affected_households")
     if not barangay or affected_households is None:

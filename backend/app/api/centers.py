@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
+from app.core.deps import require_roles
 from app.schemas import CenterCreate, CenterUpdate, EvacuationCenter
 from app.services.store import create_center, get_center, get_centers, update_center
 
@@ -7,12 +8,12 @@ router = APIRouter(tags=["centers"])
 
 
 @router.get("/centers")
-def list_centers():
+def list_centers(_user=Depends(require_roles("admin", "responder", "viewer"))):
     return get_centers()
 
 
 @router.get("/centers/{center_id}")
-def get_center_by_id(center_id: int):
+def get_center_by_id(center_id: int, _user=Depends(require_roles("admin", "responder", "viewer"))):
     center = get_center(center_id)
     if center is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Center not found")
@@ -20,12 +21,16 @@ def get_center_by_id(center_id: int):
 
 
 @router.post("/centers", response_model=EvacuationCenter)
-def create_new_center(payload: CenterCreate):
+def create_new_center(payload: CenterCreate, _user=Depends(require_roles("admin", "responder"))):
     return create_center(payload.model_dump())
 
 
 @router.put("/centers/{center_id}", response_model=EvacuationCenter)
-def update_existing_center(center_id: int, payload: CenterUpdate):
+def update_existing_center(
+    center_id: int,
+    payload: CenterUpdate,
+    _user=Depends(require_roles("admin", "responder")),
+):
     updates = {k: v for k, v in payload.model_dump(exclude_unset=True).items() if v is not None}
     if not updates:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No fields to update")

@@ -4,6 +4,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from typing import Any
 
+from app.core.barangays import SAN_RAFAEL_BARANGAYS
 from app.db.session import SessionLocal
 from app.models.center import EvacuationCenter
 from app.models.household import Household
@@ -108,7 +109,7 @@ def seed_demo_data():
                         household_no="H-001",
                         head_name="Maria Santos",
                         address="24 Rizal St",
-                        barangay="Barangay 1",
+                        barangay="Poblacion",
                         size=5,
                         children_count=2,
                         elderly_count=1,
@@ -122,7 +123,7 @@ def seed_demo_data():
                         household_no="H-002",
                         head_name="Jose Dela Cruz",
                         address="12 Mabini Ave",
-                        barangay="Barangay 2",
+                        barangay="San Roque",
                         size=4,
                         children_count=1,
                         elderly_count=1,
@@ -136,7 +137,7 @@ def seed_demo_data():
                         household_no="H-003",
                         head_name="Alicia Ramos",
                         address="33 Luna Street",
-                        barangay="Barangay 1",
+                        barangay="Balagtas",
                         size=3,
                         children_count=1,
                         elderly_count=0,
@@ -153,8 +154,8 @@ def seed_demo_data():
             db.add_all(
                 [
                     EvacuationCenter(
-                        name="San Jose Evacuation Center",
-                        barangay="Barangay 1",
+                        name="Poblacion Evacuation Center",
+                        barangay="Poblacion",
                         address="San Jose Avenue",
                         capacity=120,
                         current_occupants=18,
@@ -165,8 +166,8 @@ def seed_demo_data():
                         status="active",
                     ),
                     EvacuationCenter(
-                        name="Barangay 2 Relief Hub",
-                        barangay="Barangay 2",
+                        name="San Roque Relief Hub",
+                        barangay="San Roque",
                         address="Mabini Extension",
                         capacity=80,
                         current_occupants=12,
@@ -177,8 +178,8 @@ def seed_demo_data():
                         status="active",
                     ),
                     EvacuationCenter(
-                        name="Purok 3 Safe Haven",
-                        barangay="Barangay 3",
+                        name="Maronquillo Safe Haven",
+                        barangay="Maronquillo",
                         address="Purok 3 Road",
                         capacity=60,
                         current_occupants=5,
@@ -243,7 +244,7 @@ def seed_demo_data():
                     Incident(
                         title="Flooding near creek",
                         type="flood",
-                        barangay="Barangay 1",
+                        barangay="Balagtas",
                         severity="high",
                         status="responding",
                         description="Water level rising near the creek after heavy rain.",
@@ -257,7 +258,7 @@ def seed_demo_data():
                     Incident(
                         title="Electrical fire report",
                         type="fire",
-                        barangay="Barangay 2",
+                        barangay="Poblacion",
                         severity="moderate",
                         status="assessing",
                         description="Small electrical fire reported near a residential unit.",

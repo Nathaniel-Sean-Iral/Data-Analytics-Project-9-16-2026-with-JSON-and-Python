@@ -18,11 +18,15 @@ import type {
 } from './types';
 
 /**
- * True when the API is not yet able to serve a request: no network access, a
- * proxy/gateway failure (502/503/504), or the backend responded with a status
- * meaning "endpoint not implemented" (404 / 405 / 501). In those cases we fall
- * back to bundled sample data so the UI stays fully usable during development.
+ * Mock data fallback is intentionally opt-in for demo-only scenarios.
+ * The app should use the live backend by default; the fallback remains available
+ * only if the environment explicitly enables it.
+ *
+ * When the backend is unavailable, the UI can still remain usable by falling
+ * back to bundled sample data for development and demos.
  */
+const ENABLE_MOCK_FALLBACK = import.meta.env.VITE_ENABLE_MOCK_FALLBACK === 'true';
+
 function backendUnavailable(err: unknown): boolean {
   return (
     err instanceof ApiError &&
@@ -34,7 +38,7 @@ async function withMock<T>(request: Promise<T>, fallback: T | (() => T)): Promis
   try {
     return await request;
   } catch (err) {
-    if (!backendUnavailable(err)) throw err;
+    if (!ENABLE_MOCK_FALLBACK || !backendUnavailable(err)) throw err;
     return typeof fallback === 'function' ? (fallback as () => T)() : fallback;
   }
 }

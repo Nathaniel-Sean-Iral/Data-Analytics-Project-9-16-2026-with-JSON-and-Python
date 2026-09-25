@@ -27,7 +27,11 @@ def test_household_create_persists_to_database():
         "notes": "Created by test",
     }
 
-    response = client.post("/api/households", json=payload)
+    response = client.post(
+        "/api/households",
+        json=payload,
+        headers={"Authorization": "Bearer mock-token-admin"},
+    )
     assert response.status_code == 200, response.text
 
     db = SessionLocal()
