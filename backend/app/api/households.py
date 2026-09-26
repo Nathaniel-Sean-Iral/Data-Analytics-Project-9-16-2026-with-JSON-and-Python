@@ -1,8 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from pydantic import BaseModel
 
 from app.core.deps import require_roles
 from app.schemas import Household, HouseholdCreate, HouseholdUpdate
-from app.services.store import create_household, delete_household, get_household, get_households, update_household
+from app.services.store import create_household, delete_household, get_household, get_households, import_households, update_household
+
+
+class HouseholdImportRequest(BaseModel):
+    csv: str
 
 router = APIRouter(tags=["households"])
 
@@ -33,6 +38,20 @@ def create_new_household(
     _user=Depends(require_roles("admin", "responder")),
 ):
     return create_household(payload.model_dump())
+
+
+@router.post("/households/import")
+def import_household_csv(
+    payload: HouseholdImportRequest,
+    _user=Depends(require_roles("admin", "responder")),
+):
+    csv_text = payload.csv or ""
+    if not csv_text.strip():
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="CSV content is required")
+    try:
+        return import_households(csv_text)
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
 
 
 @router.put("/households/{household_id}", response_model=Household)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+import io
 from collections import defaultdict
 from datetime import datetime, timezone
 from typing import Any
@@ -277,9 +279,6 @@ def seed_demo_data():
         db.close()
 
 
-seed_demo_data()
-
-
 def get_households(barangay: str | None = None):
     db = SessionLocal()
     try:
@@ -337,6 +336,44 @@ def delete_household(household_id: int):
         db.delete(item)
         db.commit()
         return True
+    finally:
+        db.close()
+
+
+def import_households(csv_text: str):
+    rows = list(csv.DictReader(io.StringIO(csv_text.strip())))
+    if not rows:
+        return {"created": 0, "items": []}
+
+    created_items = []
+    db = SessionLocal()
+    try:
+        for row in rows:
+            payload = {
+                "household_no": (row.get("household_no") or "").strip(),
+                "head_name": (row.get("head_name") or "").strip(),
+                "address": (row.get("address") or "").strip(),
+                "barangay": (row.get("barangay") or "").strip(),
+                "size": int((row.get("size") or 1) or 1),
+                "children_count": int((row.get("children_count") or 0) or 0),
+                "elderly_count": int((row.get("elderly_count") or 0) or 0),
+                "pwd_count": int((row.get("pwd_count") or 0) or 0),
+                "contact": (row.get("contact") or "").strip(),
+                "lat": float(row.get("lat") or 0),
+                "lng": float(row.get("lng") or 0),
+                "notes": (row.get("notes") or "") or None,
+            }
+            if not payload["household_no"] or not payload["head_name"] or not payload["address"] or not payload["barangay"]:
+                continue
+            existing = db.query(Household).filter(Household.household_no == payload["household_no"]).first()
+            if existing:
+                continue
+            item = Household(**payload)
+            db.add(item)
+            db.flush()
+            created_items.append(serialize_household(item))
+        db.commit()
+        return {"created": len(created_items), "items": created_items}
     finally:
         db.close()
 

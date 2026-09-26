@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Users, Pencil, Trash2, Plus, FileUp, Phone, Home } from 'lucide-react';
 import { PageHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,7 @@ import {
   createHousehold,
   updateHousehold,
   deleteHousehold,
+  importHouseholdsCsv,
 } from '@/api/services';
 import { BARANGAYS } from '@/api/mock';
 import type { Household } from '@/api/types';
@@ -191,6 +192,7 @@ export function HouseholdsPage() {
   const { data, loading, refetch } = useAsync(() => fetchHouseholds());
   const { hasRole } = useAuth();
   const { success, error } = useToast();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const canEdit = hasRole('admin');
   const [query, setQuery] = useState('');
@@ -258,6 +260,21 @@ export function HouseholdsPage() {
       void refetch();
     } catch (err) {
       error(err instanceof Error ? err.message : 'Failed to delete household');
+    }
+  }
+
+  async function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const result = await importHouseholdsCsv(text);
+      success(`${result.created} households imported`);
+      event.target.value = '';
+      void refetch();
+    } catch (err) {
+      error(err instanceof Error ? err.message : 'Failed to import household CSV');
     }
   }
 
@@ -357,7 +374,8 @@ export function HouseholdsPage() {
         actions={
           canEdit ? (
             <>
-              <Button variant="secondary" onClick={() => error('CSV/GeoJSON import not connected to the backend yet.')}>
+              <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImport} />
+              <Button variant="secondary" onClick={() => fileInputRef.current?.click()}>
                 <FileUp className="h-4 w-4" />
                 Import
               </Button>

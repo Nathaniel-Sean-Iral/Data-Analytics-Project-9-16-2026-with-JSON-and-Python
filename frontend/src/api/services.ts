@@ -99,6 +99,13 @@ export async function deleteHousehold(id: number): Promise<void> {
   await withMock(http.delete<unknown>(`/households/${id}`), () => undefined);
 }
 
+export async function importHouseholdsCsv(csv: string): Promise<{ created: number; items: Household[] }> {
+  return withMock(http.post<{ created: number; items: Household[] }>('/households/import', { csv }), () => ({
+    created: 0,
+    items: [],
+  }));
+}
+
 /* ---------------------------- Centers ----------------------------- */
 
 export async function fetchCenters(): Promise<EvacuationCenter[]> {

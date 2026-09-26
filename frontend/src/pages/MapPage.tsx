@@ -56,6 +56,44 @@ function buildPointsGeoJson<T extends MapPointItem>(
   };
 }
 
+function buildIncidentZonesGeoJson(items: Array<{ id: number; lat?: number; lng?: number; severity?: IncidentSeverity; title?: string; barangay?: string; status?: string; reported_at?: string }>) {
+  const points = 24;
+  const radius = 0.0018;
+
+  return {
+    type: 'FeatureCollection' as const,
+    features: items
+      .filter((incident) => Number.isFinite(incident.lat) && Number.isFinite(incident.lng))
+      .map((incident) => {
+        const centerLng = Number(incident.lng);
+        const centerLat = Number(incident.lat);
+        const ring = Array.from({ length: points + 1 }, (_, index) => {
+          const angle = (index / points) * Math.PI * 2;
+          const lat = centerLat + Math.cos(angle) * radius;
+          const lng = centerLng + Math.sin(angle) * radius;
+          return [lng, lat] as [number, number];
+        });
+
+        return {
+          type: 'Feature' as const,
+          geometry: {
+            type: 'Polygon' as const,
+            coordinates: [ring],
+          },
+          properties: {
+            id: incident.id,
+            kind: 'incident-zone',
+            title: incident.title ?? 'Incident',
+            severity: incident.severity ?? 'low',
+            barangay: incident.barangay ?? '',
+            status: incident.status ?? 'reported',
+            reported_at: incident.reported_at ?? '',
+          },
+        };
+      }),
+  };
+}
+
 export function MapPage() {
   const households = useAsync(() => fetchHouseholds());
   const centers = useAsync(() => fetchCenters());
@@ -106,6 +144,8 @@ export function MapPage() {
     [validIncidents],
   );
 
+  const incidentZoneGeoJson = useMemo(() => buildIncidentZonesGeoJson(validIncidents), [validIncidents]);
+
   const toggle = (key: keyof LayerState) =>
     setLayers((prev) => ({ ...prev, [key]: !prev[key] }));
 
@@ -151,6 +191,12 @@ export function MapPage() {
         (map.getSource('incidents') as maplibregl.GeoJSONSource | undefined)?.setData(incidentGeoJson as GeoJSON.GeoJSON);
       }
 
+      if (!map.getSource('incident-zones')) {
+        map.addSource('incident-zones', { type: 'geojson', data: incidentZoneGeoJson });
+      } else {
+        (map.getSource('incident-zones') as maplibregl.GeoJSONSource | undefined)?.setData(incidentZoneGeoJson as GeoJSON.GeoJSON);
+      }
+
       if (!map.getLayer('households-layer')) {
         map.addLayer({
           id: 'households-layer',
@@ -181,6 +227,19 @@ export function MapPage() {
         });
       }
 
+      if (!map.getLayer('incident-zones-layer')) {
+        map.addLayer({
+          id: 'incident-zones-layer',
+          type: 'fill',
+          source: 'incident-zones',
+          paint: {
+            'fill-color': ['match', ['get', 'severity'], 'low', '#10b981', 'moderate', '#f59e0b', 'high', '#f97316', 'critical', '#e11d3f', '#94a3b8'],
+            'fill-opacity': 0.18,
+            'fill-outline-color': ['match', ['get', 'severity'], 'low', '#10b981', 'moderate', '#f59e0b', 'high', '#f97316', 'critical', '#e11d3f', '#94a3b8'],
+          },
+        });
+      }
+
       if (!map.getLayer('incidents-layer')) {
         map.addLayer({
           id: 'incidents-layer',
@@ -196,7 +255,7 @@ export function MapPage() {
         });
       }
 
-      const showPopup = (layerId: string, sourceName: 'households' | 'centers' | 'incidents') => {
+      const showPopup = (layerId: string, sourceName: 'households' | 'centers' | 'incidents' | 'incident-zones') => {
         map.on('click', layerId, (event: any) => {
           const feature = event.features?.[0];
           if (!feature?.properties) return;
@@ -228,7 +287,7 @@ export function MapPage() {
             `;
           }
 
-          if (sourceName === 'incidents') {
+          if (sourceName === 'incidents' || sourceName === 'incident-zones') {
             const severity = String(props.severity ?? 'low');
             const color = SEVERITY_COLOR[severity as IncidentSeverity] ?? '#94a3b8';
             html = `
@@ -261,6 +320,7 @@ export function MapPage() {
 
       showPopup('households-layer', 'households');
       showPopup('centers-layer', 'centers');
+      showPopup('incident-zones-layer', 'incident-zones');
       showPopup('incidents-layer', 'incidents');
     };
 
@@ -280,7 +340,7 @@ export function MapPage() {
       map.remove();
       mapRef.current = null;
     };
-  }, [householdGeoJson, centerGeoJson, incidentGeoJson]);
+  }, [householdGeoJson, centerGeoJson, incidentGeoJson, incidentZoneGeoJson]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -294,13 +354,17 @@ export function MapPage() {
         map.setLayoutProperty(id, 'visibility', visibility);
       }
     });
+
+    if (map.getLayer('incident-zones-layer')) {
+      map.setLayoutProperty('incident-zones-layer', 'visibility', layers.incidents ? 'visible' : 'none');
+    }
   }, [layers]);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
 
-    const updateSource = (id: 'households' | 'centers' | 'incidents', data: unknown) => {
+    const updateSource = (id: 'households' | 'centers' | 'incidents' | 'incident-zones', data: unknown) => {
       const source = map.getSource(id) as maplibregl.GeoJSONSource | undefined;
       if (source) {
         source.setData(data as GeoJSON.GeoJSON);
@@ -310,7 +374,8 @@ export function MapPage() {
     updateSource('households', householdGeoJson);
     updateSource('centers', centerGeoJson);
     updateSource('incidents', incidentGeoJson);
-  }, [householdGeoJson, centerGeoJson, incidentGeoJson]);
+    updateSource('incident-zones', incidentZoneGeoJson);
+  }, [householdGeoJson, centerGeoJson, incidentGeoJson, incidentZoneGeoJson]);
 
   return (
     <div className="flex h-full flex-col">
