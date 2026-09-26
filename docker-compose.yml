@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: disaster
+      POSTGRES_PASSWORD: disaster
+      POSTGRES_DB: disaster_prep
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U disaster -d disaster_prep"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://disaster:disaster@db:5432/disaster_prep
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production-0123456789abcdef}
+      ACCESS_TOKEN_EXPIRE_MINUTES: 480
+      CORS_ORIGINS: '["*"]'
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "8000"
+    # For local convenience also map the port so /docs is visible:
+    ports:
+      - "8000:8000"
+
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata:
