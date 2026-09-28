@@ -17,12 +17,21 @@ services:
     build: ./backend
     environment:
       DATABASE_URL: postgresql+psycopg://disaster:disaster@db:5432/disaster_prep
-      SECRET_KEY: ${SECRET_KEY:-change-me-in-production-0123456789abcdef}
+      # Left empty on purpose: entrypoint.sh generates a real key on first run
+      # and persists it in the api_secret volume. Set it here (or in a .env
+      # file) to supply your own, e.g. for CI.
+      SECRET_KEY: ${SECRET_KEY:-}
       ACCESS_TOKEN_EXPIRE_MINUTES: 480
       CORS_ORIGINS: '["*"]'
+      # Fills an empty database with the demo accounts and sample data so a
+      # fresh `docker compose up` is log-in-able. Set to false for anything
+      # resembling a real deployment.
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - api_secret:/run/secrets
     expose:
       - "8000"
     # For local convenience also map the port so /docs is visible:
@@ -38,3 +47,4 @@ services:
 
 volumes:
   pgdata:
+  api_secret:

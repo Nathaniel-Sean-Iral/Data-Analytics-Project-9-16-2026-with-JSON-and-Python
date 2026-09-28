@@ -1,0 +1,8 @@
+# Shell scripts inside containers must stay LF. Git on Windows will otherwise
+# check them out with CRLF, and /bin/sh then fails on the stray \r.
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
