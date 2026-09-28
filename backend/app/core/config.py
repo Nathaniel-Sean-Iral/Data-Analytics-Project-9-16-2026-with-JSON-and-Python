@@ -5,6 +5,18 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 _DEV_SECRET_KEY = "dev-only-change-me-in-production-0123456789abcdef"
 
+# Every default secret that has ever been committed to this repo, including the
+# fallback in docker-compose.yml. Matching only the dev default left the compose
+# path booting Postgres with a publicly-known signing key.
+_KNOWN_PLACEHOLDER_SECRETS = frozenset(
+    {
+        _DEV_SECRET_KEY,
+        "change-me-in-production-0123456789abcdef0123456789abcdef",
+    }
+)
+
+_PLACEHOLDER_MARKERS = ("change-me", "changeme", "dev-only", "placeholder", "example", "your-secret")
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
@@ -28,16 +40,30 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def _reject_dev_secrets_in_production(self) -> "Settings":
-        """Refuse to boot with the shared dev secret once Postgres is in play.
+        """Refuse to boot with a known placeholder secret once Postgres is in play.
 
         The dev default is intentionally committed so a fresh clone runs with no
         setup, but shipping it would let anyone mint valid admin tokens.
         """
-        if self.secret_key == _DEV_SECRET_KEY and not self.database_url.startswith("sqlite"):
+        if self.database_url.startswith("sqlite"):
+            return self
+
+        secret = self.secret_key
+        if secret in _KNOWN_PLACEHOLDER_SECRETS:
             raise ValueError(
-                "SECRET_KEY is still the committed development default while "
-                "DATABASE_URL points at a non-SQLite database. Set a unique "
-                "SECRET_KEY (>= 32 random bytes) before deploying."
+                "SECRET_KEY is a known placeholder (it is committed in this repo) "
+                "while DATABASE_URL points at a non-SQLite database. Set a unique "
+                "SECRET_KEY (>= 32 random bytes) before deploying. Generate one "
+                'with: python -c "import secrets; print(secrets.token_urlsafe(48))"'
+            )
+
+        lowered = secret.lower()
+        if any(marker in lowered for marker in _PLACEHOLDER_MARKERS):
+            raise ValueError(
+                "SECRET_KEY looks like a placeholder while DATABASE_URL points at "
+                "a non-SQLite database. Set a unique SECRET_KEY (>= 32 random bytes) "
+                'before deploying. Generate one with: python -c '
+                '"import secrets; print(secrets.token_urlsafe(48))"'
             )
         return self
 
