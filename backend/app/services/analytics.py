@@ -1,21 +1,36 @@
 import math
 from collections import defaultdict
 
+from app.core.config import settings
 from app.services.common import PER_PERSON_RATES, RESOURCE_TYPE_LABELS
-from app.services.allocation import allocate
+from app.services.allocation import project_allocation
+
+
+def _consumption_rate(resource_type: str) -> float:
+    """Per-evacuee consumption rate, overridable by the tunable settings."""
+    if resource_type == "water":
+        return settings.days_water_per_person
+    if resource_type == "rice":
+        return settings.rice_sacks_per_person
+    return PER_PERSON_RATES.get(resource_type, 0.05)
 
 
 def run_scenario(db, barangay: str, affected_households: int) -> dict:
-    """What-if calculation: project center loads and resource shortfalls."""
+    """What-if calculation: project center loads and resource shortfalls.
+
+    Both halves of the report are driven by `affected_households`, so the
+    projected center loads/overflow and the projected resource shortfalls always
+    describe the same number of evacuees.
+    """
     from app.models.resource import Resource
 
-    allocation = allocate(db, barangay=barangay)
-    evacuees = affected_households * 4  # avg persons per household
+    allocation = project_allocation(db, barangay=barangay, affected_households=affected_households)
+    evacuees = affected_households * max(1, settings.avg_persons_per_household)
 
     resources = db.query(Resource).order_by(Resource.id).all()
     needs = []
     for r in resources:
-        rate = PER_PERSON_RATES.get(r.type, 0.05)
+        rate = _consumption_rate(r.type)
         required = math.ceil(evacuees * rate)
         deficit = max(0, required - r.quantity_on_hand)
         if deficit == 0:
@@ -41,6 +56,7 @@ def run_scenario(db, barangay: str, affected_households: int) -> dict:
             "title": f"{barangay} affected ({affected_households} households evacuees)",
             "barangay": barangay,
             "affected_households": affected_households,
+            "estimated_evacuees": evacuees,
         },
         "allocation": allocation,
         "resource_needs": needs,
@@ -109,7 +125,10 @@ def dashboard_stats(db) -> dict:
 
     from app.models.evacuation import EvacuationAssignment
 
-    assigned = db.query(EvacuationAssignment).count()
+    # Allocation runs are kept for audit, so the same household can appear in
+    # several requests. Count distinct households, otherwise the figure grows
+    # every time an operator re-runs the allocator.
+    assigned = db.query(EvacuationAssignment.household_id).distinct().count()
     return {
         "households": households,
         "vulnerable_members": vulnerable_members,

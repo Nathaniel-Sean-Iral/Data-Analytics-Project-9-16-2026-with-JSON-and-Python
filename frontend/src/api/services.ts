@@ -196,9 +196,10 @@ export async function runScenario(scenario: { barangay: string; affected_househo
 
 function mockScenario(scenario: { barangay: string; affected_households: number }): ScenarioReport {
   const allocation = mock.mockAllocation(scenario.barangay);
+  const estimated_evacuees = scenario.affected_households * 4;
   const needs: ScenarioReport['resource_needs'] = mock.mockResources().map((r) => {
     const perPerson = r.type === 'rice' ? 0.1 : r.type === 'water' ? 3 : r.name.startsWith('Canned') ? 0.5 : 0.25;
-    const required = Math.ceil(scenario.affected_households * 4 * perPerson);
+    const required = Math.ceil(estimated_evacuees * perPerson);
     const deficit = Math.max(0, required - r.quantity_on_hand);
     return {
       resource_id: r.id,
@@ -210,7 +211,11 @@ function mockScenario(scenario: { barangay: string; affected_households: number 
       status: deficit === 0 ? 'adequate' : deficit > required * 0.5 ? 'critical' : 'shortage',
     };
   });
-  return { scenario: { ...scenario, title: `${scenario.barangay} affected (${scenario.affected_households} households evacuees)` }, allocation, resource_needs: needs };
+  return {
+    scenario: { ...scenario, title: `${scenario.barangay} affected (${scenario.affected_households} households evacuees)`, estimated_evacuees },
+    allocation,
+    resource_needs: needs,
+  };
 }
 
 /* ------------------------------ Stats ----------------------------- */

@@ -95,7 +95,10 @@ Incident shape: `title, type, barangay, severity, status, description?, lat?, ln
   "coverage_gaps":   ["<barangay> has no evacuation center — pre-position transport assets."]
 }
 ```
-Assignments persist to `evacuation_assignments`.
+Assignments persist to `evacuation_assignments`. Rows are kept for audit, so
+re-running the allocator appends a new plan rather than replacing the old one —
+`GET /api/dashboard/stats` reports `assigned_households` as the number of
+**distinct** households, not the number of rows.
 
 `GET /api/evacuations/center-loads` → current occupancy snapshot (`[CenterLoad]` above, no allocation run).
 
@@ -104,19 +107,34 @@ Assignments persist to `evacuation_assignments`.
 ## Simulator
 
 `POST /api/simulator/run` *(responder+)* — body `{ "barangay": "Poblacion", "affected_households": 100 }`.
+`barangay` is required; `affected_households` must be ≥ 1.
 
 200 → ScenarioReport:
 ```
 {
-  "scenario": { "title", "barangay", "affected_households" },
-  "allocation": AllocationResult,          // projected against current capacities
+  "scenario": { "title", "barangay", "affected_households", "estimated_evacuees" },
+  "allocation": AllocationResult,          // dry run, request_id is prefixed "SIM-"
   "resource_needs": [{
      "resource_id", "name", "current", "required", "deficit", "unit",
      "status": adequate|shortage|critical    // critical = deficit > 50% of required
   }]
 }
 ```
-Evacuees modeled as `affected_households × AVG_PERSONS_PER_HOUSEHOLD` (default 4); rates per resource type in `app/services/common.py`.
+
+The scenario is a **dry run**: nothing is written to `evacuation_assignments`, so
+assignment `id` values in the nested `allocation` are `null` (use
+`POST /api/evacuations/allocate` when you want a persisted plan).
+
+Both halves of the report describe the same evacuee count. The nested allocation
+models exactly `affected_households` households in `barangay` — the registry's
+real rows first, then synthetic households anchored at the barangay centroid —
+so the projected `center_loads` and `overflow` genuinely reflect the scenario
+input rather than however many rows happen to be in the database.
+
+Evacuees modeled as `affected_households × AVG_PERSONS_PER_HOUSEHOLD` (default 4);
+water and rice rates are overridable via `DAYS_WATER_PER_PERSON` /
+`RICE_SACKS_PER_PERSON`, other rates come from `PER_PERSON_RATES` in
+`app/services/common.py`.
 
 ---
 

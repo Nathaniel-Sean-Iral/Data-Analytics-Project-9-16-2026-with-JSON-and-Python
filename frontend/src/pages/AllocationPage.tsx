@@ -162,7 +162,7 @@ export function AllocationPage() {
           <DataTable
             columns={columns}
             rows={result.assignments}
-            keyFor={(r) => r.id}
+            keyFor={(r) => r.id ?? r.household_no}
             sortable
             emptyTitle="No assignments generated"
           />

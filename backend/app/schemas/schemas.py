@@ -222,7 +222,10 @@ class IncidentOut(IncidentBase):
 
 
 class EvacuationAssignmentOut(BaseModel):
-    id: int
+    # `id` is the persisted `evacuation_assignments` row id. It is null for
+    # assignments produced by the scenario simulator, which is a dry run and
+    # never writes rows.
+    id: int | None = None
     household_id: int
     household_no: str
     household_head: str

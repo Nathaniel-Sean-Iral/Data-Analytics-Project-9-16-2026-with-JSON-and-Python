@@ -95,12 +95,27 @@ Full list in `backend/app/core/config.py`. Environment variables:
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | `sqlite:///./disaster_prep.db` | SQLAlchemy URL (SQLite dev, Postgres prod) |
-| `SECRET_KEY` | dev-only | JWT signing key — must be changed & kept secret |
+| `SECRET_KEY` | dev-only | JWT signing key — **must** be changed & kept secret |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | `480` | Session lifetime (8 h) |
 | `CORS_ORIGINS` | `["*"]` | Allowed origins (JSON list string) |
 | `DAYS_WATER_PER_PERSON` | `3.0` | Simulator water rate (gallons) |
 | `RICE_SACKS_PER_PERSON` | `0.1` | Simulator rice rate (50 kg sacks) |
 | `AVG_PERSONS_PER_HOUSEHOLD` | `4` | Simulator household-to-evacuee multiplier |
+
+### Startup guards
+
+The app refuses to boot on an unsafe production configuration rather than
+starting with a known-bad secret:
+
+- **`SECRET_KEY` is still the committed development default while
+  `DATABASE_URL` is not SQLite** → raises at startup. The dev default is
+  committed on purpose so a fresh clone runs with no setup, but shipping it
+  would let anyone mint valid admin tokens. Generate one with
+  `python -c "import secrets; print(secrets.token_urlsafe(48))"`.
+- **`CORS_ORIGINS` mixes `*` with explicit origins** → raises at startup. Pick
+  one: either the wildcard (no credentials) or an explicit list (credentials
+  allowed). When the wildcard is used, `allow_credentials` is disabled
+  automatically, since browsers reject credentialed wildcard requests anyway.
 
 ---
 

@@ -42,18 +42,27 @@
 - [x] Center load % + overflow + coverage gaps report (`/api/evacuations/center-loads`)
 - [x] Scenario simulator + `/api/simulator/run` (+ projected resource shortfalls)
 
-**Exit criteria:** a scenario run reports center loads, overflow counts, resource gaps. ✅ **Met** (allocates nearest-center-first with capacity checks; simulator computes per-resource deficit vs 400-evacuee baseline).
+**Exit criteria:** a scenario run reports center loads, overflow counts, resource gaps. ✅ **Met** — nearest-center-first with capacity checks; a simulation is a dry run (`SIM-` request id, no rows written) and both halves of the report are driven by `affected_households`, so projected center loads and projected shortfalls always describe the same evacuee count.
 
 ---
 
 ## Phase 4 — Hardening & Polish
-- [x] pytest suite (API + allocation algorithm) — 46 tests green
+- [x] pytest suite (API + allocation algorithm) — 57 tests green
+- [x] Frontend test suite (Vitest + React Testing Library) — 26 tests green
 - [x] Seed script (realistic barangay data) + demo login
 - [x] Alembic migrations — initial revision generated; `upgrade head` verified on fresh DB; dev DB stamped
 - [x] Docker Compose (API + Postgres + Nginx serving React build) — `docker-compose.yml` + Dockerfiles + nginx config
 - [x] Documentation (README, API reference, deployment guide) — `docs/API.md`, `docs/DEPLOYMENT.md`, `docs/ERD.md`
 
 **Exit criteria:** full test suite green; `docker compose up` runs the system. ✅ **Met** (46/46 tests; compose stack ready — requires Docker to run locally, available in Codespaces/CI).
+
+---
+
+## Known gaps (tracked, not yet built)
+- **Household CSV / GeoJSON import** — Phase 1 of the workplan calls for it; no endpoint exists yet.
+- **Map incident zones as GeoJSON polygons** — `MapPage` draws severity-coloured `CircleMarker`s. The workplan asks for GeoJSON zone polygons; the backend serves no GeoJSON layer.
+- **Docker Compose has not been executed end-to-end** — `docker compose config` validates and Docker 29.8 is installed locally, but the stack has not been brought up.
+- No login rate limiting (acceptable behind a reverse proxy; noted for public deployment).
 
 ---
 
@@ -68,10 +77,14 @@
 - RBAC implemented as a rank gate (`viewer=1 < responder=2 < admin=3`): read = viewer+, incident create/update + allocation + simulator = responder+, households/centers/resources mutations = admin.
 - Passwords hashed with PBKDF2-HMAC-SHA256 (600k iterations, `pbkdf2$600000$<salt>$<digest>` format). Secrets come from `app/core/config.py` `Settings` (env-overridable via `.env`).
 - PATCH `/incidents/{id}` accepts `{status}` and enforces a workflow: `reported → assessing → responding → resolved` (backwards to `assessing` allowed).
-- Allocation assigns each household to the nearest center that still has capacity; produces center load %, overflow list, and coverage-gap warnings for barangays without a center. Assignments persist to `evacuation_assignments`.
+- Allocation assigns each household to the nearest center that still has capacity; produces center load %, overflow list, and coverage-gap warnings for barangays without a center. Assignments persist to `evacuation_assignments`; those rows are kept for audit, so the dashboard counts **distinct** households.
+- The allocation engine is split into a pure `_plan()` (nearest-center-first, no DB writes) plus two entry points: `allocate()` for persisted runs and `project_allocation()` for simulator dry runs.
+- Simulator household size and evacuee multiplier come from `Settings` (`AVG_PERSONS_PER_HOUSEHOLD`), not hardcoded constants.
+- `Settings` refuses to start with the committed dev `SECRET_KEY` when `DATABASE_URL` is not SQLite, and refuses a `CORS_ORIGINS` list that mixes `*` with explicit origins.
 - Demo accounts seeded by `backend/seed.py`: `admin/admin`, `responder/responder`, `viewer/viewer`.
 - **Run backend:** `cd backend; .venv\Scripts\python -m uvicorn app.main:app --port 8000` (docs at `/docs`).
-- Vite dev proxy forwards `/api` → `localhost:8000`.
+- Vite dev proxy forwards `/api` → `localhost:8000`, and answers **503** (not 500) when the upstream is unreachable so the client's demo-data fallback engages.
+- **Run tests:** `backend` → `python -m pytest -q`; `frontend` → `npm run test` (CI runs both plus typecheck and build).
 - Day-to-day log:
   - **Hardening (2026-09-24):** README + ERD + API + deployment docs; Alembic (initial migration `8ebd5a148d1c`, verified on fresh DB, dev SQLite stamped); Docker Compose (Postgres + API + Nginx) with Dockerfiles/nginx proxy; GitHub Actions CI (backend pytest + frontend typecheck/build). `psycopg[binary]` added for Postgres; `create_all` now gated to SQLite dev only (Postgres uses Alembic).
   - **Live wiring (2026-09-24):** mock `http.server` (PID 16104) stopped; uvicorn running `app.main:app` on 127.0.0.1:8000 (PID 23032, logs in `%TEMP%\opencode\uvicorn-8000*.log`); frontend dev server already running on http://localhost:5173 with `/api` proxy → 8000. Verified through the proxy: login (`admin/admin`) + dashboard stats (40 households, 5 incidents).

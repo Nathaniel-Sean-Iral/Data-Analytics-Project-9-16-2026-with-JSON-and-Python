@@ -1,5 +1,24 @@
 import math
+from dataclasses import dataclass
 from datetime import datetime, timezone
+
+
+@dataclass(frozen=True)
+class AffectedHousehold:
+    """A household awaiting evacuation.
+
+    Used both for real `Household` rows and for synthetic households projected by
+    the scenario simulator, so a what-if run can model more evacuees than the
+    registry currently holds.
+    """
+
+    id: int
+    household_no: str
+    head_name: str
+    barangay: str
+    size: int
+    lat: float
+    lng: float
 
 
 def haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
@@ -15,30 +34,29 @@ def coord_distance_km(lat1, lng1, lat2, lng2) -> float:
     return haversine_km(float(lat1 or 0), float(lng1 or 0), float(lat2 or 0), float(lng2 or 0))
 
 
-def allocate(db, barangay: str | None = None):
-    """Assign affected households to the nearest evacuation center with room.
-
-    Returns a dict matching AllocationResultOut plus the assignments to persist.
-    """
+def _active_centers(db):
     from app.models.center import EvacuationCenter
-    from app.models.evacuation import EvacuationAssignment
-    from app.models.household import Household
 
-    query = db.query(Household)
-    if barangay:
-        query = query.filter(Household.barangay == barangay)
-    households = query.order_by(Household.household_no).all()
-
-    centers = (
+    return (
         db.query(EvacuationCenter)
         .filter(EvacuationCenter.status.in_(["active", "standby"]))
         .order_by(EvacuationCenter.id)
         .all()
     )
 
-    request_id = f"ALLOC-{datetime.now(timezone.utc).strftime('%y%m%d%H%M%S')}"
-    generated_at = datetime.now(timezone.utc)
 
+def _plan(
+    households: list[AffectedHousehold],
+    centers: list,
+    request_id: str,
+    generated_at: datetime,
+) -> dict:
+    """Pure nearest-center-first assignment. Touches no database session.
+
+    Households needing `size` slots prefer a center that can still hold them
+    whole; ties break on geographic distance. Anything that cannot be placed
+    whole lands in the overflow list rather than being split across centers.
+    """
     # Remaining slots per center (capacity - current occupants).
     slots = {c.id: max(0, c.capacity - c.current_occupants) for c in centers}
     # Track projected occupants for center-load reporting.
@@ -120,22 +138,7 @@ def allocate(db, barangay: str | None = None):
         for b in sorted(affected_barangays - barangays_with_centers)
     ]
 
-    rows: list[EvacuationAssignment] = []
-    for a in assignments:
-        row = EvacuationAssignment(
-            request_id=request_id,
-            household_id=a["household_id"],
-            center_id=a["center_id"],
-        )
-        db.add(row)
-        rows.append(row)
-    if assignments:
-        db.commit()
-        for row, a in zip(rows, assignments):
-            db.refresh(row)
-            a["id"] = row.id
-
-    result = {
+    return {
         "request_id": request_id,
         "generated_at": generated_at,
         "total_households": len(households),
@@ -146,7 +149,116 @@ def allocate(db, barangay: str | None = None):
         "overflow": overflow,
         "coverage_gaps": gaps,
     }
+
+
+def allocate(db, barangay: str | None = None):
+    """Assign affected households to the nearest evacuation center with room.
+
+    Assigns every household currently in the registry, then persists the plan to
+    `evacuation_assignments`. For a what-if run over a hypothetical number of
+    affected households use `project_allocation` instead, which does not persist.
+    """
+    from app.models.evacuation import EvacuationAssignment
+    from app.models.household import Household
+
+    query = db.query(Household)
+    if barangay:
+        query = query.filter(Household.barangay == barangay)
+    households = [
+        AffectedHousehold(
+            id=h.id,
+            household_no=h.household_no,
+            head_name=h.head_name,
+            barangay=h.barangay,
+            size=h.size,
+            lat=h.lat,
+            lng=h.lng,
+        )
+        for h in query.order_by(Household.household_no).all()
+    ]
+
+    centers = _active_centers(db)
+
+    request_id = f"ALLOC-{datetime.now(timezone.utc).strftime('%y%m%d%H%M%S')}"
+    result = _plan(households, centers, request_id, datetime.now(timezone.utc))
+
+    rows: list[EvacuationAssignment] = []
+    for a in result["assignments"]:
+        row = EvacuationAssignment(
+            request_id=request_id,
+            household_id=a["household_id"],
+            center_id=a["center_id"],
+        )
+        db.add(row)
+        rows.append(row)
+    if rows:
+        db.commit()
+        for row, a in zip(rows, result["assignments"]):
+            db.refresh(row)
+            a["id"] = row.id
+
     return result
+
+
+def project_allocation(db, barangay: str, affected_households: int) -> dict:
+    """Dry-run allocation for a hypothetical number of affected households.
+
+    Models exactly `affected_households` households in `barangay`, padding the
+    registry's real households with synthetic ones anchored at the barangay's
+    centroid, so the projected center loads and overflow actually reflect the
+    scenario input. Nothing is written to the database.
+    """
+    from app.core.config import settings
+    from app.models.household import Household
+
+    real = (
+        db.query(Household)
+        .filter(Household.barangay == barangay)
+        .order_by(Household.household_no)
+        .all()
+    )
+    households = [
+        AffectedHousehold(
+            id=h.id,
+            household_no=h.household_no,
+            head_name=h.head_name,
+            barangay=h.barangay,
+            size=h.size,
+            lat=h.lat,
+            lng=h.lng,
+        )
+        for h in real
+    ]
+
+    # Anchor projected households on the barangay centroid; fall back to the mean
+    # center position when the registry has no coordinates for the barangay yet.
+    if real:
+        anchor_lat = sum(float(h.lat or 0) for h in real) / len(real)
+        anchor_lng = sum(float(h.lng or 0) for h in real) / len(real)
+    else:
+        centers = _active_centers(db)
+        if centers:
+            anchor_lat = sum(float(c.lat or 0) for c in centers) / len(centers)
+            anchor_lng = sum(float(c.lng or 0) for c in centers) / len(centers)
+        else:
+            anchor_lat = anchor_lng = 0.0
+
+    size = max(1, settings.avg_persons_per_household)
+    for i in range(affected_households - len(households)):
+        households.append(
+            AffectedHousehold(
+                id=-(i + 1),  # negative ids mark projected (non-persisted) households
+                household_no=f"PROJ-{i + 1:04d}",
+                head_name="Projected household",
+                barangay=barangay,
+                size=size,
+                lat=anchor_lat,
+                lng=anchor_lng,
+            )
+        )
+
+    request_id = f"SIM-{datetime.now(timezone.utc).strftime('%y%m%d%H%M%S')}"
+    return _plan(households, _active_centers(db), request_id, datetime.now(timezone.utc))
 
 
 def center_loads(db) -> list[dict]:

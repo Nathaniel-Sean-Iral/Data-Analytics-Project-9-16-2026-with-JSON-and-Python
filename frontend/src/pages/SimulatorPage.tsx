@@ -122,7 +122,11 @@ export function SimulatorPage() {
               <p className="flex items-center gap-1.5 text-xs font-medium uppercase text-slate-500">
                 <Users className="h-3.5 w-3.5" /> Evacuees
               </p>
-              <p className="mt-1 text-2xl font-bold text-slate-900">{formatNumber(report.scenario.affected_households * 4)}</p>
+              <p className="mt-1 text-2xl font-bold text-slate-900">
+                {formatNumber(
+                  report.scenario.estimated_evacuees ?? report.scenario.affected_households * 4,
+                )}
+              </p>
               <p className="text-xs text-slate-500">approx. 4 pax / household</p>
             </Card>
             <Card className="p-4">

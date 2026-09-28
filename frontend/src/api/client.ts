@@ -40,6 +40,30 @@ export function clearSession(): void {
   localStorage.removeItem(USER_KEY);
 }
 
+type SessionListener = () => void;
+
+const sessionListeners = new Set<SessionListener>();
+
+/**
+ * Notified when the session is dropped because the API rejected the token.
+ *
+ * The client can discover an invalid token on any request, but only React knows
+ * how to react to it, so subscribers (see `AuthProvider`) push the user back to
+ * the login screen. Without this a 401 would clear storage while the app still
+ * believed it was authenticated, and every page would keep retrying forever.
+ */
+export function onSessionInvalidated(listener: SessionListener): () => void {
+  sessionListeners.add(listener);
+  return () => {
+    sessionListeners.delete(listener);
+  };
+}
+
+function invalidateSession(): void {
+  clearSession();
+  for (const listener of sessionListeners) listener();
+}
+
 export async function api<T>(
   path: string,
   options: { method?: string; body?: unknown; params?: Record<string, string | number | boolean | undefined> } = {},
@@ -72,7 +96,7 @@ export async function api<T>(
   }
 
   if (response.status === 401) {
-    clearSession();
+    invalidateSession();
     throw new ApiError(401, 'Session expired. Please log in again.');
   }
 

@@ -1,6 +1,6 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import * as services from '@/api/services';
-import { clearSession, getUser, setSession } from '@/api/client';
+import { clearSession, getUser, onSessionInvalidated, setSession } from '@/api/client';
 import type { LoginRequest, Role, User } from '@/api/types';
 
 interface AuthContextValue {
@@ -29,6 +29,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     clearSession();
     setUser(null);
   }, []);
+
+  // The API client drops the stored session whenever the backend rejects the
+  // token. Mirror that into React state, otherwise a 401 (an expired token, or
+  // a demo token left over from running against the mock fallback) would leave
+  // the app stuck rendering authenticated pages that only ever 401.
+  useEffect(() => onSessionInvalidated(() => setUser(null)), []);
 
   const hasRole = useCallback(
     (role: Role) => Boolean(user && ROLE_RANK[user.role] >= ROLE_RANK[role]),

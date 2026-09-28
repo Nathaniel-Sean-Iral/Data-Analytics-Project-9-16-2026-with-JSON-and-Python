@@ -14,3 +14,20 @@ def test_dashboard_stats(client, viewer_headers):
 
 def test_dashboard_requires_auth(client):
     assert client.get("/api/dashboard/stats").status_code == 401
+
+
+def test_dashboard_counts_distinct_assigned_households(client, admin_headers):
+    """Regression: re-running the allocator inflated `assigned_households`.
+
+    Allocation rows are retained for audit, so the same household reappears in
+    every request. The dashboard must count distinct households, not rows.
+    """
+    payload = {"barangay": None}
+    client.post("/api/evacuations/allocate", json=payload, headers=admin_headers)
+    first = client.get("/api/dashboard/stats", headers=admin_headers).json()["assigned_households"]
+    assert first == 6
+
+    client.post("/api/evacuations/allocate", json=payload, headers=admin_headers)
+    client.post("/api/evacuations/allocate", json=payload, headers=admin_headers)
+    third = client.get("/api/dashboard/stats", headers=admin_headers).json()["assigned_households"]
+    assert third == first

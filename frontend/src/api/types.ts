@@ -92,7 +92,8 @@ export interface ResourceStockAdjustment {
 }
 
 export interface EvacuationAssignment {
-  id: number;
+  /** Persisted `evacuation_assignments` row id; null for simulated (dry-run) assignments. */
+  id: number | null;
   household_id: number;
   household_no: string;
   household_head: string;
@@ -135,7 +136,7 @@ export interface OverflowEntry {
 
 /** Simulation output from the "what-if" scenario engine. */
 export interface ScenarioReport {
-  scenario: { title: string; barangay: string; affected_households: number };
+  scenario: { title: string; barangay: string; affected_households: number; estimated_evacuees: number };
   allocation: AllocationResult;
   resource_needs: ResourceNeed[];
 }

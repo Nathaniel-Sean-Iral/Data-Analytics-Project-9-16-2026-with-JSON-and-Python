@@ -20,21 +20,25 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(
-    title="Disaster Preparedness API",
+    title=settings.app_name,
     description="Backend API for the Local Disaster Preparedness System",
     version="1.0.0",
     lifespan=lifespan,
 )
 
+# A wildcard origin cannot be combined with credentialed requests safely, so
+# cookies/Authorization are only echoed back when origins are pinned explicitly.
+_wildcard_cors = settings.cors_origins == ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
-    allow_credentials=True,
+    allow_credentials=not _wildcard_cors,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-API_PREFIX = "/api"
+API_PREFIX = settings.api_prefix
 
 app.include_router(auth.router, prefix=API_PREFIX)
 app.include_router(households.router, prefix=API_PREFIX)
