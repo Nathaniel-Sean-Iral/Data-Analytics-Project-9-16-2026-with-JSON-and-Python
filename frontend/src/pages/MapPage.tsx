@@ -393,7 +393,9 @@ export function MapPage() {
         )}
 
         <div ref={mapContainer} className="absolute inset-0 h-full w-full" />
-
+git checkout main
+git pull --rebase origin main
+git push origin main
         <div className="absolute left-3 top-3 z-[600] rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
             <Layers className="h-3.5 w-3.5 text-brand-600" />
