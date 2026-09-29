@@ -79,6 +79,25 @@ export async function fetchHouseholds(params = {}): Promise<Paginated<Household>
   });
 }
 
+/**
+ * Every household, following pagination.
+ *
+ * The API caps `page_size` at 200, so a single request silently drops
+ * households beyond that. The map needs the full registry, not the first page.
+ */
+export async function fetchAllHouseholds(): Promise<Household[]> {
+  const pageSize = 200;
+  const first = await fetchHouseholds({ page: 1, page_size: pageSize });
+  if (first.items.length >= first.total) return first.items;
+
+  const pages = await Promise.all(
+    Array.from({ length: Math.ceil(first.total / pageSize) - 1 }, (_, index) =>
+      fetchHouseholds({ page: index + 2, page_size: pageSize }),
+    ),
+  );
+  return [first, ...pages].flatMap((page) => page.items);
+}
+
 export async function fetchHousehold(id: number): Promise<Household> {
   return withMock(http.get<Household>(`/households/${id}`), () => {
     const item = mock.mockHousehold(id);
