@@ -88,11 +88,17 @@ cd backend
 Sample files for the import flow (regenerate with
 `backend\python -m scripts.generate_sample_data`):
 
+- `sample-data/households_import_test.csv` → 30 rows with `IMP-####` numbers, use
+  this one to test the import UI (reports 30 created)
 - `sample-data/households_san_rafael.csv` → `POST /api/households/import` (Households page)
 - `sample-data/households_san_rafael.geojson` → `POST /api/households/import/geojson`
 
-Importing the sample files into a freshly seeded DB is idempotent: rows already
-in the DB are skipped by `household_no` dedupe.
+The import endpoint skips any row whose `household_no` already exists. Because a
+fresh database is seeded from the same generator, the two
+`households_san_rafael.*` files import as 0 created on a seeded database — that
+is the dedupe working, not a failure. Use `households_import_test.csv` (or any
+CSV with new household numbers) to see rows actually created. Only CSV and
+GeoJSON are accepted; `.xlsx` is not supported.
 
 ## Migrations
 

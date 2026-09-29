@@ -12,7 +12,7 @@
       },
       "properties": {
         "household_no": "H-0001",
-        "head_name": "Divina Bautista",
+        "head_name": "Divina Ong",
         "address": "Purok 2, San Jose Street",
         "barangay": "BMA-Balagtas",
         "size": 6,
@@ -688,20 +688,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.94645,
-          14.99125
+          120.950007,
+          14.993057
         ]
       },
       "properties": {
         "household_no": "H-0032",
-        "head_name": "Andres Santiago",
-        "address": "Purok 3, Jacinto Street",
+        "head_name": "Andres Yson",
+        "address": "Purok 3, M. Hizon Street",
         "barangay": "Cruz na Daan",
         "size": 5,
         "children_count": 3,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09179353771",
+        "contact": "09175377139",
         "notes": null
       }
     },
@@ -710,21 +710,21 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.929388,
-          14.944953
+          120.930321,
+          14.943779
         ]
       },
       "properties": {
         "household_no": "H-0033",
-        "head_name": "Marites Ramos",
-        "address": "Purok 4, Katubusan Street",
+        "head_name": "Romeo Yson",
+        "address": "Purok 4, Burgos Street",
         "barangay": "Dagat-dagatan",
-        "size": 7,
-        "children_count": 3,
-        "elderly_count": 0,
+        "size": 8,
+        "children_count": 0,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09176946163",
-        "notes": null
+        "contact": "09176163174",
+        "notes": "Needs wheelchair access"
       }
     },
     {
@@ -732,64 +732,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.933589,
-          14.946559
+          120.930286,
+          14.946785
         ]
       },
       "properties": {
         "household_no": "H-0034",
-        "head_name": "Elena Ocampo",
-        "address": "Purok 1, M. Hizon Street",
-        "barangay": "Dagat-dagatan",
-        "size": 4,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09176070408",
-        "notes": "Pregnant member"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.929916,
-          14.94243
-        ]
-      },
-      "properties": {
-        "household_no": "H-0035",
-        "head_name": "Mercedes Cruz",
-        "address": "Purok 1, Gov. Padilla Street",
-        "barangay": "Dagat-dagatan",
-        "size": 6,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09176443532",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.931018,
-          14.946283
-        ]
-      },
-      "properties": {
-        "household_no": "H-0036",
-        "head_name": "Dante Espino",
+        "head_name": "Dante Cruz",
         "address": "Purok 3, Rizal Street",
         "barangay": "Dagat-dagatan",
         "size": 6,
         "children_count": 1,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09178440607",
+        "elderly_count": 1,
+        "pwd_count": 1,
+        "contact": "09178182892",
         "notes": null
       }
     },
@@ -798,20 +754,64 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.929591,
-          14.942044
+          120.93193,
+          14.946048
+        ]
+      },
+      "properties": {
+        "household_no": "H-0035",
+        "head_name": "Romeo Gutierrez",
+        "address": "Purok 3, M. Hizon Street",
+        "barangay": "Dagat-dagatan",
+        "size": 6,
+        "children_count": 0,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09175323272",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.929903,
+          14.946137
+        ]
+      },
+      "properties": {
+        "household_no": "H-0036",
+        "head_name": "Benito Bautista",
+        "address": "Purok 4, Rizal Street",
+        "barangay": "Dagat-dagatan",
+        "size": 4,
+        "children_count": 2,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09177852936",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.934915,
+          14.94358
         ]
       },
       "properties": {
         "household_no": "H-0037",
-        "head_name": "Elena Ramos",
-        "address": "Purok 2, Burgos Street",
+        "head_name": "Ferdinand Aquino",
+        "address": "Purok 6, Gov. Padilla Street",
         "barangay": "Dagat-dagatan",
-        "size": 3,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09179110827",
+        "size": 4,
+        "children_count": 0,
+        "elderly_count": 2,
+        "pwd_count": 1,
+        "contact": "09172917994",
         "notes": null
       }
     },
@@ -820,174 +820,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.929637,
-          14.945878
+          120.934879,
+          14.941972
         ]
       },
       "properties": {
         "household_no": "H-0038",
-        "head_name": "Andres Flores",
-        "address": "Purok 3, M. Hizon Street",
+        "head_name": "Corazon Ong",
+        "address": "Purok 4, Katubusan Street",
         "barangay": "Dagat-dagatan",
-        "size": 8,
-        "children_count": 2,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09174996524",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.92926,
-          14.943062
-        ]
-      },
-      "properties": {
-        "household_no": "H-0039",
-        "head_name": "Lourdes Bautista",
-        "address": "Purok 2, San Jose Street",
-        "barangay": "Dagat-dagatan",
-        "size": 5,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09170427880",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.986045,
-          14.969391
-        ]
-      },
-      "properties": {
-        "household_no": "H-0040",
-        "head_name": "Noli Villanueva",
-        "address": "Purok 1, M. Hizon Street",
-        "barangay": "Diliman I",
-        "size": 2,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09179234322",
-        "notes": "No electricity connection"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.986196,
-          14.969776
-        ]
-      },
-      "properties": {
-        "household_no": "H-0041",
-        "head_name": "Miguel Buenaventura",
-        "address": "Purok 2, Liberation Street",
-        "barangay": "Diliman I",
-        "size": 4,
-        "children_count": 2,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09175537457",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.985819,
-          14.97094
-        ]
-      },
-      "properties": {
-        "household_no": "H-0042",
-        "head_name": "Gloria Bautista",
-        "address": "Purok 3, Mabini Street",
-        "barangay": "Diliman I",
         "size": 6,
-        "children_count": 3,
+        "children_count": 1,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09175169258",
-        "notes": "Single income earner"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.985507,
-          14.967135
-        ]
-      },
-      "properties": {
-        "household_no": "H-0043",
-        "head_name": "Antonio Pascual",
-        "address": "Purok 6, Gov. Padilla Street",
-        "barangay": "Diliman I",
-        "size": 3,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09176688241",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.987281,
-          14.971806
-        ]
-      },
-      "properties": {
-        "household_no": "H-0044",
-        "head_name": "Mercedes Villanueva",
-        "address": "Purok 5, Liberation Street",
-        "barangay": "Diliman I",
-        "size": 1,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09175970746",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.985806,
-          14.972131
-        ]
-      },
-      "properties": {
-        "household_no": "H-0045",
-        "head_name": "Dante Serrano",
-        "address": "Purok 4, Mabini Street",
-        "barangay": "Diliman I",
-        "size": 8,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09170071895",
+        "contact": "09172401779",
         "notes": "Pregnant member"
       }
     },
@@ -996,20 +842,174 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.98724,
-          14.969459
+          120.932174,
+          14.941552
+        ]
+      },
+      "properties": {
+        "household_no": "H-0039",
+        "head_name": "Miguel Vergara",
+        "address": "Purok 5, Rizal Street",
+        "barangay": "Dagat-dagatan",
+        "size": 6,
+        "children_count": 2,
+        "elderly_count": 2,
+        "pwd_count": 1,
+        "contact": "09175038615",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.987126,
+          14.969621
+        ]
+      },
+      "properties": {
+        "household_no": "H-0040",
+        "head_name": "Isagani Flores",
+        "address": "Purok 2, Jacinto Street",
+        "barangay": "Diliman I",
+        "size": 4,
+        "children_count": 1,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09173226020",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98761,
+          14.968431
+        ]
+      },
+      "properties": {
+        "household_no": "H-0041",
+        "head_name": "Marites Castillo",
+        "address": "Purok 4, Jacinto Street",
+        "barangay": "Diliman I",
+        "size": 5,
+        "children_count": 1,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09175770337",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.989619,
+          14.968242
+        ]
+      },
+      "properties": {
+        "household_no": "H-0042",
+        "head_name": "Edwin Mendoza",
+        "address": "Purok 4, Del Pilar Street",
+        "barangay": "Diliman I",
+        "size": 6,
+        "children_count": 2,
+        "elderly_count": 2,
+        "pwd_count": 0,
+        "contact": "09175892816",
+        "notes": "Recently relocated from flood-prone area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98529,
+          14.969751
+        ]
+      },
+      "properties": {
+        "household_no": "H-0043",
+        "head_name": "Jose Garcia",
+        "address": "Purok 3, Mabini Street",
+        "barangay": "Diliman I",
+        "size": 4,
+        "children_count": 3,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09176939659",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.988011,
+          14.971887
+        ]
+      },
+      "properties": {
+        "household_no": "H-0044",
+        "head_name": "Andres Mendoza",
+        "address": "Purok 3, Burgos Street",
+        "barangay": "Diliman I",
+        "size": 4,
+        "children_count": 0,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09177560007",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.989891,
+          14.971243
+        ]
+      },
+      "properties": {
+        "household_no": "H-0045",
+        "head_name": "Teresa Flores",
+        "address": "Purok 6, Katubusan Street",
+        "barangay": "Diliman I",
+        "size": 4,
+        "children_count": 1,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09176069296",
+        "notes": "Recently relocated from flood-prone area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.985876,
+          14.968385
         ]
       },
       "properties": {
         "household_no": "H-0046",
-        "head_name": "Juan Tomas",
-        "address": "Purok 5, Del Pilar Street",
+        "head_name": "Rogelio Domingo",
+        "address": "Purok 4, Quezon Street",
         "barangay": "Diliman I",
-        "size": 3,
+        "size": 4,
         "children_count": 2,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09179650037",
+        "contact": "09177196384",
         "notes": null
       }
     },
@@ -1018,42 +1018,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.986654,
-          14.971268
+          120.985849,
+          14.967221
         ]
       },
       "properties": {
         "household_no": "H-0047",
-        "head_name": "Ramon Marquez",
-        "address": "Purok 1, M.H. del Pilar Street",
+        "head_name": "Juan Marquez",
+        "address": "Purok 3, Luna Street",
         "barangay": "Diliman I",
-        "size": 8,
-        "children_count": 3,
-        "elderly_count": 2,
+        "size": 7,
+        "children_count": 0,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09173843257",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.996467,
-          14.973849
-        ]
-      },
-      "properties": {
-        "household_no": "H-0048",
-        "head_name": "Reynaldo Garcia",
-        "address": "Purok 1, Del Pilar Street",
-        "barangay": "Diliman II",
-        "size": 1,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09178272701",
+        "contact": "09171282727",
         "notes": null
       }
     },
@@ -1067,11 +1045,11 @@
         ]
       },
       "properties": {
-        "household_no": "H-0049",
+        "household_no": "H-0048",
         "head_name": "Liza Aquino",
         "address": "Purok 2, Bonifacio Street",
         "barangay": "Diliman II",
-        "size": 7,
+        "size": 6,
         "children_count": 3,
         "elderly_count": 2,
         "pwd_count": 0,
@@ -1089,7 +1067,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0050",
+        "household_no": "H-0049",
         "head_name": "Gregorio Gonzales",
         "address": "Purok 5, Liberation Street",
         "barangay": "Diliman II",
@@ -1111,7 +1089,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0051",
+        "household_no": "H-0050",
         "head_name": "Teresa Flores",
         "address": "Purok 6, Mabini Street",
         "barangay": "Diliman II",
@@ -1133,7 +1111,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0052",
+        "household_no": "H-0051",
         "head_name": "Dante Reyes",
         "address": "Purok 1, Mabini Street",
         "barangay": "Diliman II",
@@ -1155,8 +1133,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0053",
-        "head_name": "Maria Bautista",
+        "household_no": "H-0052",
+        "head_name": "Maria Ong",
         "address": "Purok 1, Jacinto Street",
         "barangay": "Diliman II",
         "size": 3,
@@ -1177,7 +1155,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0054",
+        "household_no": "H-0053",
         "head_name": "Miguel Reyes",
         "address": "Purok 3, Rizal Street",
         "barangay": "Diliman II",
@@ -1194,15 +1172,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.943733,
-          14.961382
+          120.997733,
+          14.976382
         ]
       },
       "properties": {
-        "household_no": "H-0055",
+        "household_no": "H-0054",
         "head_name": "Marites Buenaventura",
         "address": "Purok 6, Gov. Padilla Street",
-        "barangay": "Capihan",
+        "barangay": "Diliman II",
         "size": 5,
         "children_count": 3,
         "elderly_count": 2,
@@ -1221,7 +1199,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0056",
+        "household_no": "H-0055",
         "head_name": "Edwin Manalo",
         "address": "Purok 2, Aguinaldo Street",
         "barangay": "Capihan",
@@ -1243,7 +1221,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0057",
+        "household_no": "H-0056",
         "head_name": "Andres Manalo",
         "address": "Purok 3, Gov. Padilla Street",
         "barangay": "Capihan",
@@ -1265,7 +1243,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0058",
+        "household_no": "H-0057",
         "head_name": "Myra Ramos",
         "address": "Purok 5, Quezon Street",
         "barangay": "Capihan",
@@ -1287,7 +1265,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0059",
+        "household_no": "H-0058",
         "head_name": "Teresa Marquez",
         "address": "Purok 1, M. Hizon Street",
         "barangay": "Capihan",
@@ -1309,7 +1287,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0060",
+        "household_no": "H-0059",
         "head_name": "Nestor Tomas",
         "address": "Purok 2, Gov. Padilla Street",
         "barangay": "Capihan",
@@ -1326,15 +1304,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.957418,
-          14.959737
+          120.943918,
+          14.960237
         ]
       },
       "properties": {
-        "household_no": "H-0061",
+        "household_no": "H-0060",
         "head_name": "Carlos Mercado",
         "address": "Purok 4, San Jose Street",
-        "barangay": "Libis",
+        "barangay": "Capihan",
         "size": 6,
         "children_count": 3,
         "elderly_count": 0,
@@ -1353,7 +1331,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0062",
+        "household_no": "H-0061",
         "head_name": "Mario Aquino",
         "address": "Purok 6, San Jose Street",
         "barangay": "Libis",
@@ -1375,8 +1353,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0063",
-        "head_name": "Marites Ong",
+        "household_no": "H-0062",
+        "head_name": "Marites Santiago",
         "address": "Purok 4, M. Hizon Street",
         "barangay": "Libis",
         "size": 4,
@@ -1397,7 +1375,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0064",
+        "household_no": "H-0063",
         "head_name": "Pedro Santos",
         "address": "Purok 2, P. Burgos Street",
         "barangay": "Libis",
@@ -1419,7 +1397,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0065",
+        "household_no": "H-0064",
         "head_name": "Mercedes Ilustre",
         "address": "Purok 5, Burgos Street",
         "barangay": "Libis",
@@ -1441,7 +1419,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0066",
+        "household_no": "H-0065",
         "head_name": "Edwin Marquez",
         "address": "Purok 1, Mabini Street",
         "barangay": "Libis",
@@ -1463,7 +1441,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0067",
+        "household_no": "H-0066",
         "head_name": "Ana Bautista",
         "address": "Purok 1, Jacinto Street",
         "barangay": "Libis",
@@ -1480,15 +1458,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.971674,
-          14.952574
+          120.958174,
+          14.960074
         ]
       },
       "properties": {
-        "household_no": "H-0068",
+        "household_no": "H-0067",
         "head_name": "Gregorio Navarro",
         "address": "Purok 1, Liberation Street",
-        "barangay": "Lico",
+        "barangay": "Libis",
         "size": 3,
         "children_count": 1,
         "elderly_count": 1,
@@ -1507,7 +1485,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0069",
+        "household_no": "H-0068",
         "head_name": "Isagani Ilustre",
         "address": "Purok 2, Jacinto Street",
         "barangay": "Lico",
@@ -1529,7 +1507,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0070",
+        "household_no": "H-0069",
         "head_name": "Noli Espino",
         "address": "Purok 4, Jacinto Street",
         "barangay": "Lico",
@@ -1551,7 +1529,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0071",
+        "household_no": "H-0070",
         "head_name": "Carlos Domingo",
         "address": "Purok 6, Gov. Padilla Street",
         "barangay": "Lico",
@@ -1573,7 +1551,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0072",
+        "household_no": "H-0071",
         "head_name": "Noli Cruz",
         "address": "Purok 2, Burgos Street",
         "barangay": "Lico",
@@ -1595,7 +1573,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0073",
+        "household_no": "H-0072",
         "head_name": "Nestor Alcantara",
         "address": "Purok 5, Gov. Padilla Street",
         "barangay": "Lico",
@@ -1617,7 +1595,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0074",
+        "household_no": "H-0073",
         "head_name": "Dante Gonzales",
         "address": "Purok 1, Del Pilar Street",
         "barangay": "Lico",
@@ -1634,15 +1612,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.987843,
-          14.995824
+          120.968843,
+          14.952824
         ]
       },
       "properties": {
-        "household_no": "H-0075",
+        "household_no": "H-0074",
         "head_name": "Carmen Alcantara",
         "address": "Purok 3, Aguinaldo Street",
-        "barangay": "Maasim",
+        "barangay": "Lico",
         "size": 2,
         "children_count": 1,
         "elderly_count": 0,
@@ -1661,7 +1639,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0076",
+        "household_no": "H-0075",
         "head_name": "Juan Aquino",
         "address": "Purok 2, M. Hizon Street",
         "barangay": "Maasim",
@@ -1683,7 +1661,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0077",
+        "household_no": "H-0076",
         "head_name": "Marites Flores",
         "address": "Purok 3, Del Pilar Street",
         "barangay": "Maasim",
@@ -1705,7 +1683,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0078",
+        "household_no": "H-0077",
         "head_name": "Rosa Garcia",
         "address": "Purok 4, Katubusan Street",
         "barangay": "Maasim",
@@ -1727,7 +1705,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0079",
+        "household_no": "H-0078",
         "head_name": "Carlos Del Rosario",
         "address": "Purok 1, Luna Street",
         "barangay": "Maasim",
@@ -1749,7 +1727,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0080",
+        "household_no": "H-0079",
         "head_name": "Mario Vergara",
         "address": "Purok 4, Liberation Street",
         "barangay": "Maasim",
@@ -1771,7 +1749,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0081",
+        "household_no": "H-0080",
         "head_name": "Maria Villanueva",
         "address": "Purok 2, Burgos Street",
         "barangay": "Maasim",
@@ -1788,15 +1766,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.96784,
-          14.906743
+          120.98584,
+          14.994243
         ]
       },
       "properties": {
-        "household_no": "H-0082",
+        "household_no": "H-0081",
         "head_name": "Marites Yson",
         "address": "Purok 5, M. Hizon Street",
-        "barangay": "Mabalas-balas",
+        "barangay": "Maasim",
         "size": 7,
         "children_count": 0,
         "elderly_count": 2,
@@ -1815,7 +1793,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0083",
+        "household_no": "H-0082",
         "head_name": "Ferdinand Lucero",
         "address": "Purok 4, Gov. Padilla Street",
         "barangay": "Mabalas-balas",
@@ -1837,7 +1815,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0084",
+        "household_no": "H-0083",
         "head_name": "Luzviminda Flores",
         "address": "Purok 1, Bonifacio Street",
         "barangay": "Mabalas-balas",
@@ -1859,7 +1837,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0085",
+        "household_no": "H-0084",
         "head_name": "Juan Espino",
         "address": "Purok 1, Del Pilar Street",
         "barangay": "Mabalas-balas",
@@ -1881,7 +1859,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0086",
+        "household_no": "H-0085",
         "head_name": "Mario Tomas",
         "address": "Purok 3, Bonifacio Street",
         "barangay": "Mabalas-balas",
@@ -1903,7 +1881,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0087",
+        "household_no": "H-0086",
         "head_name": "Gloria Ilustre",
         "address": "Purok 6, Burgos Street",
         "barangay": "Mabalas-balas",
@@ -1925,7 +1903,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0088",
+        "household_no": "H-0087",
         "head_name": "Gregorio Cruz",
         "address": "Purok 5, Mabini Street",
         "barangay": "Mabalas-balas",
@@ -1947,7 +1925,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0089",
+        "household_no": "H-0088",
         "head_name": "Carlos Castillo",
         "address": "Purok 2, Rizal Street",
         "barangay": "Mabalas-balas",
@@ -1969,7 +1947,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0090",
+        "household_no": "H-0089",
         "head_name": "Isagani Soriano",
         "address": "Purok 6, Del Pilar Street",
         "barangay": "Mabalas-balas",
@@ -1986,15 +1964,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.984331,
-          14.935439
+          120.969831,
+          14.908439
         ]
       },
       "properties": {
-        "household_no": "H-0091",
+        "household_no": "H-0090",
         "head_name": "Pedro Mendoza",
         "address": "Purok 5, Quezon Street",
-        "barangay": "Maguinao",
+        "barangay": "Mabalas-balas",
         "size": 3,
         "children_count": 1,
         "elderly_count": 0,
@@ -2013,7 +1991,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0092",
+        "household_no": "H-0091",
         "head_name": "Marites Buenaventura",
         "address": "Purok 2, Katubusan Street",
         "barangay": "Maguinao",
@@ -2035,7 +2013,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0093",
+        "household_no": "H-0092",
         "head_name": "Mario Flores",
         "address": "Purok 6, Liberation Street",
         "barangay": "Maguinao",
@@ -2057,7 +2035,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0094",
+        "household_no": "H-0093",
         "head_name": "Romeo Mercado",
         "address": "Purok 5, San Jose Street",
         "barangay": "Maguinao",
@@ -2079,7 +2057,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0095",
+        "household_no": "H-0094",
         "head_name": "Lourdes Santianez",
         "address": "Purok 6, Rizal Street",
         "barangay": "Maguinao",
@@ -2101,7 +2079,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0096",
+        "household_no": "H-0095",
         "head_name": "Myra Domingo",
         "address": "Purok 6, Del Pilar Street",
         "barangay": "Maguinao",
@@ -2123,7 +2101,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0097",
+        "household_no": "H-0096",
         "head_name": "Cecilia Castillo",
         "address": "Purok 4, Aguinaldo Street",
         "barangay": "Maguinao",
@@ -2140,15 +2118,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.962604,
-          14.991017
+          120.985104,
+          14.936517
         ]
       },
       "properties": {
-        "household_no": "H-0098",
+        "household_no": "H-0097",
         "head_name": "Fe Magpayo",
         "address": "Purok 6, Mabini Street",
-        "barangay": "Maronquillo",
+        "barangay": "Maguinao",
         "size": 7,
         "children_count": 1,
         "elderly_count": 2,
@@ -2167,7 +2145,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0099",
+        "household_no": "H-0098",
         "head_name": "Ferdinand Domingo",
         "address": "Purok 5, San Jose Street",
         "barangay": "Maronquillo",
@@ -2189,7 +2167,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0100",
+        "household_no": "H-0099",
         "head_name": "Gloria Vergara",
         "address": "Purok 5, P. Burgos Street",
         "barangay": "Maronquillo",
@@ -2211,7 +2189,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0101",
+        "household_no": "H-0100",
         "head_name": "Liza Flores",
         "address": "Purok 1, Del Pilar Street",
         "barangay": "Maronquillo",
@@ -2233,8 +2211,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0102",
-        "head_name": "Ana Bautista",
+        "household_no": "H-0101",
+        "head_name": "Ana Ong",
         "address": "Purok 6, San Jose Street",
         "barangay": "Maronquillo",
         "size": 6,
@@ -2255,8 +2233,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0103",
-        "head_name": "Fe Bautista",
+        "household_no": "H-0102",
+        "head_name": "Fe Ong",
         "address": "Purok 5, Aguinaldo Street",
         "barangay": "Maronquillo",
         "size": 6,
@@ -2277,7 +2255,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0104",
+        "household_no": "H-0103",
         "head_name": "Teresa Gonzales",
         "address": "Purok 3, Gov. Padilla Street",
         "barangay": "Maronquillo",
@@ -2299,7 +2277,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0105",
+        "household_no": "H-0104",
         "head_name": "Dante Del Rosario",
         "address": "Purok 2, San Jose Street",
         "barangay": "Maronquillo",
@@ -2316,15 +2294,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.957119,
-          14.919757
+          120.959119,
+          14.989757
         ]
       },
       "properties": {
-        "household_no": "H-0106",
-        "head_name": "Maria Bautista",
+        "household_no": "H-0105",
+        "head_name": "Maria Ong",
         "address": "Purok 6, Liberation Street",
-        "barangay": "Paco",
+        "barangay": "Maronquillo",
         "size": 6,
         "children_count": 3,
         "elderly_count": 1,
@@ -2343,7 +2321,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0107",
+        "household_no": "H-0106",
         "head_name": "Liza Tomas",
         "address": "Purok 6, Jacinto Street",
         "barangay": "Paco",
@@ -2360,20 +2338,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.962487,
-          14.921627
+          120.957344,
+          14.922196
         ]
       },
       "properties": {
-        "household_no": "H-0108",
-        "head_name": "Pedro Santiago",
-        "address": "Purok 2, M. Hizon Street",
+        "household_no": "H-0107",
+        "head_name": "Pedro Domingo",
+        "address": "Purok 2, San Jose Street",
         "barangay": "Paco",
         "size": 4,
         "children_count": 3,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09175987354",
+        "contact": "09179873541",
         "notes": null
       }
     },
@@ -2382,20 +2360,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.958141,
-          14.917715
+          120.960215,
+          14.922875
         ]
       },
       "properties": {
-        "household_no": "H-0109",
-        "head_name": "Maria Mendoza",
-        "address": "Purok 2, Aguinaldo Street",
+        "household_no": "H-0108",
+        "head_name": "Reynaldo Ocampo",
+        "address": "Purok 6, Aguinaldo Street",
         "barangay": "Paco",
-        "size": 1,
-        "children_count": 1,
+        "size": 2,
+        "children_count": 0,
         "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09170351234",
+        "pwd_count": 1,
+        "contact": "09173419349",
         "notes": null
       }
     },
@@ -2409,11 +2387,11 @@
         ]
       },
       "properties": {
-        "household_no": "H-0110",
+        "household_no": "H-0109",
         "head_name": "Gloria Buenaventura",
         "address": "Purok 2, Gov. Padilla Street",
         "barangay": "Paco",
-        "size": 4,
+        "size": 6,
         "children_count": 2,
         "elderly_count": 0,
         "pwd_count": 0,
@@ -2431,7 +2409,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0111",
+        "household_no": "H-0110",
         "head_name": "Liza Vergara",
         "address": "Purok 1, Quezon Street",
         "barangay": "Paco",
@@ -2453,7 +2431,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0112",
+        "household_no": "H-0111",
         "head_name": "Isagani Castillo",
         "address": "Purok 1, Mabini Street",
         "barangay": "Paco",
@@ -2475,7 +2453,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0113",
+        "household_no": "H-0112",
         "head_name": "Divina Gutierrez",
         "address": "Purok 5, M. Hizon Street",
         "barangay": "Paco",
@@ -2497,7 +2475,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0114",
+        "household_no": "H-0113",
         "head_name": "Gloria Pascual",
         "address": "Purok 2, P. Burgos Street",
         "barangay": "Paco",
@@ -2514,15 +2492,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.942914,
-          14.910264
+          120.957914,
+          14.917264
         ]
       },
       "properties": {
-        "household_no": "H-0115",
+        "household_no": "H-0114",
         "head_name": "Elena Yson",
         "address": "Purok 3, San Jose Street",
-        "barangay": "Pansumaloc",
+        "barangay": "Paco",
         "size": 4,
         "children_count": 0,
         "elderly_count": 1,
@@ -2541,7 +2519,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0116",
+        "household_no": "H-0115",
         "head_name": "Gregorio Ocampo",
         "address": "Purok 6, M. Hizon Street",
         "barangay": "Pansumaloc",
@@ -2563,7 +2541,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0117",
+        "household_no": "H-0116",
         "head_name": "Andres Tomas",
         "address": "Purok 5, Gov. Padilla Street",
         "barangay": "Pansumaloc",
@@ -2585,7 +2563,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0118",
+        "household_no": "H-0117",
         "head_name": "Elena Domingo",
         "address": "Purok 3, Rizal Street",
         "barangay": "Pansumaloc",
@@ -2607,7 +2585,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0119",
+        "household_no": "H-0118",
         "head_name": "Divina Lucero",
         "address": "Purok 2, Del Pilar Street",
         "barangay": "Pansumaloc",
@@ -2629,7 +2607,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0120",
+        "household_no": "H-0119",
         "head_name": "Mario Lucero",
         "address": "Purok 5, Liberation Street",
         "barangay": "Pansumaloc",
@@ -2651,7 +2629,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0121",
+        "household_no": "H-0120",
         "head_name": "Gregorio Gonzales",
         "address": "Purok 4, San Jose Street",
         "barangay": "Pansumaloc",
@@ -2673,7 +2651,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0122",
+        "household_no": "H-0121",
         "head_name": "Liza Mercado",
         "address": "Purok 1, M. Hizon Street",
         "barangay": "Pansumaloc",
@@ -2690,15 +2668,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.937992,
-          14.969216
+          120.947992,
+          14.914216
         ]
       },
       "properties": {
-        "household_no": "H-0123",
+        "household_no": "H-0122",
         "head_name": "Ferdinand Lucero",
         "address": "Purok 2, Del Pilar Street",
-        "barangay": "Pantubig",
+        "barangay": "Pansumaloc",
         "size": 6,
         "children_count": 0,
         "elderly_count": 2,
@@ -2717,7 +2695,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0124",
+        "household_no": "H-0123",
         "head_name": "Cecilia Ramos",
         "address": "Purok 5, Aguinaldo Street",
         "barangay": "Pantubig",
@@ -2739,7 +2717,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0125",
+        "household_no": "H-0124",
         "head_name": "Liza Buenaventura",
         "address": "Purok 6, Bonifacio Street",
         "barangay": "Pantubig",
@@ -2761,7 +2739,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0126",
+        "household_no": "H-0125",
         "head_name": "Benito Ramos",
         "address": "Purok 2, Mabini Street",
         "barangay": "Pantubig",
@@ -2783,7 +2761,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0127",
+        "household_no": "H-0126",
         "head_name": "Gloria Torres",
         "address": "Purok 3, Katubusan Street",
         "barangay": "Pantubig",
@@ -2800,15 +2778,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.952802,
-          14.97863
+          120.933802,
+          14.96563
         ]
       },
       "properties": {
-        "household_no": "H-0128",
-        "head_name": "Lourdes Santiago",
-        "address": "Purok 3, Quezon Street",
-        "barangay": "Pasong Bangkal",
+        "household_no": "H-0127",
+        "head_name": "Lourdes Serrano",
+        "address": "Purok 5, Quezon Street",
+        "barangay": "Pantubig",
         "size": 4,
         "children_count": 2,
         "elderly_count": 1,
@@ -2822,20 +2800,42 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.955407,
-          14.979379
+          120.953252,
+          14.982407
         ]
       },
       "properties": {
-        "household_no": "H-0129",
-        "head_name": "Ramon Santiago",
-        "address": "Purok 6, Rizal Street",
+        "household_no": "H-0128",
+        "head_name": "Ramon Reyes",
+        "address": "Purok 2, San Jose Street",
         "barangay": "Pasong Bangkal",
         "size": 1,
         "children_count": 0,
         "elderly_count": 0,
         "pwd_count": 1,
-        "contact": "09173528496",
+        "contact": "09172849630",
+        "notes": "No electricity connection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.955784,
+          14.979464
+        ]
+      },
+      "properties": {
+        "household_no": "H-0129",
+        "head_name": "Edwin Gonzales",
+        "address": "Purok 2, P. Burgos Street",
+        "barangay": "Pasong Bangkal",
+        "size": 8,
+        "children_count": 3,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09170805716",
         "notes": null
       }
     },
@@ -2844,20 +2844,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.951328,
-          14.983212
+          120.953782,
+          14.980777
         ]
       },
       "properties": {
         "household_no": "H-0130",
-        "head_name": "Edwin Santiago",
-        "address": "Purok 6, M.H. del Pilar Street",
+        "head_name": "Rosa Del Rosario",
+        "address": "Purok 4, Aguinaldo Street",
         "barangay": "Pasong Bangkal",
-        "size": 2,
-        "children_count": 2,
-        "elderly_count": 0,
+        "size": 3,
+        "children_count": 0,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09174598370",
+        "contact": "09172645042",
         "notes": null
       }
     },
@@ -2866,20 +2866,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.952877,
-          14.98249
+          120.951764,
+          14.978182
         ]
       },
       "properties": {
         "household_no": "H-0131",
-        "head_name": "Reynaldo Del Rosario",
-        "address": "Purok 5, Rizal Street",
+        "head_name": "Divina Domingo",
+        "address": "Purok 2, Gov. Padilla Street",
         "barangay": "Pasong Bangkal",
-        "size": 4,
+        "size": 3,
         "children_count": 1,
-        "elderly_count": 2,
+        "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09177136226",
+        "contact": "09177724827",
         "notes": null
       }
     },
@@ -2888,21 +2888,21 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.954187,
-          14.978936
+          120.951159,
+          14.981522
         ]
       },
       "properties": {
         "household_no": "H-0132",
-        "head_name": "Andres Alcantara",
-        "address": "Purok 2, Aguinaldo Street",
+        "head_name": "Ferdinand Yson",
+        "address": "Purok 2, Rizal Street",
         "barangay": "Pasong Bangkal",
-        "size": 5,
+        "size": 7,
         "children_count": 3,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09178329777",
-        "notes": null
+        "contact": "09173500722",
+        "notes": "Elderly resident living alone"
       }
     },
     {
@@ -2910,20 +2910,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.956304,
-          14.980144
+          120.956367,
+          14.978827
         ]
       },
       "properties": {
         "household_no": "H-0133",
-        "head_name": "Cecilia Magpayo",
-        "address": "Purok 2, Rizal Street",
+        "head_name": "Lourdes Alcantara",
+        "address": "Purok 6, Luna Street",
         "barangay": "Pasong Bangkal",
-        "size": 5,
+        "size": 4,
         "children_count": 1,
-        "elderly_count": 2,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09178538803",
+        "contact": "09171450007",
         "notes": null
       }
     },
@@ -2932,20 +2932,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.968909,
-          14.963389
+          120.967939,
+          14.964404
         ]
       },
       "properties": {
         "household_no": "H-0134",
-        "head_name": "Teresa Reyes",
-        "address": "Purok 2, Quezon Street",
+        "head_name": "Gloria Buenaventura",
+        "address": "Purok 5, Mabini Street",
         "barangay": "Pasong Callos",
-        "size": 3,
+        "size": 4,
         "children_count": 1,
-        "elderly_count": 2,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09173637381",
+        "contact": "09171995752",
         "notes": null
       }
     },
@@ -2954,20 +2954,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.969068,
-          14.966401
+          120.972938,
+          14.964409
         ]
       },
       "properties": {
         "household_no": "H-0135",
-        "head_name": "Mercedes Garcia",
-        "address": "Purok 4, Liberation Street",
+        "head_name": "Nestor Salazar",
+        "address": "Purok 6, Liberation Street",
         "barangay": "Pasong Callos",
-        "size": 6,
-        "children_count": 0,
+        "size": 7,
+        "children_count": 2,
         "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09173647901",
+        "contact": "09176662931",
         "notes": null
       }
     },
@@ -2976,20 +2976,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.970641,
-          14.965443
+          120.972573,
+          14.965833
         ]
       },
       "properties": {
         "household_no": "H-0136",
-        "head_name": "Andres Santianez",
-        "address": "Purok 6, Katubusan Street",
+        "head_name": "Imelda Ilustre",
+        "address": "Purok 4, Mabini Street",
         "barangay": "Pasong Callos",
         "size": 3,
-        "children_count": 1,
-        "elderly_count": 2,
+        "children_count": 3,
+        "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09173685666",
+        "contact": "09179044733",
         "notes": null
       }
     },
@@ -2998,20 +2998,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.968203,
-          14.964522
+          120.969439,
+          14.96636
         ]
       },
       "properties": {
         "household_no": "H-0137",
-        "head_name": "Marites Ilustre",
-        "address": "Purok 2, M.H. del Pilar Street",
+        "head_name": "Mercedes Santos",
+        "address": "Purok 1, Liberation Street",
         "barangay": "Pasong Callos",
-        "size": 2,
+        "size": 4,
         "children_count": 0,
-        "elderly_count": 1,
+        "elderly_count": 2,
         "pwd_count": 0,
-        "contact": "09174760904",
+        "contact": "09178979660",
         "notes": null
       }
     },
@@ -3020,20 +3020,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.972257,
-          14.965406
+          120.970958,
+          14.963827
         ]
       },
       "properties": {
         "household_no": "H-0138",
-        "head_name": "Noli Cruz",
-        "address": "Purok 6, Rizal Street",
+        "head_name": "Dante Gutierrez",
+        "address": "Purok 2, Bonifacio Street",
         "barangay": "Pasong Callos",
-        "size": 6,
-        "children_count": 3,
-        "elderly_count": 2,
+        "size": 8,
+        "children_count": 0,
+        "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09171868979",
+        "contact": "09175681718",
         "notes": null
       }
     },
@@ -3042,20 +3042,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.971928,
-          14.965458
+          120.972343,
+          14.966677
         ]
       },
       "properties": {
         "household_no": "H-0139",
-        "head_name": "Romeo Soriano",
-        "address": "Purok 3, Bonifacio Street",
+        "head_name": "Dante Ong",
+        "address": "Purok 3, Aguinaldo Street",
         "barangay": "Pasong Callos",
-        "size": 1,
-        "children_count": 1,
-        "elderly_count": 0,
+        "size": 3,
+        "children_count": 0,
+        "elderly_count": 2,
         "pwd_count": 0,
-        "contact": "09171674315",
+        "contact": "09172322886",
         "notes": null
       }
     },
@@ -3064,20 +3064,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.970173,
-          14.96694
+          120.969732,
+          14.968718
         ]
       },
       "properties": {
         "household_no": "H-0140",
-        "head_name": "Mario Flores",
-        "address": "Purok 1, Gov. Padilla Street",
+        "head_name": "Antonio Santos",
+        "address": "Purok 2, San Jose Street",
         "barangay": "Pasong Callos",
         "size": 5,
-        "children_count": 0,
-        "elderly_count": 2,
+        "children_count": 3,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09179422322",
+        "contact": "09170592644",
         "notes": null
       }
     },
@@ -3086,20 +3086,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.967851,
-          14.966481
+          120.968313,
+          14.966733
         ]
       },
       "properties": {
         "household_no": "H-0141",
-        "head_name": "Jonalyn Buenaventura",
-        "address": "Purok 1, M. Hizon Street",
+        "head_name": "Liza Pascual",
+        "address": "Purok 1, Katubusan Street",
         "barangay": "Pasong Intsik",
-        "size": 5,
-        "children_count": 2,
-        "elderly_count": 2,
+        "size": 4,
+        "children_count": 3,
+        "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09170350592",
+        "contact": "09171819217",
         "notes": null
       }
     },
@@ -3108,20 +3108,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.966622,
-          14.961971
+          120.967934,
+          14.963372
         ]
       },
       "properties": {
         "household_no": "H-0142",
-        "head_name": "Luzviminda Salazar",
-        "address": "Purok 4, Luna Street",
+        "head_name": "Ana Yson",
+        "address": "Purok 1, Bonifacio Street",
         "barangay": "Pasong Intsik",
         "size": 7,
         "children_count": 2,
-        "elderly_count": 1,
+        "elderly_count": 2,
         "pwd_count": 0,
-        "contact": "09178014195",
+        "contact": "09172518667",
         "notes": null
       }
     },
@@ -3130,20 +3130,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.968134,
-          14.964564
+          120.963629,
+          14.962794
         ]
       },
       "properties": {
         "household_no": "H-0143",
-        "head_name": "Reynaldo Castillo",
-        "address": "Purok 1, Mabini Street",
+        "head_name": "Carlos Espino",
+        "address": "Purok 6, Katubusan Street",
         "barangay": "Pasong Intsik",
-        "size": 2,
-        "children_count": 1,
-        "elderly_count": 0,
+        "size": 1,
+        "children_count": 0,
+        "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09179511251",
+        "contact": "09177106067",
         "notes": null
       }
     },
@@ -3152,20 +3152,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.963753,
-          14.961749
+          120.968761,
+          14.963987
         ]
       },
       "properties": {
         "household_no": "H-0144",
-        "head_name": "Maria Santos",
-        "address": "Purok 5, Del Pilar Street",
+        "head_name": "Divina Reyes",
+        "address": "Purok 6, Jacinto Street",
         "barangay": "Pasong Intsik",
-        "size": 4,
+        "size": 1,
         "children_count": 0,
-        "elderly_count": 2,
+        "elderly_count": 0,
         "pwd_count": 0,
-        "contact": "09179715571",
+        "contact": "09175047714",
         "notes": null
       }
     },
@@ -3174,394 +3174,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.966408,
-          14.967024
+          120.968304,
+          14.965588
         ]
       },
       "properties": {
         "household_no": "H-0145",
-        "head_name": "Divina Cruz",
-        "address": "Purok 2, Bonifacio Street",
-        "barangay": "Pasong Intsik",
-        "size": 1,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09175804504",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.969197,
-          14.966939
-        ]
-      },
-      "properties": {
-        "household_no": "H-0146",
-        "head_name": "Edwin Santiago",
-        "address": "Purok 6, M. Hizon Street",
-        "barangay": "Pasong Intsik",
-        "size": 6,
-        "children_count": 2,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09174488317",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.976751,
-          14.952195
-        ]
-      },
-      "properties": {
-        "household_no": "H-0147",
-        "head_name": "Reynaldo Ramos",
-        "address": "Purok 2, P. Burgos Street",
-        "barangay": "Pinacpinacan",
-        "size": 1,
-        "children_count": 0,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09175415349",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.974785,
-          14.948224
-        ]
-      },
-      "properties": {
-        "household_no": "H-0148",
-        "head_name": "Lourdes Castillo",
-        "address": "Purok 2, Quezon Street",
-        "barangay": "Pinacpinacan",
-        "size": 6,
-        "children_count": 2,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09172392786",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.974384,
-          14.952923
-        ]
-      },
-      "properties": {
-        "household_no": "H-0149",
-        "head_name": "Divina Mendoza",
-        "address": "Purok 4, Rizal Street",
-        "barangay": "Pinacpinacan",
-        "size": 8,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09170764221",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.973379,
-          14.948629
-        ]
-      },
-      "properties": {
-        "household_no": "H-0150",
-        "head_name": "Rosa Yson",
-        "address": "Purok 3, P. Burgos Street",
-        "barangay": "Pinacpinacan",
-        "size": 3,
-        "children_count": 2,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09174456953",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.973596,
-          14.952872
-        ]
-      },
-      "properties": {
-        "household_no": "H-0151",
-        "head_name": "Gloria Flores",
-        "address": "Purok 3, Jacinto Street",
-        "barangay": "Pinacpinacan",
-        "size": 4,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09170091141",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.971569,
-          14.948911
-        ]
-      },
-      "properties": {
-        "household_no": "H-0152",
-        "head_name": "Romeo Garcia",
-        "address": "Purok 3, Del Pilar Street",
-        "barangay": "Pinacpinacan",
-        "size": 4,
-        "children_count": 3,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09171408938",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.973722,
-          14.950218
-        ]
-      },
-      "properties": {
-        "household_no": "H-0153",
-        "head_name": "Imelda Mercado",
-        "address": "Purok 6, Del Pilar Street",
-        "barangay": "Pinacpinacan",
-        "size": 2,
-        "children_count": 1,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09171516200",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.975086,
-          14.949674
-        ]
-      },
-      "properties": {
-        "household_no": "H-0154",
-        "head_name": "Benito Ong",
-        "address": "Purok 3, Mabini Street",
-        "barangay": "Pinacpinacan",
-        "size": 4,
-        "children_count": 3,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09176443530",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.964137,
-          14.956498
-        ]
-      },
-      "properties": {
-        "household_no": "H-0155",
-        "head_name": "Maria Santos",
-        "address": "Purok 3, M.H. del Pilar Street",
-        "barangay": "Poblacion",
-        "size": 4,
-        "children_count": 0,
-        "elderly_count": 1,
-        "pwd_count": 0,
-        "contact": "09175749470",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.961218,
-          14.957668
-        ]
-      },
-      "properties": {
-        "household_no": "H-0156",
-        "head_name": "Ana Tomas",
-        "address": "Purok 3, Luna Street",
-        "barangay": "Poblacion",
-        "size": 8,
-        "children_count": 2,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09177410682",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.963776,
-          14.954655
-        ]
-      },
-      "properties": {
-        "household_no": "H-0157",
-        "head_name": "Reynaldo Salazar",
+        "head_name": "Ferdinand Domingo",
         "address": "Purok 1, P. Burgos Street",
-        "barangay": "Poblacion",
-        "size": 7,
-        "children_count": 2,
+        "barangay": "Pasong Intsik",
+        "size": 8,
+        "children_count": 1,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09171459167",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.960113,
-          14.955752
-        ]
-      },
-      "properties": {
-        "household_no": "H-0158",
-        "head_name": "Ramon Flores",
-        "address": "Purok 2, Burgos Street",
-        "barangay": "Poblacion",
-        "size": 1,
-        "children_count": 0,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09178726282",
-        "notes": "Recently relocated from flood-prone area"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.962251,
-          14.955952
-        ]
-      },
-      "properties": {
-        "household_no": "H-0159",
-        "head_name": "Maria Lucero",
-        "address": "Purok 5, P. Burgos Street",
-        "barangay": "Poblacion",
-        "size": 5,
-        "children_count": 3,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09172481331",
-        "notes": "Two infants in household"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.961467,
-          14.957344
-        ]
-      },
-      "properties": {
-        "household_no": "H-0160",
-        "head_name": "Rosa Aquino",
-        "address": "Purok 4, Del Pilar Street",
-        "barangay": "Poblacion",
-        "size": 4,
-        "children_count": 2,
-        "elderly_count": 2,
-        "pwd_count": 0,
-        "contact": "09173016621",
-        "notes": "Single income earner"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.961079,
-          14.954213
-        ]
-      },
-      "properties": {
-        "household_no": "H-0161",
-        "head_name": "Marites Cruz",
-        "address": "Purok 2, Del Pilar Street",
-        "barangay": "Poblacion",
-        "size": 2,
-        "children_count": 2,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09174998619",
-        "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          120.969094,
-          14.940203
-        ]
-      },
-      "properties": {
-        "household_no": "H-0162",
-        "head_name": "Maria Castillo",
-        "address": "Purok 4, Luna Street",
-        "barangay": "Pulo",
-        "size": 4,
-        "children_count": 1,
-        "elderly_count": 0,
-        "pwd_count": 0,
-        "contact": "09175523102",
+        "contact": "09173800286",
         "notes": "Pregnant member"
       }
     },
@@ -3570,20 +3196,372 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.968417,
-          14.940111
+          120.968115,
+          14.963159
         ]
       },
       "properties": {
-        "household_no": "H-0163",
-        "head_name": "Carmen Villanueva",
-        "address": "Purok 3, Burgos Street",
-        "barangay": "Pulo",
+        "household_no": "H-0146",
+        "head_name": "Carlos Espino",
+        "address": "Purok 2, Burgos Street",
+        "barangay": "Pasong Intsik",
+        "size": 5,
+        "children_count": 2,
+        "elderly_count": 2,
+        "pwd_count": 0,
+        "contact": "09179769597",
+        "notes": "Elderly resident living alone"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.975823,
+          14.953246
+        ]
+      },
+      "properties": {
+        "household_no": "H-0147",
+        "head_name": "Miguel Marquez",
+        "address": "Purok 5, M.H. del Pilar Street",
+        "barangay": "Pinacpinacan",
+        "size": 7,
+        "children_count": 1,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09171097060",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.974844,
+          14.948033
+        ]
+      },
+      "properties": {
+        "household_no": "H-0148",
+        "head_name": "Riza Gutierrez",
+        "address": "Purok 2, Aguinaldo Street",
+        "barangay": "Pinacpinacan",
+        "size": 1,
+        "children_count": 0,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09171492855",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.975259,
+          14.949672
+        ]
+      },
+      "properties": {
+        "household_no": "H-0149",
+        "head_name": "Noli Gutierrez",
+        "address": "Purok 3, M.H. del Pilar Street",
+        "barangay": "Pinacpinacan",
+        "size": 4,
+        "children_count": 2,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09179533650",
+        "notes": "Assisted breathing device"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.975404,
+          14.953139
+        ]
+      },
+      "properties": {
+        "household_no": "H-0150",
+        "head_name": "Maria Santos",
+        "address": "Purok 5, Bonifacio Street",
+        "barangay": "Pinacpinacan",
         "size": 3,
         "children_count": 2,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09171585928",
+        "contact": "09171412665",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.972784,
+          14.953398
+        ]
+      },
+      "properties": {
+        "household_no": "H-0151",
+        "head_name": "Imelda Cruz",
+        "address": "Purok 5, Quezon Street",
+        "barangay": "Pinacpinacan",
+        "size": 4,
+        "children_count": 0,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09178314716",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.974495,
+          14.950995
+        ]
+      },
+      "properties": {
+        "household_no": "H-0152",
+        "head_name": "Elena Reyes",
+        "address": "Purok 1, Gov. Padilla Street",
+        "barangay": "Pinacpinacan",
+        "size": 3,
+        "children_count": 0,
+        "elderly_count": 1,
+        "pwd_count": 1,
+        "contact": "09177655764",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.976232,
+          14.949252
+        ]
+      },
+      "properties": {
+        "household_no": "H-0153",
+        "head_name": "Lourdes Cruz",
+        "address": "Purok 3, Mabini Street",
+        "barangay": "Pinacpinacan",
+        "size": 4,
+        "children_count": 2,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09176066600",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.971478,
+          14.94991
+        ]
+      },
+      "properties": {
+        "household_no": "H-0154",
+        "head_name": "Rogelio Santos",
+        "address": "Purok 4, Burgos Street",
+        "barangay": "Pinacpinacan",
+        "size": 8,
+        "children_count": 3,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09176614940",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.962082,
+          14.954577
+        ]
+      },
+      "properties": {
+        "household_no": "H-0155",
+        "head_name": "Isagani Domingo",
+        "address": "Purok 5, Jacinto Street",
+        "barangay": "Poblacion",
+        "size": 2,
+        "children_count": 0,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09176595517",
+        "notes": "Recently relocated from flood-prone area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.965578,
+          14.959881
+        ]
+      },
+      "properties": {
+        "household_no": "H-0156",
+        "head_name": "Gregorio Santos",
+        "address": "Purok 5, Mabini Street",
+        "barangay": "Poblacion",
+        "size": 2,
+        "children_count": 0,
+        "elderly_count": 2,
+        "pwd_count": 0,
+        "contact": "09171323898",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.959928,
+          14.95656
+        ]
+      },
+      "properties": {
+        "household_no": "H-0157",
+        "head_name": "Elena Carpio",
+        "address": "Purok 2, Burgos Street",
+        "barangay": "Poblacion",
+        "size": 4,
+        "children_count": 3,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09173001977",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.961791,
+          14.954483
+        ]
+      },
+      "properties": {
+        "household_no": "H-0158",
+        "head_name": "Luzviminda Torres",
+        "address": "Purok 2, M. Hizon Street",
+        "barangay": "Poblacion",
+        "size": 6,
+        "children_count": 3,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09171466129",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.965652,
+          14.955477
+        ]
+      },
+      "properties": {
+        "household_no": "H-0159",
+        "head_name": "Antonio Reyes",
+        "address": "Purok 1, M.H. del Pilar Street",
+        "barangay": "Poblacion",
+        "size": 6,
+        "children_count": 1,
+        "elderly_count": 1,
+        "pwd_count": 0,
+        "contact": "09176218847",
+        "notes": "No electricity connection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.965117,
+          14.957358
+        ]
+      },
+      "properties": {
+        "household_no": "H-0160",
+        "head_name": "Corazon Gonzales",
+        "address": "Purok 4, Bonifacio Street",
+        "barangay": "Poblacion",
+        "size": 1,
+        "children_count": 0,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09179036756",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.965516,
+          14.955718
+        ]
+      },
+      "properties": {
+        "household_no": "H-0161",
+        "head_name": "Pedro Yson",
+        "address": "Purok 3, Aguinaldo Street",
+        "barangay": "Poblacion",
+        "size": 6,
+        "children_count": 0,
+        "elderly_count": 2,
+        "pwd_count": 0,
+        "contact": "09173102812",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.967987,
+          14.941758
+        ]
+      },
+      "properties": {
+        "household_no": "H-0162",
+        "head_name": "Noli Gutierrez",
+        "address": "Purok 1, Katubusan Street",
+        "barangay": "Pulo",
+        "size": 4,
+        "children_count": 2,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09178592889",
         "notes": null
       }
     },
@@ -3597,13 +3575,13 @@
         ]
       },
       "properties": {
-        "household_no": "H-0164",
+        "household_no": "H-0163",
         "head_name": "Marites Vergara",
         "address": "Purok 5, Jacinto Street",
         "barangay": "Pulo",
-        "size": 4,
-        "children_count": 0,
-        "elderly_count": 1,
+        "size": 8,
+        "children_count": 2,
+        "elderly_count": 0,
         "pwd_count": 0,
         "contact": "09171102075",
         "notes": null
@@ -3619,7 +3597,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0165",
+        "household_no": "H-0164",
         "head_name": "Antonio Alcantara",
         "address": "Purok 3, Liberation Street",
         "barangay": "Pulo",
@@ -3641,7 +3619,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0166",
+        "household_no": "H-0165",
         "head_name": "Mario Santianez",
         "address": "Purok 2, Luna Street",
         "barangay": "Pulo",
@@ -3663,8 +3641,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0167",
-        "head_name": "Luzviminda Ramos",
+        "household_no": "H-0166",
+        "head_name": "Luzviminda Santiago",
         "address": "Purok 5, San Jose Street",
         "barangay": "Pulo",
         "size": 5,
@@ -3680,15 +3658,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.976923,
-          14.926118
+          120.966923,
+          14.941118
         ]
       },
       "properties": {
-        "household_no": "H-0168",
+        "household_no": "H-0167",
         "head_name": "Lourdes Pascual",
         "address": "Purok 4, Mabini Street",
-        "barangay": "Pulong Bayabas",
+        "barangay": "Pulo",
         "size": 7,
         "children_count": 0,
         "elderly_count": 1,
@@ -3707,7 +3685,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0169",
+        "household_no": "H-0168",
         "head_name": "Carmen Cruz",
         "address": "Purok 4, Bonifacio Street",
         "barangay": "Pulong Bayabas",
@@ -3729,7 +3707,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0170",
+        "household_no": "H-0169",
         "head_name": "Gregorio Serrano",
         "address": "Purok 2, Katubusan Street",
         "barangay": "Pulong Bayabas",
@@ -3751,7 +3729,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0171",
+        "household_no": "H-0170",
         "head_name": "Andres Ramos",
         "address": "Purok 6, Luna Street",
         "barangay": "Pulong Bayabas",
@@ -3773,7 +3751,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0172",
+        "household_no": "H-0171",
         "head_name": "Nestor Del Rosario",
         "address": "Purok 4, M.H. del Pilar Street",
         "barangay": "Pulong Bayabas",
@@ -3790,15 +3768,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.977834,
-          14.948333
+          120.975834,
+          14.922333
         ]
       },
       "properties": {
-        "household_no": "H-0173",
+        "household_no": "H-0172",
         "head_name": "Ramon Manalo",
         "address": "Purok 1, Jacinto Street",
-        "barangay": "Salapongan",
+        "barangay": "Pulong Bayabas",
         "size": 4,
         "children_count": 3,
         "elderly_count": 1,
@@ -3817,7 +3795,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0174",
+        "household_no": "H-0173",
         "head_name": "Gregorio Alcantara",
         "address": "Purok 6, Aguinaldo Street",
         "barangay": "Salapongan",
@@ -3839,7 +3817,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0175",
+        "household_no": "H-0174",
         "head_name": "Nestor Navarro",
         "address": "Purok 5, Luna Street",
         "barangay": "Salapongan",
@@ -3861,7 +3839,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0176",
+        "household_no": "H-0175",
         "head_name": "Ferdinand Tomas",
         "address": "Purok 1, Mabini Street",
         "barangay": "Salapongan",
@@ -3883,7 +3861,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0177",
+        "household_no": "H-0176",
         "head_name": "Jonalyn Vergara",
         "address": "Purok 5, Jacinto Street",
         "barangay": "Salapongan",
@@ -3905,7 +3883,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0178",
+        "household_no": "H-0177",
         "head_name": "Carlos Serrano",
         "address": "Purok 5, Bonifacio Street",
         "barangay": "Salapongan",
@@ -3927,7 +3905,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0179",
+        "household_no": "H-0178",
         "head_name": "Riza Garcia",
         "address": "Purok 4, M. Hizon Street",
         "barangay": "Salapongan",
@@ -3944,15 +3922,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.960249,
-          14.965808
+          120.981249,
+          14.952808
         ]
       },
       "properties": {
-        "household_no": "H-0180",
+        "household_no": "H-0179",
         "head_name": "Corazon Buenaventura",
         "address": "Purok 2, Katubusan Street",
-        "barangay": "Sampaloc",
+        "barangay": "Salapongan",
         "size": 6,
         "children_count": 0,
         "elderly_count": 0,
@@ -3971,8 +3949,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0181",
-        "head_name": "Edwin Ong",
+        "household_no": "H-0180",
+        "head_name": "Edwin Santiago",
         "address": "Purok 1, Quezon Street",
         "barangay": "Sampaloc",
         "size": 8,
@@ -3993,7 +3971,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0182",
+        "household_no": "H-0181",
         "head_name": "Jonalyn Mercado",
         "address": "Purok 4, Aguinaldo Street",
         "barangay": "Sampaloc",
@@ -4015,7 +3993,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0183",
+        "household_no": "H-0182",
         "head_name": "Romeo Reyes",
         "address": "Purok 6, Bonifacio Street",
         "barangay": "Sampaloc",
@@ -4037,8 +4015,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0184",
-        "head_name": "Nestor Bautista",
+        "household_no": "H-0183",
+        "head_name": "Nestor Ong",
         "address": "Purok 3, M.H. del Pilar Street",
         "barangay": "Sampaloc",
         "size": 8,
@@ -4059,7 +4037,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0185",
+        "household_no": "H-0184",
         "head_name": "Divina Torres",
         "address": "Purok 5, Burgos Street",
         "barangay": "Sampaloc",
@@ -4081,7 +4059,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0186",
+        "household_no": "H-0185",
         "head_name": "Imelda Alcantara",
         "address": "Purok 4, Bonifacio Street",
         "barangay": "Sampaloc",
@@ -4098,15 +4076,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.991315,
-          14.940931
+          120.960315,
+          14.962931
         ]
       },
       "properties": {
-        "household_no": "H-0187",
-        "head_name": "Maria Ong",
+        "household_no": "H-0186",
+        "head_name": "Maria Santiago",
         "address": "Purok 5, Liberation Street",
-        "barangay": "San Agustin",
+        "barangay": "Sampaloc",
         "size": 3,
         "children_count": 2,
         "elderly_count": 1,
@@ -4125,7 +4103,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0188",
+        "household_no": "H-0187",
         "head_name": "Carmen Bautista",
         "address": "Purok 3, Quezon Street",
         "barangay": "San Agustin",
@@ -4147,7 +4125,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0189",
+        "household_no": "H-0188",
         "head_name": "Ramon Gutierrez",
         "address": "Purok 1, P. Burgos Street",
         "barangay": "San Agustin",
@@ -4169,7 +4147,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0190",
+        "household_no": "H-0189",
         "head_name": "Miguel Bautista",
         "address": "Purok 3, Del Pilar Street",
         "barangay": "San Agustin",
@@ -4191,7 +4169,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0191",
+        "household_no": "H-0190",
         "head_name": "Mercedes Vergara",
         "address": "Purok 1, Bonifacio Street",
         "barangay": "San Agustin",
@@ -4213,7 +4191,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0192",
+        "household_no": "H-0191",
         "head_name": "Imelda Navarro",
         "address": "Purok 2, San Jose Street",
         "barangay": "San Agustin",
@@ -4235,7 +4213,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0193",
+        "household_no": "H-0192",
         "head_name": "Reynaldo Soriano",
         "address": "Purok 1, Liberation Street",
         "barangay": "San Agustin",
@@ -4257,7 +4235,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0194",
+        "household_no": "H-0193",
         "head_name": "Fe Buenaventura",
         "address": "Purok 3, P. Burgos Street",
         "barangay": "San Agustin",
@@ -4274,21 +4252,21 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.992868,
-          14.940602
+          120.990325,
+          14.94103
         ]
       },
       "properties": {
-        "household_no": "H-0195",
-        "head_name": "Mario Santiago",
-        "address": "Purok 6, Liberation Street",
+        "household_no": "H-0194",
+        "head_name": "Mario Alcantara",
+        "address": "Purok 4, Gov. Padilla Street",
         "barangay": "San Agustin",
         "size": 6,
         "children_count": 2,
         "elderly_count": 1,
         "pwd_count": 0,
-        "contact": "09177919113",
-        "notes": null
+        "contact": "09179191134",
+        "notes": "Pregnant member"
       }
     },
     {
@@ -4296,18 +4274,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.976633,
-          14.970042
+          120.988633,
+          14.942042
         ]
       },
       "properties": {
-        "household_no": "H-0196",
+        "household_no": "H-0195",
         "head_name": "Benito Soriano",
         "address": "Purok 1, Burgos Street",
-        "barangay": "San Roque",
-        "size": 3,
+        "barangay": "San Agustin",
+        "size": 4,
         "children_count": 2,
-        "elderly_count": 1,
+        "elderly_count": 2,
         "pwd_count": 0,
         "contact": "09175237958",
         "notes": null
@@ -4323,7 +4301,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0197",
+        "household_no": "H-0196",
         "head_name": "Andres Serrano",
         "address": "Purok 1, Quezon Street",
         "barangay": "San Roque",
@@ -4345,7 +4323,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0198",
+        "household_no": "H-0197",
         "head_name": "Gregorio Ilustre",
         "address": "Purok 6, San Jose Street",
         "barangay": "San Roque",
@@ -4367,7 +4345,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0199",
+        "household_no": "H-0198",
         "head_name": "Ana Ramos",
         "address": "Purok 1, San Jose Street",
         "barangay": "San Roque",
@@ -4389,7 +4367,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0200",
+        "household_no": "H-0199",
         "head_name": "Fe Flores",
         "address": "Purok 6, Jacinto Street",
         "barangay": "San Roque",
@@ -4411,7 +4389,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0201",
+        "household_no": "H-0200",
         "head_name": "Benito Torres",
         "address": "Purok 2, Luna Street",
         "barangay": "San Roque",
@@ -4433,7 +4411,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0202",
+        "household_no": "H-0201",
         "head_name": "Liza Flores",
         "address": "Purok 3, Rizal Street",
         "barangay": "San Roque",
@@ -4455,7 +4433,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0203",
+        "household_no": "H-0202",
         "head_name": "Antonio Magpayo",
         "address": "Purok 4, Jacinto Street",
         "barangay": "San Roque",
@@ -4472,15 +4450,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.937529,
-          14.987633
+          120.975529,
+          14.972133
         ]
       },
       "properties": {
-        "household_no": "H-0204",
+        "household_no": "H-0203",
         "head_name": "Carlos Magpayo",
         "address": "Purok 3, P. Burgos Street",
-        "barangay": "Talacsan",
+        "barangay": "San Roque",
         "size": 6,
         "children_count": 3,
         "elderly_count": 2,
@@ -4499,7 +4477,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0205",
+        "household_no": "H-0204",
         "head_name": "Carmen Marquez",
         "address": "Purok 4, Jacinto Street",
         "barangay": "Talacsan",
@@ -4521,7 +4499,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0206",
+        "household_no": "H-0205",
         "head_name": "Nestor Espino",
         "address": "Purok 6, San Jose Street",
         "barangay": "Talacsan",
@@ -4543,7 +4521,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0207",
+        "household_no": "H-0206",
         "head_name": "Jose Soriano",
         "address": "Purok 6, Del Pilar Street",
         "barangay": "Talacsan",
@@ -4565,7 +4543,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0208",
+        "household_no": "H-0207",
         "head_name": "Nestor Gutierrez",
         "address": "Purok 1, Aguinaldo Street",
         "barangay": "Talacsan",
@@ -4587,7 +4565,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0209",
+        "household_no": "H-0208",
         "head_name": "Riza Torres",
         "address": "Purok 5, Liberation Street",
         "barangay": "Talacsan",
@@ -4609,7 +4587,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0210",
+        "household_no": "H-0209",
         "head_name": "Liza Del Rosario",
         "address": "Purok 5, Del Pilar Street",
         "barangay": "Talacsan",
@@ -4631,7 +4609,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0211",
+        "household_no": "H-0210",
         "head_name": "Rogelio Espino",
         "address": "Purok 1, Luna Street",
         "barangay": "Talacsan",
@@ -4648,15 +4626,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.9532,
-          14.939083
+          120.9412,
+          14.987583
         ]
       },
       "properties": {
-        "household_no": "H-0212",
+        "household_no": "H-0211",
         "head_name": "Rogelio Lucero",
         "address": "Purok 5, P. Burgos Street",
-        "barangay": "Tambubong",
+        "barangay": "Talacsan",
         "size": 8,
         "children_count": 2,
         "elderly_count": 0,
@@ -4675,7 +4653,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0213",
+        "household_no": "H-0212",
         "head_name": "Imelda Marquez",
         "address": "Purok 2, Luna Street",
         "barangay": "Tambubong",
@@ -4697,7 +4675,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0214",
+        "household_no": "H-0213",
         "head_name": "Elena Cruz",
         "address": "Purok 2, Bonifacio Street",
         "barangay": "Tambubong",
@@ -4719,7 +4697,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0215",
+        "household_no": "H-0214",
         "head_name": "Romeo Flores",
         "address": "Purok 4, Gov. Padilla Street",
         "barangay": "Tambubong",
@@ -4741,7 +4719,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0216",
+        "household_no": "H-0215",
         "head_name": "Elena Aquino",
         "address": "Purok 6, Bonifacio Street",
         "barangay": "Tambubong",
@@ -4763,7 +4741,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0217",
+        "household_no": "H-0216",
         "head_name": "Divina Pascual",
         "address": "Purok 3, Gov. Padilla Street",
         "barangay": "Tambubong",
@@ -4785,7 +4763,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0218",
+        "household_no": "H-0217",
         "head_name": "Mercedes Del Rosario",
         "address": "Purok 5, Rizal Street",
         "barangay": "Tambubong",
@@ -4807,7 +4785,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0219",
+        "household_no": "H-0218",
         "head_name": "Antonio Salazar",
         "address": "Purok 5, Katubusan Street",
         "barangay": "Tambubong",
@@ -4824,15 +4802,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.939219,
-          14.947232
+          120.951219,
+          14.936232
         ]
       },
       "properties": {
-        "household_no": "H-0220",
+        "household_no": "H-0219",
         "head_name": "Edwin Alcantara",
         "address": "Purok 4, Liberation Street",
-        "barangay": "Tukod",
+        "barangay": "Tambubong",
         "size": 2,
         "children_count": 1,
         "elderly_count": 1,
@@ -4851,7 +4829,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0221",
+        "household_no": "H-0220",
         "head_name": "Ramon Reyes",
         "address": "Purok 1, M.H. del Pilar Street",
         "barangay": "Tukod",
@@ -4873,7 +4851,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0222",
+        "household_no": "H-0221",
         "head_name": "Jose Espino",
         "address": "Purok 1, M.H. del Pilar Street",
         "barangay": "Tukod",
@@ -4895,7 +4873,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0223",
+        "household_no": "H-0222",
         "head_name": "Isagani Torres",
         "address": "Purok 3, Rizal Street",
         "barangay": "Tukod",
@@ -4917,7 +4895,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0224",
+        "household_no": "H-0223",
         "head_name": "Ana Castillo",
         "address": "Purok 1, Luna Street",
         "barangay": "Tukod",
@@ -4939,7 +4917,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0225",
+        "household_no": "H-0224",
         "head_name": "Juan Torres",
         "address": "Purok 1, Gov. Padilla Street",
         "barangay": "Tukod",
@@ -4956,15 +4934,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.971194,
-          14.988538
+          120.939194,
+          14.948538
         ]
       },
       "properties": {
-        "household_no": "H-0226",
+        "household_no": "H-0225",
         "head_name": "Ferdinand Cruz",
         "address": "Purok 6, Jacinto Street",
-        "barangay": "Ulingao",
+        "barangay": "Tukod",
         "size": 7,
         "children_count": 3,
         "elderly_count": 0,
@@ -4983,7 +4961,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0227",
+        "household_no": "H-0226",
         "head_name": "Marites Santos",
         "address": "Purok 1, Katubusan Street",
         "barangay": "Ulingao",
@@ -5005,8 +4983,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0228",
-        "head_name": "Imelda Ong",
+        "household_no": "H-0227",
+        "head_name": "Imelda Santiago",
         "address": "Purok 6, Luna Street",
         "barangay": "Ulingao",
         "size": 7,
@@ -5027,7 +5005,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0229",
+        "household_no": "H-0228",
         "head_name": "Romeo Soriano",
         "address": "Purok 6, M.H. del Pilar Street",
         "barangay": "Ulingao",
@@ -5049,7 +5027,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0230",
+        "household_no": "H-0229",
         "head_name": "Ana Reyes",
         "address": "Purok 2, Bonifacio Street",
         "barangay": "Ulingao",
@@ -5071,7 +5049,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0231",
+        "household_no": "H-0230",
         "head_name": "Pedro Soriano",
         "address": "Purok 5, P. Burgos Street",
         "barangay": "Ulingao",
@@ -5093,8 +5071,8 @@
         ]
       },
       "properties": {
-        "household_no": "H-0232",
-        "head_name": "Carlos Ong",
+        "household_no": "H-0231",
+        "head_name": "Carlos Santiago",
         "address": "Purok 6, Jacinto Street",
         "barangay": "Ulingao",
         "size": 5,
@@ -5110,15 +5088,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          120.986023,
-          14.915532
+          120.970023,
+          14.988532
         ]
       },
       "properties": {
-        "household_no": "H-0233",
+        "household_no": "H-0232",
         "head_name": "Mercedes Marquez",
         "address": "Purok 3, Rizal Street",
-        "barangay": "Sapang Pahalang",
+        "barangay": "Ulingao",
         "size": 4,
         "children_count": 3,
         "elderly_count": 0,
@@ -5137,7 +5115,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0234",
+        "household_no": "H-0233",
         "head_name": "Carmen Soriano",
         "address": "Purok 1, San Jose Street",
         "barangay": "Sapang Pahalang",
@@ -5159,7 +5137,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0235",
+        "household_no": "H-0234",
         "head_name": "Benito Mercado",
         "address": "Purok 3, M. Hizon Street",
         "barangay": "Sapang Pahalang",
@@ -5181,7 +5159,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0236",
+        "household_no": "H-0235",
         "head_name": "Elena Torres",
         "address": "Purok 5, Luna Street",
         "barangay": "Sapang Pahalang",
@@ -5203,7 +5181,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0237",
+        "household_no": "H-0236",
         "head_name": "Liza Marquez",
         "address": "Purok 2, Mabini Street",
         "barangay": "Sapang Pahalang",
@@ -5225,7 +5203,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0238",
+        "household_no": "H-0237",
         "head_name": "Edwin Salazar",
         "address": "Purok 4, Quezon Street",
         "barangay": "Sapang Pahalang",
@@ -5247,7 +5225,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0239",
+        "household_no": "H-0238",
         "head_name": "Myra Manalo",
         "address": "Purok 2, Burgos Street",
         "barangay": "Sapang Pahalang",
@@ -5269,7 +5247,7 @@
         ]
       },
       "properties": {
-        "household_no": "H-0240",
+        "household_no": "H-0239",
         "head_name": "Jonalyn Bautista",
         "address": "Purok 3, Mabini Street",
         "barangay": "Sapang Pahalang",
@@ -5279,6 +5257,28 @@
         "pwd_count": 0,
         "contact": "09174509729",
         "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.989124,
+          14.915896
+        ]
+      },
+      "properties": {
+        "household_no": "H-0240",
+        "head_name": "Fe Ilustre",
+        "address": "Purok 1, Liberation Street",
+        "barangay": "Sapang Pahalang",
+        "size": 2,
+        "children_count": 0,
+        "elderly_count": 0,
+        "pwd_count": 0,
+        "contact": "09170558086",
+        "notes": "No electricity connection"
       }
     }
   ]

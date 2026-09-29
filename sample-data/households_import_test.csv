@@ -1,0 +1,31 @@
+household_no,head_name,address,barangay,size,children_count,elderly_count,pwd_count,contact,lat,lng,notes
+IMP-0001,Luzviminda Santianez,"Purok 5, Burgos Street",BMA-Balagtas,5,1,1,0,09172206079,14.956997,120.950494,No electricity connection
+IMP-0002,Marites Navarro,"Purok 1, Del Pilar Street",BMA-Balagtas,7,1,1,0,09175946745,14.956671,120.949176,
+IMP-0003,Rosa Cruz,"Purok 3, Aguinaldo Street",BMA-Balagtas,4,2,2,0,09174660041,14.957436,120.951082,
+IMP-0004,Rosa Magpayo,"Purok 4, Liberation Street",BMA-Balagtas,7,1,2,0,09179624590,14.958647,120.952656,
+IMP-0005,Benito Ocampo,"Purok 4, Aguinaldo Street",BMA-Balagtas,4,2,0,0,09175898361,14.959564,120.954065,
+IMP-0006,Teresa Yson,"Purok 5, Mabini Street",BMA-Balagtas,5,0,1,0,09176170250,14.954331,120.953494,Elderly resident living alone
+IMP-0007,Andres Mercado,"Purok 4, San Jose Street",Banca-banca,1,0,0,0,09173669999,14.980486,120.972426,Needs wheelchair access
+IMP-0008,Teresa Ong,"Purok 6, Del Pilar Street",Banca-banca,5,3,2,0,09171170755,14.977967,120.974175,
+IMP-0009,Mario Alcantara,"Purok 4, Mabini Street",Banca-banca,3,0,2,0,09178562392,14.982659,120.973861,
+IMP-0010,Liza Flores,"Purok 5, Del Pilar Street",Banca-banca,5,1,1,0,09178586942,14.978377,120.974828,
+IMP-0011,Lourdes Serrano,"Purok 1, Liberation Street",Banca-banca,4,3,1,0,09176142634,14.977773,120.975783,
+IMP-0012,Carlos Salazar,"Purok 1, Bonifacio Street",Banca-banca,7,1,2,0,09179686055,14.980839,120.975123,
+IMP-0013,Divina Torres,"Purok 5, Quezon Street",Banca-banca,6,3,2,0,09178232116,14.982642,120.974329,
+IMP-0014,Teresa Torres,"Purok 1, Katubusan Street",Banca-banca,4,1,2,0,09174649634,14.981081,120.973924,
+IMP-0015,Antonio Castillo,"Purok 2, P. Burgos Street",Caingin,3,0,1,0,09177751997,14.933936,120.952125,
+IMP-0016,Benito Navarro,"Purok 5, Bonifacio Street",Caingin,6,0,0,0,09178959481,14.930375,120.952949,
+IMP-0017,Isagani Santianez,"Purok 4, Jacinto Street",Caingin,4,0,2,0,09178981712,14.932585,120.952178,Two infants in household
+IMP-0018,Mario Ong,"Purok 1, Luna Street",Caingin,4,0,0,0,09179209987,14.929525,120.956183,
+IMP-0019,Carlos Castillo,"Purok 2, P. Burgos Street",Caingin,5,0,2,0,09178581070,14.934018,120.955243,
+IMP-0020,Nestor Castillo,"Purok 6, Luna Street",Caingin,5,1,2,0,09173155659,14.931498,120.95267,Two infants in household
+IMP-0021,Jose Aquino,"Purok 3, Bonifacio Street",Coral na Bato,6,0,2,0,09179288919,14.924265,120.989562,
+IMP-0022,Antonio Gutierrez,"Purok 2, M. Hizon Street",Coral na Bato,5,3,2,0,09175186713,14.925413,120.993943,
+IMP-0023,Marites Salazar,"Purok 3, Del Pilar Street",Coral na Bato,2,0,2,0,09172054949,14.926507,120.992751,
+IMP-0024,Andres Santiago,"Purok 4, Rizal Street",Coral na Bato,3,1,1,0,09174815668,14.926787,120.991942,
+IMP-0025,Antonio Santianez,"Purok 5, Gov. Padilla Street",Coral na Bato,4,3,1,0,09171359143,14.922996,120.991515,
+IMP-0026,Divina Salazar,"Purok 2, M.H. del Pilar Street",Coral na Bato,3,1,1,0,09179965992,14.925736,120.990568,
+IMP-0027,Miguel Domingo,"Purok 1, Bonifacio Street",Cruz na Daan,2,0,2,0,09175949492,14.993124,120.949939,
+IMP-0028,Noli Salazar,"Purok 2, Luna Street",Cruz na Daan,4,0,2,0,09173766509,14.993063,120.946288,
+IMP-0029,Noli Manalo,"Purok 3, M. Hizon Street",Cruz na Daan,2,0,0,0,09178273649,14.987869,120.948956,
+IMP-0030,Liza Aquino,"Purok 5, Jacinto Street",Cruz na Daan,5,1,1,0,09176843746,14.988807,120.947314,
