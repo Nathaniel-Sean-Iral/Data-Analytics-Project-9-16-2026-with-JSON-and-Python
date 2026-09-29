@@ -18,6 +18,7 @@ import {
 import { useAuth } from '@/auth/AuthContext';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/cn';
+import { MUNICIPALITY_LABEL } from '@/lib/location';
 import type { Role } from '@/api/types';
 
 interface NavItem {
@@ -97,7 +98,7 @@ export function AppShell() {
           </div>
           <div>
             <p className="text-sm font-bold text-white">Disaster Prep</p>
-            <p className="text-[11px] text-slate-400">Local Preparedness System</p>
+            <p className="text-[11px] text-slate-400">{MUNICIPALITY_LABEL}</p>
           </div>
         </div>
         <SidebarNav />

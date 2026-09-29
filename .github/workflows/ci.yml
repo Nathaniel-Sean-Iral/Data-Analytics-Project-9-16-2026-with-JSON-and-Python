@@ -20,7 +20,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Lint
+        run: ruff check .
+      - name: Check migrations are in sync with models
+        env:
+          DATABASE_URL: sqlite:///./ci_migration_check.db
+        run: |
+          alembic upgrade head
+          alembic check
       - name: Run backend tests
+        env:
+          SECRET_KEY: ci-secret-key-not-a-placeholder-0123456789
         run: pytest -q
 
   frontend:
@@ -37,5 +47,5 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: npm ci
-      - name: Build frontend
+      - name: Typecheck and build frontend
         run: npm run build

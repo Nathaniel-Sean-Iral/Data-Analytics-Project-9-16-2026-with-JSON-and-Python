@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -9,7 +9,18 @@ IncidentType = Literal["flood", "fire", "earthquake", "landslide", "typhoon", "o
 IncidentSeverity = Literal["low", "moderate", "high", "critical"]
 IncidentStatus = Literal["reported", "assessing", "responding", "resolved"]
 CenterStatus = Literal["active", "standby", "closed"]
-ResourceType = Literal["rice", "water", "medicine", "blankets", "hygiene", "canned_goods", "clothing", "mats", "tents", "other"]
+ResourceType = Literal[
+    "rice",
+    "water",
+    "medicine",
+    "blankets",
+    "hygiene",
+    "canned_goods",
+    "clothing",
+    "mats",
+    "tents",
+    "other",
+]
 
 
 class User(BaseModel):
@@ -17,7 +28,8 @@ class User(BaseModel):
     username: str
     full_name: str
     role: Role
-    email: Optional[str] = None
+    email: str | None = None
+    is_active: bool = True
 
 
 class LoginRequest(BaseModel):
@@ -25,9 +37,25 @@ class LoginRequest(BaseModel):
     password: str
 
 
-class AuthResponse(BaseModel):
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+
+class TokenPair(BaseModel):
     access_token: str
+    refresh_token: str
     token_type: str = "bearer"
+
+
+class UserCreate(BaseModel):
+    username: str = Field(..., min_length=3, max_length=50, pattern=r"^[A-Za-z0-9._-]+$")
+    full_name: str = Field(..., min_length=1, max_length=120)
+    password: str = Field(..., min_length=8, max_length=128)
+    role: Role = "viewer"
+    email: str | None = None
+
+
+class AuthResponse(TokenPair):
     user: User
 
 
@@ -40,14 +68,18 @@ class HouseholdBase(BaseModel):
     children_count: int = 0
     elderly_count: int = 0
     pwd_count: int = 0
-    contact: str
-    lat: float
-    lng: float
-    notes: Optional[str] = None
+    contact: str | None = None
+    # Optional on input: the API falls back to the barangay centroid so a
+    # household always lands somewhere on the map.
+    lat: float | None = None
+    lng: float | None = None
+    notes: str | None = None
 
 
 class Household(HouseholdBase):
     id: int
+    lat: float
+    lng: float
 
 
 class HouseholdCreate(HouseholdBase):
@@ -55,18 +87,18 @@ class HouseholdCreate(HouseholdBase):
 
 
 class HouseholdUpdate(BaseModel):
-    household_no: Optional[str] = None
-    head_name: Optional[str] = None
-    address: Optional[str] = None
-    barangay: Optional[str] = None
-    size: Optional[int] = Field(None, ge=1)
-    children_count: Optional[int] = None
-    elderly_count: Optional[int] = None
-    pwd_count: Optional[int] = None
-    contact: Optional[str] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-    notes: Optional[str] = None
+    household_no: str | None = None
+    head_name: str | None = None
+    address: str | None = None
+    barangay: str | None = None
+    size: int | None = Field(None, ge=1)
+    children_count: int | None = None
+    elderly_count: int | None = None
+    pwd_count: int | None = None
+    contact: str | None = None
+    lat: float | None = None
+    lng: float | None = None
+    notes: str | None = None
 
 
 class CenterBase(BaseModel):
@@ -76,7 +108,7 @@ class CenterBase(BaseModel):
     capacity: int = Field(..., ge=1)
     current_occupants: int = 0
     facilities: list[str] = Field(default_factory=list)
-    contact: Optional[str] = None
+    contact: str | None = None
     lat: float
     lng: float
     status: CenterStatus = "active"
@@ -91,16 +123,16 @@ class CenterCreate(CenterBase):
 
 
 class CenterUpdate(BaseModel):
-    name: Optional[str] = None
-    barangay: Optional[str] = None
-    address: Optional[str] = None
-    capacity: Optional[int] = Field(None, ge=1)
-    current_occupants: Optional[int] = None
-    facilities: Optional[list[str]] = None
-    contact: Optional[str] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-    status: Optional[CenterStatus] = None
+    name: str | None = None
+    barangay: str | None = None
+    address: str | None = None
+    capacity: int | None = Field(None, ge=1)
+    current_occupants: int | None = None
+    facilities: list[str] | None = None
+    contact: str | None = None
+    lat: float | None = None
+    lng: float | None = None
+    status: CenterStatus | None = None
 
 
 class ResourceBase(BaseModel):
@@ -109,19 +141,38 @@ class ResourceBase(BaseModel):
     unit: str
     quantity_on_hand: int = 0
     threshold: int = 0
-    expiry: Optional[str] = None
-    stored_in: Optional[str] = None
-    updated_at: Optional[str] = None
+    expiry: str | None = None
+    stored_in: str | None = None
+    updated_at: str | None = None
 
 
 class Resource(ResourceBase):
     id: int
 
 
+class ResourceCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    type: ResourceType
+    unit: str = Field(min_length=1, max_length=40)
+    quantity_on_hand: int = Field(default=0, ge=0)
+    threshold: int = Field(default=0, ge=0)
+    expiry: str | None = None
+    stored_in: str | None = None
+
+
+class ResourceUpdate(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    unit: str | None = Field(default=None, min_length=1, max_length=40)
+    threshold: int | None = Field(default=None, ge=0)
+    expiry: str | None = None
+    stored_in: str | None = None
+
+
 class ResourceAdjustment(BaseModel):
     resource_id: int
     delta: int
-    reason: Optional[str] = None
+    reason: str | None = None
+    note: str | None = None
 
 
 class ResourceSummary(BaseModel):
@@ -139,11 +190,12 @@ class IncidentBase(BaseModel):
     barangay: str
     severity: IncidentSeverity
     status: IncidentStatus = "reported"
-    description: Optional[str] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-    affected_households: Optional[int] = None
-    reported_by: Optional[str] = None
+    description: str | None = None
+    lat: float | None = None
+    lng: float | None = None
+    zone_geojson: dict | None = None
+    affected_households: int | None = None
+    reported_by: str | None = None
 
 
 class Incident(IncidentBase):
@@ -154,6 +206,20 @@ class Incident(IncidentBase):
 
 class IncidentCreate(IncidentBase):
     pass
+
+
+class IncidentUpdate(BaseModel):
+    title: str | None = None
+    type: IncidentType | None = None
+    barangay: str | None = None
+    severity: IncidentSeverity | None = None
+    status: IncidentStatus | None = None
+    description: str | None = None
+    lat: float | None = None
+    lng: float | None = None
+    zone_geojson: dict | None = None
+    affected_households: int | None = None
+    reported_by: str | None = None
 
 
 class IncidentStatusUpdate(BaseModel):

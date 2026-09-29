@@ -2,27 +2,105 @@ from __future__ import annotations
 
 import csv
 import io
-from collections import defaultdict
-from datetime import datetime, timezone
+import json
+from datetime import UTC, datetime
 from typing import Any
 
-from app.core.barangays import SAN_RAFAEL_BARANGAYS
+from app.core.config import settings
+from app.core.location import coordinates_for
+from app.core.security import hash_password, needs_rehash, verify_password
 from app.db.session import SessionLocal
+from app.models.assignment import EvacuationAssignment
 from app.models.center import EvacuationCenter
 from app.models.household import Household
 from app.models.incident import Incident
 from app.models.resource import ResourceItem
+from app.models.resource_transaction import ResourceTransaction
 from app.models.user import User
+from app.services.pagination import PageParams, apply_sort_and_search, build_page
 
-USERS = {
-    "admin": {"id": 1, "username": "admin", "full_name": "Admin User", "role": "admin", "email": "admin@example.com"},
-    "responder": {"id": 2, "username": "responder", "full_name": "Responder User", "role": "responder", "email": "responder@example.com"},
-    "viewer": {"id": 3, "username": "viewer", "full_name": "Viewer User", "role": "viewer", "email": "viewer@example.com"},
-}
+DEMO_USERS = [
+    {"id": 1, "username": "admin", "full_name": "Admin User", "role": "admin", "email": "admin@sanrafael.gov.ph"},
+    {
+        "id": 2,
+        "username": "responder",
+        "full_name": "Responder User",
+        "role": "responder",
+        "email": "responder@sanrafael.gov.ph",
+    },
+    {"id": 3, "username": "viewer", "full_name": "Viewer User", "role": "viewer", "email": "viewer@sanrafael.gov.ph"},
+]
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
+
+
+def utc_now_dt() -> datetime:
+    """Timezone-aware datetime, for real DateTime columns.
+
+    ``utc_now`` returns a string because ``Incident.reported_at`` is a string
+    column. Do not use it for DateTime columns; SQLite will reject a str.
+    """
+    return datetime.now(UTC)
+
+
+def serialize_user(model: User) -> dict[str, Any]:
+    return {
+        "id": model.id,
+        "username": model.username,
+        "full_name": model.full_name,
+        "role": model.role,
+        "email": model.email,
+        "is_active": model.is_active,
+    }
+
+
+def get_user_by_username(username: str) -> dict[str, Any] | None:
+    db = SessionLocal()
+    try:
+        model = db.query(User).filter(User.username == username).first()
+        return serialize_user(model) if model else None
+    finally:
+        db.close()
+
+
+def authenticate_user(username: str, password: str) -> dict[str, Any] | None:
+    db = SessionLocal()
+    try:
+        model = db.query(User).filter(User.username == username).first()
+        if model is None or not model.is_active:
+            return None
+        if not verify_password(password, model.password_hash):
+            return None
+        if needs_rehash(model.password_hash):
+            model.password_hash = hash_password(password)
+            db.commit()
+        return serialize_user(model)
+    finally:
+        db.close()
+
+
+def create_user(payload: dict[str, Any], password: str) -> dict[str, Any]:
+    db = SessionLocal()
+    try:
+        existing = db.query(User).filter(User.username == payload["username"]).first()
+        if existing is not None:
+            raise ValueError(f"Username '{payload['username']}' is already taken")
+        model = User(
+            username=payload["username"],
+            full_name=payload["full_name"],
+            role=payload.get("role", "viewer"),
+            email=payload.get("email"),
+            password_hash=hash_password(password),
+            is_active=payload.get("is_active", True),
+        )
+        db.add(model)
+        db.commit()
+        db.refresh(model)
+        return serialize_user(model)
+    finally:
+        db.close()
 
 
 def serialize_household(model: Household) -> dict[str, Any]:
@@ -87,6 +165,7 @@ def serialize_incident(model: Incident) -> dict[str, Any]:
         "updated_at": model.updated_at,
         "lat": model.lat,
         "lng": model.lng,
+        "zone_geojson": json.loads(model.zone_geojson) if model.zone_geojson else None,
         "affected_households": model.affected_households,
         "reported_by": model.reported_by,
     }
@@ -96,11 +175,19 @@ def seed_demo_data():
     db = SessionLocal()
     try:
         if db.query(User).count() == 0:
+            demo_password_hash = hash_password(settings.DEMO_PASSWORD)
             db.add_all(
                 [
-                    User(id=1, username="admin", full_name="Admin User", role="admin", email="admin@example.com"),
-                    User(id=2, username="responder", full_name="Responder User", role="responder", email="responder@example.com"),
-                    User(id=3, username="viewer", full_name="Viewer User", role="viewer", email="viewer@example.com"),
+                    User(
+                        id=record["id"],
+                        username=record["username"],
+                        full_name=record["full_name"],
+                        role=record["role"],
+                        email=record["email"],
+                        password_hash=demo_password_hash,
+                        is_active=True,
+                    )
+                    for record in DEMO_USERS
                 ]
             )
 
@@ -117,8 +204,8 @@ def seed_demo_data():
                         elderly_count=1,
                         pwd_count=0,
                         contact="09170001234",
-                        lat=14.5995,
-                        lng=120.9833,
+                        lat=14.9574,
+                        lng=120.9634,
                         notes="Needs wheelchair access",
                     ),
                     Household(
@@ -131,22 +218,22 @@ def seed_demo_data():
                         elderly_count=1,
                         pwd_count=1,
                         contact="09170005678",
-                        lat=14.6101,
-                        lng=120.9778,
+                        lat=14.9703,
+                        lng=120.9785,
                         notes="Two infants in household",
                     ),
                     Household(
                         household_no="H-003",
                         head_name="Alicia Ramos",
                         address="33 Luna Street",
-                        barangay="Balagtas",
+                        barangay="BMA-Balagtas",
                         size=3,
                         children_count=1,
                         elderly_count=0,
                         pwd_count=0,
                         contact="09170009999",
-                        lat=14.5912,
-                        lng=120.9901,
+                        lat=14.9565,
+                        lng=120.9524,
                         notes="Senior caregiver on site",
                     ),
                 ]
@@ -163,8 +250,8 @@ def seed_demo_data():
                         current_occupants=18,
                         facilities="kitchen,water,power",
                         contact="09180001111",
-                        lat=14.596,
-                        lng=120.985,
+                        lat=14.9578,
+                        lng=120.9642,
                         status="active",
                     ),
                     EvacuationCenter(
@@ -175,8 +262,8 @@ def seed_demo_data():
                         current_occupants=12,
                         facilities="water,power",
                         contact="09180002222",
-                        lat=14.612,
-                        lng=120.979,
+                        lat=14.9692,
+                        lng=120.9788,
                         status="active",
                     ),
                     EvacuationCenter(
@@ -187,8 +274,8 @@ def seed_demo_data():
                         current_occupants=5,
                         facilities="kitchen,water",
                         contact="09180003333",
-                        lat=14.620,
-                        lng=120.975,
+                        lat=14.9903,
+                        lng=120.9625,
                         status="standby",
                     ),
                 ]
@@ -246,14 +333,14 @@ def seed_demo_data():
                     Incident(
                         title="Flooding near creek",
                         type="flood",
-                        barangay="Balagtas",
+                        barangay="BMA-Balagtas",
                         severity="high",
                         status="responding",
                         description="Water level rising near the creek after heavy rain.",
                         reported_at="2026-09-24T08:15:00+00:00",
                         updated_at="2026-09-25T09:00:00+00:00",
-                        lat=14.598,
-                        lng=120.986,
+                        lat=14.9560,
+                        lng=120.9530,
                         affected_households=18,
                         reported_by="admin",
                     ),
@@ -266,8 +353,8 @@ def seed_demo_data():
                         description="Small electrical fire reported near a residential unit.",
                         reported_at="2026-09-25T06:45:00+00:00",
                         updated_at="2026-09-25T07:15:00+00:00",
-                        lat=14.614,
-                        lng=120.978,
+                        lat=14.9585,
+                        lng=120.9660,
                         affected_households=6,
                         reported_by="responder",
                     ),
@@ -279,12 +366,26 @@ def seed_demo_data():
         db.close()
 
 
-def get_households(barangay: str | None = None):
+def get_households(barangay: str | None = None, params: PageParams | None = None):
     db = SessionLocal()
     try:
         query = db.query(Household)
         if barangay:
             query = query.filter(Household.barangay.ilike(barangay))
+        if params is not None:
+            query = query.filter(Household.is_active.is_(True))
+            query = apply_sort_and_search(
+                query,
+                Household,
+                params,
+                searchable=["household_no", "head_name", "address", "barangay", "contact"],
+                sortable=HOUSEHOLD_SORTABLE,
+            )
+            total = query.order_by(None).count()
+            rows = query.offset(params.offset).limit(params.page_size).all()
+            return build_page(
+                [serialize_household(item) for item in rows], total, params, sortable=HOUSEHOLD_SORTABLE
+            )
         return [serialize_household(item) for item in query.order_by(Household.id).all()]
     finally:
         db.close()
@@ -299,10 +400,26 @@ def get_household(household_id: int):
         db.close()
 
 
+def _with_household_coordinates(payload: dict[str, Any]) -> dict[str, Any]:
+    """Fill in missing lat/lng from the barangay centroid.
+
+    ``lat``/``lng`` are NOT NULL in the database, and a household registered from
+    a form or an import often has no pin dropped yet.
+    """
+    record = dict(payload)
+    lat, lng = record.get("lat"), record.get("lng")
+    if lat is None or lng is None:
+        fallback_lat, fallback_lng = coordinates_for(record.get("barangay") or "")
+        record["lat"] = lat if lat is not None else fallback_lat
+        record["lng"] = lng if lng is not None else fallback_lng
+    return record
+
+
 def create_household(payload: dict[str, Any]):
     db = SessionLocal()
     try:
-        item = Household(**payload)
+        record = _with_household_coordinates(payload)
+        item = Household(**record)
         db.add(item)
         db.commit()
         db.refresh(item)
@@ -363,8 +480,13 @@ def import_households(csv_text: str):
                 "lng": float(row.get("lng") or 0),
                 "notes": (row.get("notes") or "") or None,
             }
-            if not payload["household_no"] or not payload["head_name"] or not payload["address"] or not payload["barangay"]:
+            required_fields = ("household_no", "head_name", "address", "barangay")
+            if any(not payload[field] for field in required_fields):
                 continue
+            if not row.get("lat") or not row.get("lng"):
+                fallback_lat, fallback_lng = coordinates_for(payload["barangay"])
+                payload["lat"] = fallback_lat
+                payload["lng"] = fallback_lng
             existing = db.query(Household).filter(Household.household_no == payload["household_no"]).first()
             if existing:
                 continue
@@ -378,10 +500,164 @@ def import_households(csv_text: str):
         db.close()
 
 
-def get_centers():
+def _geometry_to_lat_lng(geometry: dict[str, Any]) -> tuple[float, float] | None:
+    """Best-effort representative point for a GeoJSON geometry.
+
+    Uses the centroid where one is computable, otherwise falls back to the first
+    coordinate pair. Polygon ring order can shift the centroid slightly outside
+    the shape, which is acceptable for a marker.
+    """
+    if not isinstance(geometry, dict):
+        return None
+    kind = geometry.get("type")
+    coordinates = geometry.get("coordinates")
+
+    def flatten(coords) -> list[tuple[float, float]]:
+        points: list[tuple[float, float]] = []
+        if isinstance(coords, (list, tuple)) and coords and isinstance(coords[0], (int, float)):
+            if len(coords) >= 2:
+                points.append((float(coords[0]), float(coords[1])))
+        elif isinstance(coords, (list, tuple)):
+            for entry in coords:
+                points.extend(flatten(entry))
+        return points
+
+    if kind == "GeometryCollection":
+        for sub in geometry.get("geometries") or []:
+            result = _geometry_to_lat_lng(sub)
+            if result:
+                return result
+        return None
+
+    points = flatten(coordinates)
+    if not points:
+        return None
+    # GeoJSON orders coordinates [longitude, latitude]; the rest of the app uses
+    # (lat, lng), so swap on the way out.
+    lng = sum(point[0] for point in points) / len(points)
+    lat = sum(point[1] for point in points) / len(points)
+    return (round(lat, 6), round(lng, 6))
+
+
+def _first_prop(props: dict[str, Any], *names: str, default: Any = "") -> Any:
+    """Return the first present, non-empty property among ``names``."""
+    for name in names:
+        value = props.get(name)
+        if value not in (None, ""):
+            return value
+    return default
+
+
+def import_households_geojson(payload: dict[str, Any]) -> dict[str, Any]:
+    """Import households from a GeoJSON FeatureCollection.
+
+    Each feature may carry a centroid in ``center`` or ``centroid``, its own
+    Point geometry, or any polygon to be reduced to a representative point.
+    Properties map to household fields, with ``barangay`` required.
+    """
+    features = payload.get("features")
+    if not isinstance(features, list):
+        raise ValueError("Expected a GeoJSON FeatureCollection with a 'features' array")
+
+    created_items: list[dict[str, Any]] = []
+    errors: list[dict[str, Any]] = []
+    skipped = 0
     db = SessionLocal()
     try:
-        return [serialize_center(item) for item in db.query(EvacuationCenter).order_by(EvacuationCenter.id).all()]
+        for index, feature in enumerate(features):
+            if not isinstance(feature, dict):
+                errors.append({"index": index, "error": "Feature is not an object"})
+                continue
+            props = feature.get("properties") or {}
+            household_no = str(_first_prop(props, "household_no", "householdNo", "household", "id")).strip()
+            head_name = str(_first_prop(props, "head_name", "headName", "head", "name")).strip()
+            address = str(_first_prop(props, "address", "location", "street")).strip()
+            barangay = str(_first_prop(props, "barangay", "district")).strip()
+
+            missing = [
+                field
+                for field, value in (
+                    ("household_no", household_no),
+                    ("head_name", head_name),
+                    ("address", address),
+                    ("barangay", barangay),
+                )
+                if not value
+            ]
+            if missing:
+                errors.append({"index": index, "error": f"Missing required field(s): {', '.join(missing)}"})
+                continue
+
+            lat = lng = None
+            centroid = props.get("center") or props.get("centroid")
+            if isinstance(centroid, (list, tuple)) and len(centroid) >= 2:
+                # GeoJSON convention: [lng, lat].
+                lng, lat = float(centroid[0]), float(centroid[1])
+            if lat is None:
+                parsed = _geometry_to_lat_lng(feature.get("geometry") or {})
+                if parsed:
+                    lat, lng = parsed
+            if lat is None or lng is None:
+                lat, lng = coordinates_for(barangay)
+
+            def as_int(value, fallback=0) -> int:
+                try:
+                    return int(float(value))
+                except (TypeError, ValueError):
+                    return fallback
+
+            record = {
+                "household_no": household_no,
+                "head_name": head_name,
+                "address": address,
+                "barangay": barangay,
+                "size": max(1, as_int(_first_prop(props, "size", "household_size", "members"), 1)),
+                "children_count": as_int(_first_prop(props, "children_count", "children")),
+                "elderly_count": as_int(_first_prop(props, "elderly_count", "elderly", "senior")),
+                "pwd_count": as_int(_first_prop(props, "pwd_count", "pwd")),
+                "contact": str(_first_prop(props, "contact", "phone")).strip() or None,
+                "lat": lat,
+                "lng": lng,
+                "notes": str(_first_prop(props, "notes", "remarks")).strip() or None,
+            }
+
+            existing = db.query(Household).filter(Household.household_no == household_no).first()
+            if existing:
+                skipped += 1
+                continue
+            item = Household(**record)
+            db.add(item)
+            db.flush()
+            created_items.append(serialize_household(item))
+        db.commit()
+        return {
+            "created": len(created_items),
+            "skipped": skipped,
+            "errors": errors,
+            "items": created_items,
+        }
+    finally:
+        db.close()
+
+
+def get_centers(params: PageParams | None = None):
+    db = SessionLocal()
+    try:
+        query = db.query(EvacuationCenter)
+        if params is not None:
+            query = apply_sort_and_search(
+                query,
+                EvacuationCenter,
+                params,
+                searchable=["name", "barangay", "address", "status"],
+                sortable=CENTER_SORTABLE,
+            )
+            total = query.order_by(None).count()
+            rows = query.offset(params.offset).limit(params.page_size).all()
+            return build_page(
+                [serialize_center(item) for item in rows], total, params, sortable=CENTER_SORTABLE
+            )
+        return [serialize_center(item) for item in query.order_by(EvacuationCenter.id).all()]
     finally:
         db.close()
 
@@ -427,10 +703,83 @@ def update_center(center_id: int, payload: dict[str, Any]):
         db.close()
 
 
-def get_resources():
+def delete_center(center_id: int) -> bool:
+    """Delete a center. Blocked while it holds people."""
     db = SessionLocal()
     try:
-        return [serialize_resource(item) for item in db.query(ResourceItem).order_by(ResourceItem.id).all()]
+        item = db.query(EvacuationCenter).filter(EvacuationCenter.id == center_id).first()
+        if item is None:
+            return False
+        if item.current_occupants > 0:
+            raise ValueError(
+                f"Cannot delete {item.name}: it currently houses {item.current_occupants} people. "
+                "Set the occupant count to 0 first."
+            )
+        db.query(EvacuationAssignment).filter(EvacuationAssignment.center_id == center_id).delete()
+        db.delete(item)
+        db.commit()
+        return True
+    finally:
+        db.close()
+
+
+RESOURCE_TYPE_LABELS = {
+    "rice": "Rice",
+    "water": "Water",
+    "medicine": "Medicine",
+    "blankets": "Blankets",
+    "hygiene": "Hygiene Kits",
+    "canned_goods": "Canned Goods",
+    "clothing": "Clothing",
+    "mats": "Sleeping Mats",
+    "tents": "Tents",
+    "other": "Other",
+}
+
+# Whitelists of sortable columns, shared by the query builder and the response
+# envelope so ``sort`` in the payload always reflects the column actually used.
+HOUSEHOLD_SORTABLE = (
+    "id",
+    "household_no",
+    "head_name",
+    "barangay",
+    "size",
+    "children_count",
+    "elderly_count",
+    "pwd_count",
+)
+CENTER_SORTABLE = ("id", "name", "barangay", "capacity", "current_occupants", "status")
+RESOURCE_SORTABLE = ("id", "name", "type", "quantity_on_hand", "threshold", "updated_at")
+INCIDENT_SORTABLE = (
+    "id",
+    "title",
+    "type",
+    "barangay",
+    "severity",
+    "status",
+    "reported_at",
+    "updated_at",
+)
+
+
+def get_resources(params: PageParams | None = None):
+    db = SessionLocal()
+    try:
+        query = db.query(ResourceItem)
+        if params is not None:
+            query = apply_sort_and_search(
+                query,
+                ResourceItem,
+                params,
+                searchable=["name", "type", "stored_in"],
+                sortable=RESOURCE_SORTABLE,
+            )
+            total = query.order_by(None).count()
+            rows = query.offset(params.offset).limit(params.page_size).all()
+            return build_page(
+                [serialize_resource(item) for item in rows], total, params, sortable=RESOURCE_SORTABLE
+            )
+        return [serialize_resource(item) for item in query.order_by(ResourceItem.id).all()]
     finally:
         db.close()
 
@@ -440,6 +789,30 @@ def get_resource(resource_id: int):
     try:
         item = db.query(ResourceItem).filter(ResourceItem.id == resource_id).first()
         return serialize_resource(item) if item else None
+    finally:
+        db.close()
+
+
+def create_resource(payload: dict[str, Any]):
+    db = SessionLocal()
+    try:
+        item = ResourceItem(updated_at=utc_now(), **payload)
+        db.add(item)
+        db.flush()
+        db.add(
+            ResourceTransaction(
+                resource_id=item.id,
+                delta=int(item.quantity_on_hand),
+                quantity_after=int(item.quantity_on_hand),
+                reason="created",
+                note="Initial stock",
+                performed_by=payload.get("performed_by"),
+                created_at=utc_now_dt(),
+            )
+        )
+        db.commit()
+        db.refresh(item)
+        return serialize_resource(item)
     finally:
         db.close()
 
@@ -460,19 +833,83 @@ def update_resource(resource_id: int, payload: dict[str, Any]):
         db.close()
 
 
-def adjust_resource(resource_id: int, delta: int, reason: str | None = None):
+def delete_resource(resource_id: int) -> bool:
+    db = SessionLocal()
+    try:
+        item = db.query(ResourceItem).filter(ResourceItem.id == resource_id).first()
+        if item is None:
+            return False
+        db.query(ResourceTransaction).filter(ResourceTransaction.resource_id == resource_id).delete()
+        db.delete(item)
+        db.commit()
+        return True
+    finally:
+        db.close()
+
+
+def adjust_resource(
+    resource_id: int,
+    delta: int,
+    reason: str | None = None,
+    note: str | None = None,
+    performed_by: str | None = None,
+):
+    """Apply a stock delta and record it in the audit ledger.
+
+    The ledger is written in the same transaction as the quantity change, so a
+    failure can never leave the two out of sync.
+    """
     db = SessionLocal()
     try:
         item = db.query(ResourceItem).filter(ResourceItem.id == resource_id).first()
         if item is None:
             return None
-        item.quantity_on_hand = max(0, item.quantity_on_hand + delta)
+        new_quantity = item.quantity_on_hand + delta
+        if new_quantity < 0:
+            raise ValueError(f"Cannot remove {abs(delta)} units; only {item.quantity_on_hand} on hand")
+        item.quantity_on_hand = new_quantity
         item.updated_at = utc_now()
+        db.add(
+            ResourceTransaction(
+                resource_id=item.id,
+                delta=delta,
+                quantity_after=new_quantity,
+                reason=reason or ("stock-in" if delta > 0 else "stock-out"),
+                note=note,
+                performed_by=performed_by,
+                created_at=utc_now_dt(),
+            )
+        )
         db.commit()
         db.refresh(item)
-        if reason:
-            item.stored_in = item.stored_in or ""
         return serialize_resource(item)
+    finally:
+        db.close()
+
+
+def get_resource_transactions(resource_id: int, limit: int = 50):
+    db = SessionLocal()
+    try:
+        rows = (
+            db.query(ResourceTransaction)
+            .filter(ResourceTransaction.resource_id == resource_id)
+            .order_by(ResourceTransaction.created_at.desc(), ResourceTransaction.id.desc())
+            .limit(limit)
+            .all()
+        )
+        return [
+            {
+                "id": row.id,
+                "resource_id": row.resource_id,
+                "delta": row.delta,
+                "quantity_after": row.quantity_after,
+                "reason": row.reason,
+                "note": row.note,
+                "performed_by": row.performed_by,
+                "created_at": row.created_at.isoformat() if row.created_at else None,
+            }
+            for row in rows
+        ]
     finally:
         db.close()
 
@@ -480,36 +917,50 @@ def adjust_resource(resource_id: int, delta: int, reason: str | None = None):
 def get_resource_summaries():
     db = SessionLocal()
     try:
-        grouped: dict[str, dict[str, Any]] = defaultdict(lambda: {"type": "other", "label": "Other", "total_on_hand": 0, "total_required": 0, "gap": 0, "low_stock_count": 0})
+        grouped: dict[str, dict[str, Any]] = {}
         for resource in db.query(ResourceItem).all():
             key = resource.type
-            grouped[key]["type"] = resource.type
-            grouped[key]["label"] = resource.name
-            grouped[key]["total_on_hand"] += int(resource.quantity_on_hand)
-            grouped[key]["total_required"] += int(resource.threshold)
+            if key not in grouped:
+                grouped[key] = {
+                    "type": key,
+                    "label": RESOURCE_TYPE_LABELS.get(key, key.replace("_", " ").title()),
+                    "total_on_hand": 0,
+                    "total_required": 0,
+                    "gap": 0,
+                    "low_stock_count": 0,
+                    "item_count": 0,
+                }
+            entry = grouped[key]
+            entry["total_on_hand"] += int(resource.quantity_on_hand)
+            entry["total_required"] += int(resource.threshold)
+            entry["item_count"] += 1
             if resource.quantity_on_hand < resource.threshold:
-                grouped[key]["low_stock_count"] += 1
-        for item in grouped.values():
-            item["gap"] = item["total_on_hand"] - item["total_required"]
-        return [
-            {
-                "type": item["type"],
-                "label": item["label"],
-                "total_on_hand": item["total_on_hand"],
-                "total_required": item["total_required"],
-                "gap": item["gap"],
-                "low_stock_count": item["low_stock_count"],
-            }
-            for item in grouped.values()
-        ]
+                entry["low_stock_count"] += 1
+        for entry in grouped.values():
+            entry["gap"] = entry["total_on_hand"] - entry["total_required"]
+        return sorted(grouped.values(), key=lambda entry: entry["type"])
     finally:
         db.close()
 
 
-def list_incidents():
+def list_incidents(params: PageParams | None = None):
     db = SessionLocal()
     try:
-        return [serialize_incident(item) for item in db.query(Incident).order_by(Incident.id).all()]
+        query = db.query(Incident)
+        if params is not None:
+            query = apply_sort_and_search(
+                query,
+                Incident,
+                params,
+                searchable=["title", "type", "barangay", "status", "severity", "description"],
+                sortable=INCIDENT_SORTABLE,
+            )
+            total = query.order_by(None).count()
+            rows = query.offset(params.offset).limit(params.page_size).all()
+            return build_page(
+                [serialize_incident(item) for item in rows], total, params, sortable=INCIDENT_SORTABLE
+            )
+        return [serialize_incident(item) for item in query.order_by(Incident.id).all()]
     finally:
         db.close()
 
@@ -526,8 +977,11 @@ def get_incident(incident_id: int):
 def create_incident(payload: dict[str, Any]):
     db = SessionLocal()
     try:
+        record = dict(payload)
+        if isinstance(record.get("zone_geojson"), dict):
+            record["zone_geojson"] = json.dumps(record["zone_geojson"])
         now = utc_now()
-        item = Incident(reported_at=now, updated_at=now, **payload)
+        item = Incident(reported_at=now, updated_at=now, **record)
         db.add(item)
         db.commit()
         db.refresh(item)
@@ -551,102 +1005,54 @@ def update_incident_status(incident_id: int, status: str):
         db.close()
 
 
-def calculate_allocation(barangay: str | None = None):
-    households = get_households(barangay)
+def update_incident(incident_id: int, payload: dict[str, Any]):
+    """Full incident update, not just status."""
     db = SessionLocal()
     try:
-        active_centers = [serialize_center(center) for center in db.query(EvacuationCenter).filter(EvacuationCenter.status != "closed").all()]
+        item = db.query(Incident).filter(Incident.id == incident_id).first()
+        if item is None:
+            return None
+        for key, value in payload.items():
+            if value is not None and hasattr(item, key):
+                setattr(item, key, json.dumps(value) if key == "zone_geojson" and isinstance(value, dict) else value)
+        item.updated_at = utc_now()
+        db.commit()
+        db.refresh(item)
+        return serialize_incident(item)
     finally:
         db.close()
 
-    center_usage = {center["id"]: center["current_occupants"] for center in active_centers}
-    assignments: list[dict[str, Any]] = []
-    overflow: list[dict[str, Any]] = []
-    coverage_gaps: list[str] = []
 
-    for household in households:
-        best_center = None
-        best_distance = None
-        for center in active_centers:
-            remaining_capacity = center["capacity"] - center_usage.get(center["id"], 0)
-            if remaining_capacity <= 0:
-                continue
-            distance = ((household["lat"] - center["lat"]) ** 2 + (household["lng"] - center["lng"]) ** 2) ** 0.5
-            if best_center is None or distance < best_distance:
-                best_center = center
-                best_distance = distance
+def delete_incident(incident_id: int) -> bool:
+    db = SessionLocal()
+    try:
+        item = db.query(Incident).filter(Incident.id == incident_id).first()
+        if item is None:
+            return False
+        db.delete(item)
+        db.commit()
+        return True
+    finally:
+        db.close()
 
-        if best_center is None:
-            overflow.append(
-                {
-                    "household_id": household["id"],
-                    "household_no": household["household_no"],
-                    "head_name": household["head_name"],
-                    "barangay": household["barangay"],
-                    "reason": "No evacuation center has remaining capacity",
-                }
-            )
-            continue
 
-        center_usage[best_center["id"]] = center_usage.get(best_center["id"], 0) + 1
-        assignments.append(
-            {
-                "id": len(assignments) + 1,
-                "household_id": household["id"],
-                "household_no": household["household_no"],
-                "household_head": household["head_name"],
-                "barangay": household["barangay"],
-                "center_id": best_center["id"],
-                "center_name": best_center["name"],
-                "center_load_percent": int((center_usage[best_center["id"]] / best_center["capacity"]) * 100),
-                "assigned_at": utc_now(),
-            }
-        )
+def calculate_allocation(
+    barangay: str | None = None,
+    affected_households: int | None = None,
+    persist: bool = False,
+):
+    """Thin wrapper so existing imports keep working; logic lives in services/allocation."""
+    from app.services.allocation import calculate_allocation as _calculate
 
-    center_loads = []
-    for center in active_centers:
-        occupants = center_usage.get(center["id"], center["current_occupants"])
-        load_percent = int((occupants / center["capacity"]) * 100) if center["capacity"] else 0
-        if load_percent >= 100:
-            status = "overflow"
-        elif load_percent >= 90:
-            status = "full"
-        elif load_percent >= 70:
-            status = "near_capacity"
-        else:
-            status = "ok"
-        center_loads.append(
-            {
-                "center_id": center["id"],
-                "center_name": center["name"],
-                "barangay": center["barangay"],
-                "capacity": center["capacity"],
-                "occupants": occupants,
-                "load_percent": load_percent,
-                "status": status,
-            }
-        )
-
-    if overflow:
-        coverage_gaps.append(f"{len(overflow)} households could not be assigned due to full centers.")
-
-    return {
-        "request_id": f"alloc-{int(datetime.now(tz=timezone.utc).timestamp())}",
-        "generated_at": utc_now(),
-        "total_households": len(households),
-        "assigned_households": len(assignments),
-        "overflow_households": len(overflow),
-        "assignments": assignments,
-        "center_loads": center_loads,
-        "overflow": overflow,
-        "coverage_gaps": coverage_gaps,
-    }
+    return _calculate(barangay=barangay, affected_households=affected_households, persist=persist)
 
 
 def dashboard_stats():
     db = SessionLocal()
     try:
-        households = [serialize_household(item) for item in db.query(Household).all()]
+        households = [
+            serialize_household(item) for item in db.query(Household).filter(Household.is_active.is_(True)).all()
+        ]
         incidents = [serialize_incident(item) for item in db.query(Incident).all()]
         centers = [serialize_center(item) for item in db.query(EvacuationCenter).all()]
         resources = [serialize_resource(item) for item in db.query(ResourceItem).all()]
@@ -655,37 +1061,57 @@ def dashboard_stats():
 
     vulnerable = sum(item["children_count"] + item["elderly_count"] + item["pwd_count"] for item in households)
     active_incidents = sum(1 for incident in incidents if incident["status"] != "resolved")
-    critical_incidents = sum(1 for incident in incidents if incident["severity"] == "critical")
-    available_capacity = sum(center["capacity"] - center["current_occupants"] for center in centers if center["status"] != "closed")
+    critical_incidents = sum(
+        1 for incident in incidents if incident["severity"] == "critical" and incident["status"] != "resolved"
+    )
+    available_capacity = sum(
+        center["capacity"] - center["current_occupants"] for center in centers if center["status"] != "closed"
+    )
     low_stock_resources = sum(1 for resource in resources if resource["quantity_on_hand"] < resource["threshold"])
-    assigned_households = len(calculate_allocation()["assignments"])
+    total_people = sum(item["size"] for item in households)
     return {
         "households": len(households),
+        "total_people": total_people,
         "vulnerable_members": vulnerable,
         "active_incidents": active_incidents,
         "critical_incidents": critical_incidents,
         "centers": len(centers),
         "available_capacity": available_capacity,
+        "total_capacity": sum(center["capacity"] for center in centers if center["status"] != "closed"),
         "low_stock_resources": low_stock_resources,
-        "assigned_households": assigned_households,
     }
 
 
 def run_scenario(barangay: str, affected_households: int):
-    allocation = calculate_allocation(barangay)
+    """Model a disaster in one barangay.
+
+    ``affected_households`` caps how many households are at risk; the run then
+    works out the real headcount, and relief requirements are computed from
+    *people*. The previous version divided by household count, which understated
+    need for larger families.
+    """
+    from app.services.allocation import resource_requirements
+
+    allocation = calculate_allocation(barangay, affected_households=affected_households)
+    total_people = allocation.get("assigned_people", 0) + sum(
+        item["size"] for item in allocation.get("overflow", [])
+    )
+
     db = SessionLocal()
     try:
         resources = [serialize_resource(item) for item in db.query(ResourceItem).all()]
     finally:
         db.close()
+
+    factors = resource_requirements(total_people)
     resource_needs = []
     for resource in resources:
-        factor = {"rice": 0.10, "water": 3, "medicine": 0.15, "blankets": 0.30}.get(resource["type"], 0.2)
-        required = max(0, int(affected_households * factor))
+        factor = factors.get(resource["type"], 0.2)
+        required = int(total_people * factor)
         deficit = max(0, required - resource["quantity_on_hand"])
         if deficit == 0:
             status = "adequate"
-        elif deficit > required * 0.5:
+        elif required == 0 or deficit > required * 0.5:
             status = "critical"
         else:
             status = "shortage"
@@ -693,6 +1119,7 @@ def run_scenario(barangay: str, affected_households: int):
             {
                 "resource_id": resource["id"],
                 "name": resource["name"],
+                "type": resource["type"],
                 "current": resource["quantity_on_hand"],
                 "required": required,
                 "deficit": deficit,
@@ -700,11 +1127,14 @@ def run_scenario(barangay: str, affected_households: int):
                 "status": status,
             }
         )
+
     return {
         "scenario": {
-            "title": f"{barangay} affected ({affected_households} households evacuees)",
+            "title": f"{barangay} affected ({affected_households} households, {total_people} people)",
             "barangay": barangay,
             "affected_households": affected_households,
+            "total_people": total_people,
+            "basis": "requirements are calculated per person, not per household",
         },
         "allocation": allocation,
         "resource_needs": resource_needs,

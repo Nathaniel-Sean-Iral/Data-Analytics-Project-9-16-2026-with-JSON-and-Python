@@ -1,5 +1,5 @@
 SAN_RAFAEL_BARANGAYS = [
-    "Balagtas",
+    "BMA-Balagtas",
     "Banca-banca",
     "Caingin",
     "Coral na Bato",
@@ -24,7 +24,7 @@ SAN_RAFAEL_BARANGAYS = [
     "Poblacion",
     "Pulo",
     "Pulong Bayabas",
-    "Salapungan",
+    "Salapongan",
     "Sampaloc",
     "San Agustin",
     "San Roque",

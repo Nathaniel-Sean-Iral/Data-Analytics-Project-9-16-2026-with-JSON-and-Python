@@ -37,6 +37,8 @@ export interface Household {
 
 export type IncidentType = 'flood' | 'fire' | 'earthquake' | 'landslide' | 'typhoon' | 'other';
 export type IncidentSeverity = 'low' | 'moderate' | 'high' | 'critical';
+export type GeoJsonGeometry = GeoJSON.Geometry;
+
 export type IncidentStatus = 'reported' | 'assessing' | 'responding' | 'resolved';
 
 export interface Incident {
@@ -51,6 +53,8 @@ export interface Incident {
   updated_at: string;
   lat?: number;
   lng?: number;
+  /** GeoJSON geometry for the affected area, drawn as a filled polygon on the map. */
+  zone_geojson?: GeoJsonGeometry;
   affected_households?: number;
   reported_by?: string;
 }

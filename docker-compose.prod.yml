@@ -1,0 +1,50 @@
+# Production stack. Nginx serves the built React app on :80 and proxies
+# /api to the API, which talks to PostgreSQL on db.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+#
+# Environment secrets are read from .env; see .env.example.
+
+services:
+  backend:
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: production
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env}
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
+      DEMO_PASSWORD: ${DEMO_PASSWORD}
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/disaster_prep
+      CORS_ORIGINS: '["http://localhost"]'
+    depends_on:
+      db:
+        condition: service_healthy
+    ports: []
+
+  db:
+    restart: unless-stopped
+    # The base compose uses `network_mode: host` for local dev. In production the
+    # backend reaches the database over the compose network via `db:5432`.
+    network_mode: bridge
+    environment:
+      POSTGRES_DB: disaster_prep
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d disaster_prep']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    ports:
+      - '${HTTP_PORT:-80}:80'
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+    name: disaster_prep_postgres_data

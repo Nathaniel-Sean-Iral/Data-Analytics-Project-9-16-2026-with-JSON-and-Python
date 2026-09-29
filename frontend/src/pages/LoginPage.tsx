@@ -4,6 +4,7 @@ import { ShieldCheck, LogIn, ShieldAlert, Radio, Eye } from 'lucide-react';
 import { useAuth } from '@/auth/AuthContext';
 import { Button, Spinner } from '@/components/ui/button';
 import { Input, FormField } from '@/components/ui/form';
+import { MUNICIPALITY_LABEL } from '@/lib/location';
 
 const DEMO_ACCOUNTS = [
   { username: 'admin', password: 'password', label: 'Admin', desc: 'Full access', icon: <ShieldAlert className="h-4 w-4" /> },
@@ -55,7 +56,7 @@ export function LoginPage() {
             <ShieldCheck className="h-8 w-8" />
           </div>
           <h1 className="mt-4 text-2xl font-bold text-white">Disaster Prep</h1>
-          <p className="mt-1 text-sm text-slate-400">Local Disaster Preparedness System</p>
+          <p className="mt-1 text-sm text-slate-400">{MUNICIPALITY_LABEL} - Local Disaster Preparedness System</p>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-white p-6 shadow-2xl">

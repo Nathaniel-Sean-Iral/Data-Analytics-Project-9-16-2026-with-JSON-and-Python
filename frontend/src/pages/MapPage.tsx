@@ -9,6 +9,7 @@ import { useAsync } from '@/lib/useAsync';
 import { fetchHouseholds, fetchCenters, fetchIncidents } from '@/api/services';
 import { cn } from '@/lib/cn';
 import { formatDateTime } from '@/lib/labels';
+import { MUNICIPALITY_CENTER } from '@/lib/location';
 import type { IncidentSeverity } from '@/api/types';
 
 maplibregl.setWorkerUrl(workerUrl);
@@ -17,7 +18,7 @@ const MAP_STYLES = [
   'https://tiles.openfreemap.org/styles/liberty',
   'https://demotiles.maplibre.org/style.json',
 ] as const;
-const DEFAULT_CENTER: [number, number] = [121.15, 14.092];
+const DEFAULT_CENTER: [number, number] = [MUNICIPALITY_CENTER[1], MUNICIPALITY_CENTER[0]];
 
 const SEVERITY_COLOR: Record<IncidentSeverity, string> = {
   low: '#10b981',
@@ -56,41 +57,72 @@ function buildPointsGeoJson<T extends MapPointItem>(
   };
 }
 
-function buildIncidentZonesGeoJson(items: Array<{ id: number; lat?: number; lng?: number; severity?: IncidentSeverity; title?: string; barangay?: string; status?: string; reported_at?: string }>) {
+function buildIncidentZonesGeoJson(
+  items: Array<{
+    id: number;
+    lat?: number;
+    lng?: number;
+    severity?: IncidentSeverity;
+    title?: string;
+    barangay?: string;
+    status?: string;
+    reported_at?: string;
+    zone_geojson?: import('@/api/types').GeoJsonGeometry;
+  }>,
+) {
+  // Use saved zone polygons when present; otherwise fall back to a small circle
+  // around the incident point so every incident still contributes a shape.
+  const zones = items
+    .filter((incident) => incident.zone_geojson && incident.zone_geojson.type)
+    .map((incident) => ({
+      type: 'Feature' as const,
+      geometry: incident.zone_geojson as GeoJSON.Geometry,
+      properties: {
+        id: incident.id,
+        kind: 'incident-zone',
+        title: incident.title ?? 'Incident',
+        severity: incident.severity ?? 'low',
+        barangay: incident.barangay ?? '',
+        status: incident.status ?? 'reported',
+        reported_at: incident.reported_at ?? '',
+      },
+    }));
+
   const points = 24;
   const radius = 0.0018;
+  const circles = items
+    .filter((incident) => Number.isFinite(incident.lat) && Number.isFinite(incident.lng))
+    .map((incident) => {
+      const centerLng = Number(incident.lng);
+      const centerLat = Number(incident.lat);
+      const ring = Array.from({ length: points + 1 }, (_, index) => {
+        const angle = (index / points) * Math.PI * 2;
+        const lat = centerLat + Math.cos(angle) * radius;
+        const lng = centerLng + Math.sin(angle) * radius;
+        return [lng, lat] as [number, number];
+      });
+
+      return {
+        type: 'Feature' as const,
+        geometry: {
+          type: 'Polygon' as const,
+          coordinates: [ring],
+        },
+        properties: {
+          id: incident.id,
+          kind: 'incident-zone',
+          title: incident.title ?? 'Incident',
+          severity: incident.severity ?? 'low',
+          barangay: incident.barangay ?? '',
+          status: incident.status ?? 'reported',
+          reported_at: incident.reported_at ?? '',
+        },
+      };
+    });
 
   return {
     type: 'FeatureCollection' as const,
-    features: items
-      .filter((incident) => Number.isFinite(incident.lat) && Number.isFinite(incident.lng))
-      .map((incident) => {
-        const centerLng = Number(incident.lng);
-        const centerLat = Number(incident.lat);
-        const ring = Array.from({ length: points + 1 }, (_, index) => {
-          const angle = (index / points) * Math.PI * 2;
-          const lat = centerLat + Math.cos(angle) * radius;
-          const lng = centerLng + Math.sin(angle) * radius;
-          return [lng, lat] as [number, number];
-        });
-
-        return {
-          type: 'Feature' as const,
-          geometry: {
-            type: 'Polygon' as const,
-            coordinates: [ring],
-          },
-          properties: {
-            id: incident.id,
-            kind: 'incident-zone',
-            title: incident.title ?? 'Incident',
-            severity: incident.severity ?? 'low',
-            barangay: incident.barangay ?? '',
-            status: incident.status ?? 'reported',
-            reported_at: incident.reported_at ?? '',
-          },
-        };
-      }),
+    features: [...zones, ...circles],
   };
 }
 
@@ -393,9 +425,6 @@ export function MapPage() {
         )}
 
         <div ref={mapContainer} className="absolute inset-0 h-full w-full" />
-git checkout main
-git pull --rebase origin main
-git push origin main
         <div className="absolute left-3 top-3 z-[600] rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
             <Layers className="h-3.5 w-3.5 text-brand-600" />

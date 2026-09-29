@@ -15,6 +15,7 @@ class Incident(Base):
     description = Column(Text, nullable=True)
     lat = Column(Float, nullable=True)
     lng = Column(Float, nullable=True)
+    zone_geojson = Column(Text, nullable=True)
     affected_households = Column(Integer, nullable=True)
     reported_by = Column(String, nullable=True)
     reported_at = Column(String, nullable=False)

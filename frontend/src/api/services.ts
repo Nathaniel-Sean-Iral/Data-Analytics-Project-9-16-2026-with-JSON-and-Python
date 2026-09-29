@@ -106,6 +106,18 @@ export async function importHouseholdsCsv(csv: string): Promise<{ created: numbe
   }));
 }
 
+export async function importHouseholdsGeoJson(
+  geojson: GeoJSON.GeoJSON & { type: 'FeatureCollection' },
+): Promise<{ created: number; skipped: number; errors: Array<{ index: number; error: string }>; items: Household[] }> {
+  return withMock(
+    http.post<{ created: number; skipped: number; errors: Array<{ index: number; error: string }>; items: Household[] }>(
+      '/households/import/geojson',
+      { geojson },
+    ),
+    () => ({ created: 0, skipped: 0, errors: [], items: [] }),
+  );
+}
+
 /* ---------------------------- Centers ----------------------------- */
 
 export async function fetchCenters(): Promise<EvacuationCenter[]> {
@@ -134,11 +146,45 @@ export async function fetchResources(): Promise<Resource[]> {
   return withMock(http.get<Resource[]>('/resources'), () => mock.mockResources());
 }
 
+export async function createResource(
+  data: Pick<Resource, 'name' | 'type' | 'unit' | 'quantity_on_hand' | 'threshold' | 'expiry' | 'stored_in'>,
+): Promise<Resource> {
+  return withMock(http.post<Resource>('/resources', data), () => ({
+    ...data,
+    id: Date.now(),
+    updated_at: new Date().toISOString(),
+  }));
+}
+
+export async function deleteResource(id: number): Promise<void> {
+  await withMock(http.delete<unknown>(`/resources/${id}`), () => undefined);
+}
+
+export interface StockTransaction {
+  id: number;
+  resource_id: number;
+  delta: number;
+  quantity_after: number;
+  reason: string | null;
+  note: string | null;
+  performed_by: string | null;
+  created_at: string | null;
+}
+
+export async function fetchResourceTransactions(id: number): Promise<StockTransaction[]> {
+  return withMock(http.get<StockTransaction[]>(`/resources/${id}/transactions`), () => []);
+}
+
 export async function fetchResourceSummaries(): Promise<ResourceSummary[]> {
   return withMock(http.get<ResourceSummary[]>('/resources/summary'), () => mock.mockResourceSummaries());
 }
 
-export async function adjustStock(body: { resource_id: number; delta: number; reason?: string }): Promise<Resource> {
+export async function adjustStock(body: {
+  resource_id: number;
+  delta: number;
+  reason?: string;
+  note?: string;
+}): Promise<Resource> {
   return withMock(http.post<Resource>('/resources/adjust', body), () => {
     const item = mock.mockResources().find((r) => r.id === body.resource_id);
     if (!item) throw new Error('Resource not found');
@@ -186,10 +232,43 @@ export async function updateIncidentStatus(id: number, status: IncidentStatus): 
   });
 }
 
+export async function updateIncident(id: number, data: Partial<Incident>): Promise<Incident> {
+  return withMock(http.patch<Incident>(`/incidents/${id}`, data), () => {
+    const item = mock.mockIncident(id);
+    if (!item) throw new Error('Incident not found');
+    return { ...item, ...data, updated_at: new Date().toISOString() };
+  });
+}
+
+export async function deleteIncident(id: number): Promise<void> {
+  await withMock(http.delete<unknown>(`/incidents/${id}`), () => undefined);
+}
+
+export async function saveIncidentZone(id: number, geometry: GeoJSON.Geometry): Promise<Incident> {
+  return withMock(http.post<Incident>('/map/zones', { incident_id: id, geometry }), () => {
+    const item = mock.mockIncident(id);
+    if (!item) throw new Error('Incident not found');
+    return { ...item, zone_geojson: geometry };
+  });
+}
+
+export async function fetchMapLayer(
+  layer: 'households' | 'centers' | 'incidents' | 'zones',
+  barangay?: string,
+): Promise<GeoJSON.FeatureCollection> {
+  return withMock(
+    http.get<GeoJSON.FeatureCollection>('/map/layers', { layer, barangay }),
+    () => ({ type: 'FeatureCollection', features: [] }),
+  );
+}
+
 /* --------------------------- Allocation --------------------------- */
 
-export async function runAllocation(barangay?: string): Promise<AllocationResult> {
-  return withMock(http.post<AllocationResult>('/evacuations/allocate', { barangay }), () => mock.mockAllocation(barangay));
+export async function runAllocation(barangay?: string, options?: { affected_households?: number; persist?: boolean }): Promise<AllocationResult> {
+  return withMock(
+    http.post<AllocationResult>('/evacuations/allocate', { barangay, ...options }),
+    () => mock.mockAllocation(barangay),
+  );
 }
 
 export async function fetchCenterLoads(): Promise<CenterLoad[]> {

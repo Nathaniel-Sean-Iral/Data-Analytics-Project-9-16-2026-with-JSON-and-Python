@@ -19,6 +19,7 @@ import {
 import { BARANGAYS } from '@/api/mock';
 import type { Household } from '@/api/types';
 import { formatNumber } from '@/lib/labels';
+import { MUNICIPALITY_CENTER } from '@/lib/location';
 
 type HouseholdForm = Omit<Household, 'id'>;
 
@@ -32,8 +33,8 @@ const EMPTY_FORM: HouseholdForm = {
   elderly_count: 0,
   pwd_count: 0,
   contact: '',
-  lat: 14.08,
-  lng: 121.14,
+  lat: MUNICIPALITY_CENTER[0],
+  lng: MUNICIPALITY_CENTER[1],
   notes: '',
 };
 

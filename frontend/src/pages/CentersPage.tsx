@@ -23,6 +23,7 @@ import { useAsync } from '@/lib/useAsync';
 import { fetchCenters, createCenter, updateCenter } from '@/api/services';
 import { BARANGAYS } from '@/api/mock';
 import { CENTER_STATUS_TONES } from '@/lib/labels';
+import { MUNICIPALITY_CENTER } from '@/lib/location';
 import type { CenterStatus, EvacuationCenter } from '@/api/types';
 
 const FACILITY_OPTIONS = [
@@ -44,8 +45,8 @@ const EMPTY_FORM: CenterForm = {
   current_occupants: 0,
   facilities: ['water', 'power'],
   contact: '',
-  lat: 14.08,
-  lng: 121.14,
+  lat: MUNICIPALITY_CENTER[0],
+  lng: MUNICIPALITY_CENTER[1],
   status: 'standby',
 };
 

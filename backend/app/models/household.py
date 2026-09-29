@@ -15,7 +15,8 @@ class Household(Base):
     children_count = Column(Integer, default=0)
     elderly_count = Column(Integer, default=0)
     pwd_count = Column(Integer, default=0)
-    contact = Column(String, nullable=False)
+    # Not every household has a reachable phone number, so contact is optional.
+    contact = Column(String, nullable=True)
     lat = Column(Float, nullable=False)
     lng = Column(Float, nullable=False)
     notes = Column(Text, nullable=True)
