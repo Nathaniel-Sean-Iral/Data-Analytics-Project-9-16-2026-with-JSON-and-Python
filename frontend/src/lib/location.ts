@@ -6,14 +6,18 @@ export const ZIP_CODE = '3008';
 
 export const MUNICIPALITY_LABEL = `${MUNICIPALITY}, ${PROVINCE}`;
 
-/** Poblacion, San Rafael, Bulacan (municipal hall). */
-export const MUNICIPALITY_CENTER: [number, number] = [14.9571, 120.9629];
+/**
+ * OSM centroid of the San Rafael boundary relation (8404894), Poblacion area.
+ * Mirrors backend/app/core/location.py.
+ */
+export const MUNICIPALITY_CENTER: [number, number] = [14.9581, 120.9637];
 
+/** OSM municipal extent padded by ~500 m on each side. */
 export const MUNICIPALITY_BOUNDS = {
-  minLat: 14.9,
-  maxLat: 15.02,
-  minLng: 120.9,
-  maxLng: 121.02,
+  minLat: 14.944,
+  maxLat: 15.0461,
+  minLng: 120.8881,
+  maxLng: 121.0646,
 };
 
 export function isWithinMunicipality(lat: number, lng: number): boolean {

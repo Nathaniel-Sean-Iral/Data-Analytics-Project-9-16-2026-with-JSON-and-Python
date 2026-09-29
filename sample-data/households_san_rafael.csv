@@ -1,241 +1,241 @@
 household_no,head_name,address,barangay,size,children_count,elderly_count,pwd_count,contact,lat,lng,notes
-H-0001,Divina Ong,"Purok 2, San Jose Street",BMA-Balagtas,6,2,0,0,09176773022,14.954616,120.952278,Two infants in household
-H-0002,Benito Serrano,"Purok 2, Quezon Street",BMA-Balagtas,6,3,0,1,09172246884,14.958682,120.952551,
-H-0003,Gregorio Mercado,"Purok 2, Jacinto Street",BMA-Balagtas,6,0,0,0,09178788190,14.954697,120.949263,
-H-0004,Rogelio Gutierrez,"Purok 3, M.H. del Pilar Street",BMA-Balagtas,3,0,2,0,09174252716,14.95848,120.949423,Elderly resident living alone
-H-0005,Luzviminda Mercado,"Purok 1, Katubusan Street",BMA-Balagtas,5,2,0,0,09174726463,14.955034,120.954631,Pregnant member
-H-0006,Jonalyn Aquino,"Purok 2, Aguinaldo Street",BMA-Balagtas,6,0,0,0,09174325589,14.954745,120.949314,Assisted breathing device
-H-0007,Ana Buenaventura,"Purok 1, Del Pilar Street",Banca-banca,3,0,0,0,09177211783,14.980799,120.976749,
-H-0008,Reynaldo Espino,"Purok 5, Katubusan Street",Banca-banca,4,1,2,0,09177001601,14.982876,120.972108,
-H-0009,Juan Domingo,"Purok 1, Del Pilar Street",Banca-banca,5,0,2,0,09173789977,14.982095,120.974307,
-H-0010,Riza Aquino,"Purok 6, Del Pilar Street",Banca-banca,6,1,1,0,09175210492,14.978548,120.975306,
-H-0011,Maria Tomas,"Purok 1, Liberation Street",Banca-banca,6,3,0,0,09179955436,14.981021,120.976446,Elderly resident living alone
-H-0012,Reynaldo Yson,"Purok 1, M.H. del Pilar Street",Banca-banca,1,1,0,0,09170793447,14.977718,120.974923,Recently relocated from flood-prone area
-H-0013,Rogelio Buenaventura,"Purok 5, Katubusan Street",Banca-banca,3,2,0,0,09177066298,14.980799,120.974496,
-H-0014,Edwin Salazar,"Purok 5, Rizal Street",Caingin,3,0,1,0,09171006939,14.932756,120.956349,
-H-0015,Mercedes Navarro,"Purok 3, San Jose Street",Caingin,4,0,0,0,09170232298,14.929211,120.954575,
-H-0016,Cecilia Tomas,"Purok 6, Gov. Padilla Street",Caingin,1,0,0,0,09171529627,14.930721,120.956052,Assisted breathing device
-H-0017,Maria Mercado,"Purok 4, Liberation Street",Caingin,8,3,0,0,09176826198,14.932975,120.954849,
-H-0018,Jose Aquino,"Purok 1, Rizal Street",Caingin,4,0,0,0,09174289469,14.929271,120.956749,
-H-0019,Nestor Carpio,"Purok 2, M. Hizon Street",Caingin,5,1,1,0,09172045070,14.931467,120.951913,No electricity connection
-H-0020,Riza Mercado,"Purok 4, P. Burgos Street",Caingin,6,0,1,1,09176212388,14.930208,120.953344,
-H-0021,Rogelio Mercado,"Purok 6, Del Pilar Street",Coral na Bato,6,3,1,0,09174962828,14.923577,120.993731,
-H-0022,Andres Mendoza,"Purok 3, Jacinto Street",Coral na Bato,7,2,2,0,09174492730,14.924322,120.990885,
-H-0023,Jonalyn Navarro,"Purok 6, P. Burgos Street",Coral na Bato,3,0,1,0,09172274019,14.926815,120.993529,
-H-0024,Antonio Buenaventura,"Purok 5, Quezon Street",Coral na Bato,5,3,2,0,09171380895,14.923827,120.989151,
-H-0025,Cecilia Mercado,"Purok 2, P. Burgos Street",Coral na Bato,7,1,1,1,09178278525,14.926505,120.992586,
-H-0026,Lourdes Magpayo,"Purok 6, Del Pilar Street",Coral na Bato,1,0,1,0,09175824381,14.923591,120.991635,
-H-0027,Corazon Alcantara,"Purok 1, Luna Street",Cruz na Daan,8,0,2,0,09178557414,14.99345,120.946347,
-H-0028,Teresa Aquino,"Purok 3, Rizal Street",Cruz na Daan,4,1,0,1,09172491624,14.991467,120.948962,
-H-0029,Nestor Torres,"Purok 6, Luna Street",Cruz na Daan,5,3,1,0,09175972682,14.993492,120.947143,Elderly resident living alone
-H-0030,Liza Salazar,"Purok 2, Katubusan Street",Cruz na Daan,5,0,0,0,09171437236,14.990351,120.945736,Two infants in household
-H-0031,Gregorio Salazar,"Purok 5, Gov. Padilla Street",Cruz na Daan,5,0,0,0,09173369935,14.990861,120.946371,
-H-0032,Andres Yson,"Purok 3, M. Hizon Street",Cruz na Daan,5,3,1,0,09175377139,14.993057,120.950007,
-H-0033,Romeo Yson,"Purok 4, Burgos Street",Dagat-dagatan,8,0,1,0,09176163174,14.943779,120.930321,Needs wheelchair access
-H-0034,Dante Cruz,"Purok 3, Rizal Street",Dagat-dagatan,6,1,1,1,09178182892,14.946785,120.930286,
-H-0035,Romeo Gutierrez,"Purok 3, M. Hizon Street",Dagat-dagatan,6,0,0,0,09175323272,14.946048,120.93193,
-H-0036,Benito Bautista,"Purok 4, Rizal Street",Dagat-dagatan,4,2,0,0,09177852936,14.946137,120.929903,
-H-0037,Ferdinand Aquino,"Purok 6, Gov. Padilla Street",Dagat-dagatan,4,0,2,1,09172917994,14.94358,120.934915,
-H-0038,Corazon Ong,"Purok 4, Katubusan Street",Dagat-dagatan,6,1,1,0,09172401779,14.941972,120.934879,Pregnant member
-H-0039,Miguel Vergara,"Purok 5, Rizal Street",Dagat-dagatan,6,2,2,1,09175038615,14.941552,120.932174,
-H-0040,Isagani Flores,"Purok 2, Jacinto Street",Diliman I,4,1,0,0,09173226020,14.969621,120.987126,
-H-0041,Marites Castillo,"Purok 4, Jacinto Street",Diliman I,5,1,1,0,09175770337,14.968431,120.98761,
-H-0042,Edwin Mendoza,"Purok 4, Del Pilar Street",Diliman I,6,2,2,0,09175892816,14.968242,120.989619,Recently relocated from flood-prone area
-H-0043,Jose Garcia,"Purok 3, Mabini Street",Diliman I,4,3,0,0,09176939659,14.969751,120.98529,
-H-0044,Andres Mendoza,"Purok 3, Burgos Street",Diliman I,4,0,1,0,09177560007,14.971887,120.988011,
-H-0045,Teresa Flores,"Purok 6, Katubusan Street",Diliman I,4,1,0,0,09176069296,14.971243,120.989891,Recently relocated from flood-prone area
-H-0046,Rogelio Domingo,"Purok 4, Quezon Street",Diliman I,4,2,1,0,09177196384,14.968385,120.985876,
-H-0047,Juan Marquez,"Purok 3, Luna Street",Diliman I,7,0,1,0,09171282727,14.967221,120.985849,
-H-0048,Liza Aquino,"Purok 2, Bonifacio Street",Diliman II,6,3,2,0,09179236452,14.975732,120.994225,No electricity connection
-H-0049,Gregorio Gonzales,"Purok 5, Liberation Street",Diliman II,3,0,1,0,09176004545,14.976023,120.994321,Pregnant member
-H-0050,Teresa Flores,"Purok 6, Mabini Street",Diliman II,2,0,1,0,09177514061,14.973621,120.994012,
-H-0051,Dante Reyes,"Purok 1, Mabini Street",Diliman II,7,3,2,0,09179321469,14.975787,120.998089,
-H-0052,Maria Ong,"Purok 1, Jacinto Street",Diliman II,3,1,2,0,09177768127,14.975014,120.995826,
-H-0053,Miguel Reyes,"Purok 3, Rizal Street",Diliman II,4,1,2,0,09179480494,14.975351,120.996824,
-H-0054,Marites Buenaventura,"Purok 6, Gov. Padilla Street",Diliman II,5,3,2,0,09179301812,14.976382,120.997733,
-H-0055,Edwin Manalo,"Purok 2, Aguinaldo Street",Capihan,4,3,0,0,09178640565,14.963352,120.942595,Elderly resident living alone
-H-0056,Andres Manalo,"Purok 3, Gov. Padilla Street",Capihan,4,3,0,0,09174376761,14.962943,120.941493,
-H-0057,Myra Ramos,"Purok 5, Quezon Street",Capihan,4,0,0,0,09174296371,14.961725,120.944679,
-H-0058,Teresa Marquez,"Purok 1, M. Hizon Street",Capihan,3,3,0,0,09173241255,14.962121,120.944691,
-H-0059,Nestor Tomas,"Purok 2, Gov. Padilla Street",Capihan,6,2,1,1,09171097259,14.958524,120.94148,
-H-0060,Carlos Mercado,"Purok 4, San Jose Street",Capihan,6,3,0,0,09175023226,14.960237,120.943918,
-H-0061,Mario Aquino,"Purok 6, San Jose Street",Libis,3,2,1,0,09175883398,14.958961,120.953455,
-H-0062,Marites Santiago,"Purok 4, M. Hizon Street",Libis,4,1,0,0,09172200844,14.959673,120.955067,
-H-0063,Pedro Santos,"Purok 2, P. Burgos Street",Libis,4,3,1,0,09179338671,14.961056,120.955188,
-H-0064,Mercedes Ilustre,"Purok 5, Burgos Street",Libis,2,1,0,0,09179538276,14.962649,120.954706,Pregnant member
-H-0065,Edwin Marquez,"Purok 1, Mabini Street",Libis,3,2,1,0,09179817320,14.958884,120.95493,
-H-0066,Ana Bautista,"Purok 1, Jacinto Street",Libis,4,3,0,0,09175564559,14.961313,120.955614,Pregnant member
-H-0067,Gregorio Navarro,"Purok 1, Liberation Street",Libis,3,1,1,0,09176963644,14.960074,120.958174,
-H-0068,Isagani Ilustre,"Purok 2, Jacinto Street",Lico,7,2,0,0,09177062058,14.951726,120.969436,
-H-0069,Noli Espino,"Purok 4, Jacinto Street",Lico,3,1,2,0,09175310022,14.950369,120.971303,Pregnant member
-H-0070,Carlos Domingo,"Purok 6, Gov. Padilla Street",Lico,4,3,0,1,09172873606,14.951781,120.970381,
-H-0071,Noli Cruz,"Purok 2, Burgos Street",Lico,4,0,1,0,09172708357,14.954545,120.966691,
-H-0072,Nestor Alcantara,"Purok 5, Gov. Padilla Street",Lico,5,2,2,0,09171398921,14.954457,120.971045,
-H-0073,Dante Gonzales,"Purok 1, Del Pilar Street",Lico,4,1,2,1,09176928486,14.950237,120.967961,
-H-0074,Carmen Alcantara,"Purok 3, Aguinaldo Street",Lico,2,1,0,1,09173598122,14.952824,120.968843,Single income earner
-H-0075,Juan Aquino,"Purok 2, M. Hizon Street",Maasim,2,2,0,0,09178727422,14.997094,120.989276,
-H-0076,Marites Flores,"Purok 3, Del Pilar Street",Maasim,8,3,2,0,09172143137,14.997802,120.98806,
-H-0077,Rosa Garcia,"Purok 4, Katubusan Street",Maasim,3,0,2,0,09178294021,14.993883,120.985405,
-H-0078,Carlos Del Rosario,"Purok 1, Luna Street",Maasim,6,3,0,0,09175054984,14.994885,120.985096,
-H-0079,Mario Vergara,"Purok 4, Liberation Street",Maasim,6,3,0,0,09172161530,14.993073,120.989982,
-H-0080,Maria Villanueva,"Purok 2, Burgos Street",Maasim,5,0,1,0,09178120525,14.998829,120.990087,
-H-0081,Marites Yson,"Purok 5, M. Hizon Street",Maasim,7,0,2,0,09171821731,14.994243,120.98584,Single income earner
-H-0082,Ferdinand Lucero,"Purok 4, Gov. Padilla Street",Mabalas-balas,2,1,1,0,09177403590,14.906527,120.969607,
-H-0083,Luzviminda Flores,"Purok 1, Bonifacio Street",Mabalas-balas,8,2,0,1,09176141917,14.910284,120.970404,Single income earner
-H-0084,Juan Espino,"Purok 1, Del Pilar Street",Mabalas-balas,7,2,1,0,09179403837,14.909618,120.968116,Elderly resident living alone
-H-0085,Mario Tomas,"Purok 3, Bonifacio Street",Mabalas-balas,1,1,0,0,09170294717,14.909517,120.970251,
-H-0086,Gloria Ilustre,"Purok 6, Burgos Street",Mabalas-balas,2,1,1,0,09171590885,14.908316,120.967444,
-H-0087,Gregorio Cruz,"Purok 5, Mabini Street",Mabalas-balas,6,2,0,0,09172644643,14.910111,120.969183,
-H-0088,Carlos Castillo,"Purok 2, Rizal Street",Mabalas-balas,2,1,1,0,09178313563,14.908058,120.971362,
-H-0089,Isagani Soriano,"Purok 6, Del Pilar Street",Mabalas-balas,5,2,1,1,09177274906,14.908503,120.967291,
-H-0090,Pedro Mendoza,"Purok 5, Quezon Street",Mabalas-balas,3,1,0,0,09176479083,14.908439,120.969831,Two infants in household
-H-0091,Marites Buenaventura,"Purok 2, Katubusan Street",Maguinao,5,3,1,0,09177112343,14.936206,120.984808,
-H-0092,Mario Flores,"Purok 6, Liberation Street",Maguinao,5,2,2,0,09175002970,14.93817,120.981621,
-H-0093,Romeo Mercado,"Purok 5, San Jose Street",Maguinao,3,3,0,0,09172583545,14.933938,120.986839,
-H-0094,Lourdes Santianez,"Purok 6, Rizal Street",Maguinao,1,0,0,0,09178716369,14.933753,120.986034,
-H-0095,Myra Domingo,"Purok 6, Del Pilar Street",Maguinao,5,2,2,0,09179349818,14.937054,120.986635,
-H-0096,Cecilia Castillo,"Purok 4, Aguinaldo Street",Maguinao,4,3,0,0,09171259889,14.934724,120.987451,Elderly resident living alone
-H-0097,Fe Magpayo,"Purok 6, Mabini Street",Maguinao,7,1,2,0,09179760818,14.936517,120.985104,Assisted breathing device
-H-0098,Ferdinand Domingo,"Purok 5, San Jose Street",Maronquillo,2,1,0,0,09179184166,14.991052,120.960899,
-H-0099,Gloria Vergara,"Purok 5, P. Burgos Street",Maronquillo,6,0,1,0,09170813043,14.990251,120.960866,
-H-0100,Liza Flores,"Purok 1, Del Pilar Street",Maronquillo,4,3,0,0,09176087549,14.992761,120.960751,
-H-0101,Ana Ong,"Purok 6, San Jose Street",Maronquillo,6,2,2,0,09173772947,14.988096,120.963945,
-H-0102,Fe Ong,"Purok 5, Aguinaldo Street",Maronquillo,6,2,0,0,09176529314,14.988157,120.960287,
-H-0103,Teresa Gonzales,"Purok 3, Gov. Padilla Street",Maronquillo,3,0,1,1,09173186512,14.989717,120.964659,
-H-0104,Dante Del Rosario,"Purok 2, San Jose Street",Maronquillo,3,2,1,0,09171451346,14.988494,120.960488,
-H-0105,Maria Ong,"Purok 6, Liberation Street",Maronquillo,6,3,1,0,09170443677,14.989757,120.959119,
-H-0106,Liza Tomas,"Purok 6, Jacinto Street",Paco,5,2,0,0,09177965345,14.919281,120.961018,
-H-0107,Pedro Domingo,"Purok 2, San Jose Street",Paco,4,3,1,0,09179873541,14.922196,120.957344,
-H-0108,Reynaldo Ocampo,"Purok 6, Aguinaldo Street",Paco,2,0,0,1,09173419349,14.922875,120.960215,
-H-0109,Gloria Buenaventura,"Purok 2, Gov. Padilla Street",Paco,6,2,0,0,09174256656,14.921215,120.960042,
-H-0110,Liza Vergara,"Purok 1, Quezon Street",Paco,3,1,1,0,09170865438,14.921105,120.957685,
-H-0111,Isagani Castillo,"Purok 1, Mabini Street",Paco,4,3,1,0,09172690965,14.921335,120.957879,Elderly resident living alone
-H-0112,Divina Gutierrez,"Purok 5, M. Hizon Street",Paco,6,3,2,0,09171125091,14.921055,120.959339,
-H-0113,Gloria Pascual,"Purok 2, P. Burgos Street",Paco,6,1,2,0,09173793889,14.919031,120.957699,
-H-0114,Elena Yson,"Purok 3, San Jose Street",Paco,4,0,1,0,09172279436,14.917264,120.957914,
-H-0115,Gregorio Ocampo,"Purok 6, M. Hizon Street",Pansumaloc,6,1,1,0,09175771909,14.911903,120.9446,
-H-0116,Andres Tomas,"Purok 5, Gov. Padilla Street",Pansumaloc,4,3,0,0,09171176926,14.915345,120.945253,Single income earner
-H-0117,Elena Domingo,"Purok 3, Rizal Street",Pansumaloc,3,2,0,0,09173510283,14.915134,120.947937,
-H-0118,Divina Lucero,"Purok 2, Del Pilar Street",Pansumaloc,7,1,2,0,09172274453,14.914855,120.944858,No electricity connection
-H-0119,Mario Lucero,"Purok 5, Liberation Street",Pansumaloc,1,1,0,0,09177171246,14.912615,120.943953,
-H-0120,Gregorio Gonzales,"Purok 4, San Jose Street",Pansumaloc,5,0,0,0,09179902625,14.911904,120.94631,
-H-0121,Liza Mercado,"Purok 1, M. Hizon Street",Pansumaloc,4,1,1,0,09176357654,14.912203,120.945226,
-H-0122,Ferdinand Lucero,"Purok 2, Del Pilar Street",Pansumaloc,6,0,2,0,09175776567,14.914216,120.947992,
-H-0123,Cecilia Ramos,"Purok 5, Aguinaldo Street",Pantubig,8,1,0,0,09170213269,14.968789,120.93297,
-H-0124,Liza Buenaventura,"Purok 6, Bonifacio Street",Pantubig,4,0,1,0,09175304116,14.966247,120.937278,
-H-0125,Benito Ramos,"Purok 2, Mabini Street",Pantubig,5,2,1,1,09171011030,14.969957,120.934826,
-H-0126,Gloria Torres,"Purok 3, Katubusan Street",Pantubig,8,2,1,0,09171975919,14.969644,120.932606,
-H-0127,Lourdes Serrano,"Purok 5, Quezon Street",Pantubig,4,2,1,0,09170189106,14.96563,120.933802,Recently relocated from flood-prone area
-H-0128,Ramon Reyes,"Purok 2, San Jose Street",Pasong Bangkal,1,0,0,1,09172849630,14.982407,120.953252,No electricity connection
-H-0129,Edwin Gonzales,"Purok 2, P. Burgos Street",Pasong Bangkal,8,3,1,0,09170805716,14.979464,120.955784,
-H-0130,Rosa Del Rosario,"Purok 4, Aguinaldo Street",Pasong Bangkal,3,0,1,0,09172645042,14.980777,120.953782,
-H-0131,Divina Domingo,"Purok 2, Gov. Padilla Street",Pasong Bangkal,3,1,0,0,09177724827,14.978182,120.951764,
-H-0132,Ferdinand Yson,"Purok 2, Rizal Street",Pasong Bangkal,7,3,1,0,09173500722,14.981522,120.951159,Elderly resident living alone
-H-0133,Lourdes Alcantara,"Purok 6, Luna Street",Pasong Bangkal,4,1,1,0,09171450007,14.978827,120.956367,
-H-0134,Gloria Buenaventura,"Purok 5, Mabini Street",Pasong Callos,4,1,1,0,09171995752,14.964404,120.967939,
-H-0135,Nestor Salazar,"Purok 6, Liberation Street",Pasong Callos,7,2,0,0,09176662931,14.964409,120.972938,
-H-0136,Imelda Ilustre,"Purok 4, Mabini Street",Pasong Callos,3,3,0,0,09179044733,14.965833,120.972573,
-H-0137,Mercedes Santos,"Purok 1, Liberation Street",Pasong Callos,4,0,2,0,09178979660,14.96636,120.969439,
-H-0138,Dante Gutierrez,"Purok 2, Bonifacio Street",Pasong Callos,8,0,0,0,09175681718,14.963827,120.970958,
-H-0139,Dante Ong,"Purok 3, Aguinaldo Street",Pasong Callos,3,0,2,0,09172322886,14.966677,120.972343,
-H-0140,Antonio Santos,"Purok 2, San Jose Street",Pasong Callos,5,3,1,0,09170592644,14.968718,120.969732,
-H-0141,Liza Pascual,"Purok 1, Katubusan Street",Pasong Intsik,4,3,0,0,09171819217,14.966733,120.968313,
-H-0142,Ana Yson,"Purok 1, Bonifacio Street",Pasong Intsik,7,2,2,0,09172518667,14.963372,120.967934,
-H-0143,Carlos Espino,"Purok 6, Katubusan Street",Pasong Intsik,1,0,1,0,09177106067,14.962794,120.963629,
-H-0144,Divina Reyes,"Purok 6, Jacinto Street",Pasong Intsik,1,0,0,0,09175047714,14.963987,120.968761,
-H-0145,Ferdinand Domingo,"Purok 1, P. Burgos Street",Pasong Intsik,8,1,1,0,09173800286,14.965588,120.968304,Pregnant member
-H-0146,Carlos Espino,"Purok 2, Burgos Street",Pasong Intsik,5,2,2,0,09179769597,14.963159,120.968115,Elderly resident living alone
-H-0147,Miguel Marquez,"Purok 5, M.H. del Pilar Street",Pinacpinacan,7,1,0,0,09171097060,14.953246,120.975823,
-H-0148,Riza Gutierrez,"Purok 2, Aguinaldo Street",Pinacpinacan,1,0,1,0,09171492855,14.948033,120.974844,
-H-0149,Noli Gutierrez,"Purok 3, M.H. del Pilar Street",Pinacpinacan,4,2,1,0,09179533650,14.949672,120.975259,Assisted breathing device
-H-0150,Maria Santos,"Purok 5, Bonifacio Street",Pinacpinacan,3,2,1,0,09171412665,14.953139,120.975404,
-H-0151,Imelda Cruz,"Purok 5, Quezon Street",Pinacpinacan,4,0,1,0,09178314716,14.953398,120.972784,
-H-0152,Elena Reyes,"Purok 1, Gov. Padilla Street",Pinacpinacan,3,0,1,1,09177655764,14.950995,120.974495,
-H-0153,Lourdes Cruz,"Purok 3, Mabini Street",Pinacpinacan,4,2,1,0,09176066600,14.949252,120.976232,
-H-0154,Rogelio Santos,"Purok 4, Burgos Street",Pinacpinacan,8,3,1,0,09176614940,14.94991,120.971478,
-H-0155,Isagani Domingo,"Purok 5, Jacinto Street",Poblacion,2,0,1,0,09176595517,14.954577,120.962082,Recently relocated from flood-prone area
-H-0156,Gregorio Santos,"Purok 5, Mabini Street",Poblacion,2,0,2,0,09171323898,14.959881,120.965578,
-H-0157,Elena Carpio,"Purok 2, Burgos Street",Poblacion,4,3,0,0,09173001977,14.95656,120.959928,
-H-0158,Luzviminda Torres,"Purok 2, M. Hizon Street",Poblacion,6,3,0,0,09171466129,14.954483,120.961791,
-H-0159,Antonio Reyes,"Purok 1, M.H. del Pilar Street",Poblacion,6,1,1,0,09176218847,14.955477,120.965652,No electricity connection
-H-0160,Corazon Gonzales,"Purok 4, Bonifacio Street",Poblacion,1,0,0,0,09179036756,14.957358,120.965117,
-H-0161,Pedro Yson,"Purok 3, Aguinaldo Street",Poblacion,6,0,2,0,09173102812,14.955718,120.965516,
-H-0162,Noli Gutierrez,"Purok 1, Katubusan Street",Pulo,4,2,0,0,09178592889,14.941758,120.967987,
-H-0163,Marites Vergara,"Purok 5, Jacinto Street",Pulo,8,2,0,0,09171102075,14.937366,120.965567,
-H-0164,Antonio Alcantara,"Purok 3, Liberation Street",Pulo,5,3,0,0,09176310742,14.941411,120.968336,
-H-0165,Mario Santianez,"Purok 2, Luna Street",Pulo,6,1,0,1,09179800470,14.937467,120.966491,Two infants in household
-H-0166,Luzviminda Santiago,"Purok 5, San Jose Street",Pulo,5,3,2,0,09174352380,14.937201,120.967377,
-H-0167,Lourdes Pascual,"Purok 4, Mabini Street",Pulo,7,0,1,0,09170834237,14.941118,120.966923,
-H-0168,Carmen Cruz,"Purok 4, Bonifacio Street",Pulong Bayabas,1,1,0,0,09170157026,14.92762,120.975846,Needs wheelchair access
-H-0169,Gregorio Serrano,"Purok 2, Katubusan Street",Pulong Bayabas,3,2,0,0,09171837955,14.926269,120.978304,
-H-0170,Andres Ramos,"Purok 6, Luna Street",Pulong Bayabas,3,0,0,0,09171360951,14.923768,120.978685,
-H-0171,Nestor Del Rosario,"Purok 4, M.H. del Pilar Street",Pulong Bayabas,4,2,1,0,09174765205,14.927012,120.980652,
-H-0172,Ramon Manalo,"Purok 1, Jacinto Street",Pulong Bayabas,4,3,1,0,09170537969,14.922333,120.975834,
-H-0173,Gregorio Alcantara,"Purok 6, Aguinaldo Street",Salapongan,4,3,1,0,09170710428,14.953728,120.982217,
-H-0174,Nestor Navarro,"Purok 5, Luna Street",Salapongan,3,0,2,0,09172569683,14.953668,120.982418,
-H-0175,Ferdinand Tomas,"Purok 1, Mabini Street",Salapongan,7,0,1,0,09173872411,14.953951,120.978337,
-H-0176,Jonalyn Vergara,"Purok 5, Jacinto Street",Salapongan,8,3,2,0,09175636743,14.949444,120.979973,
-H-0177,Carlos Serrano,"Purok 5, Bonifacio Street",Salapongan,6,0,2,0,09171683437,14.949881,120.982215,
-H-0178,Riza Garcia,"Purok 4, M. Hizon Street",Salapongan,4,3,1,0,09173998346,14.948166,120.97855,
-H-0179,Corazon Buenaventura,"Purok 2, Katubusan Street",Salapongan,6,0,0,0,09176393031,14.952808,120.981249,
-H-0180,Edwin Santiago,"Purok 1, Quezon Street",Sampaloc,8,0,2,0,09170681742,14.966617,120.960859,
-H-0181,Jonalyn Mercado,"Purok 4, Aguinaldo Street",Sampaloc,6,3,2,0,09172849819,14.966749,120.956263,
-H-0182,Romeo Reyes,"Purok 6, Bonifacio Street",Sampaloc,4,3,1,0,09171156567,14.965331,120.960145,
-H-0183,Nestor Ong,"Purok 3, M.H. del Pilar Street",Sampaloc,8,2,0,0,09174905608,14.966663,120.959078,
-H-0184,Divina Torres,"Purok 5, Burgos Street",Sampaloc,2,2,0,0,09173812631,14.963174,120.959774,
-H-0185,Imelda Alcantara,"Purok 4, Bonifacio Street",Sampaloc,6,3,0,1,09178430967,14.96539,120.961172,
-H-0186,Maria Santiago,"Purok 5, Liberation Street",Sampaloc,3,2,1,0,09172367264,14.962931,120.960315,
-H-0187,Carmen Bautista,"Purok 3, Quezon Street",San Agustin,4,1,2,0,09179493410,14.942747,120.988229,
-H-0188,Ramon Gutierrez,"Purok 1, P. Burgos Street",San Agustin,3,1,2,0,09178484563,14.942064,120.990035,
-H-0189,Miguel Bautista,"Purok 3, Del Pilar Street",San Agustin,3,2,0,0,09178853947,14.944624,120.992588,
-H-0190,Mercedes Vergara,"Purok 1, Bonifacio Street",San Agustin,7,1,2,0,09179225883,14.939066,120.990175,
-H-0191,Imelda Navarro,"Purok 2, San Jose Street",San Agustin,5,2,2,0,09176164581,14.944465,120.991385,
-H-0192,Reynaldo Soriano,"Purok 1, Liberation Street",San Agustin,4,0,1,0,09173161249,14.944285,120.988797,Single income earner
-H-0193,Fe Buenaventura,"Purok 3, P. Burgos Street",San Agustin,1,1,0,0,09176593585,14.941284,120.991782,
-H-0194,Mario Alcantara,"Purok 4, Gov. Padilla Street",San Agustin,6,2,1,0,09179191134,14.94103,120.990325,Pregnant member
-H-0195,Benito Soriano,"Purok 1, Burgos Street",San Agustin,4,2,2,0,09175237958,14.942042,120.988633,
-H-0196,Andres Serrano,"Purok 1, Quezon Street",San Roque,2,1,0,0,09178668703,14.970757,120.980744,Needs wheelchair access
-H-0197,Gregorio Ilustre,"Purok 6, San Jose Street",San Roque,6,3,0,1,09175575886,14.972011,120.975066,
-H-0198,Ana Ramos,"Purok 1, San Jose Street",San Roque,4,1,1,0,09176688222,14.970641,120.978703,Recently relocated from flood-prone area
-H-0199,Fe Flores,"Purok 6, Jacinto Street",San Roque,7,3,0,0,09176903787,14.970864,120.976417,
-H-0200,Benito Torres,"Purok 2, Luna Street",San Roque,3,1,1,0,09174858756,14.972484,120.977226,
-H-0201,Liza Flores,"Purok 3, Rizal Street",San Roque,1,1,0,0,09172801412,14.972707,120.976778,
-H-0202,Antonio Magpayo,"Purok 4, Jacinto Street",San Roque,4,2,0,0,09172450954,14.97137,120.97779,No electricity connection
-H-0203,Carlos Magpayo,"Purok 3, P. Burgos Street",San Roque,6,3,2,0,09170001926,14.972133,120.975529,
-H-0204,Carmen Marquez,"Purok 4, Jacinto Street",Talacsan,3,1,1,1,09177664746,14.986713,120.942193,
-H-0205,Nestor Espino,"Purok 6, San Jose Street",Talacsan,5,1,1,1,09177499778,14.983479,120.937579,
-H-0206,Jose Soriano,"Purok 6, Del Pilar Street",Talacsan,5,0,1,0,09171728668,14.987882,120.938861,
-H-0207,Nestor Gutierrez,"Purok 1, Aguinaldo Street",Talacsan,4,1,0,0,09177130947,14.98679,120.939771,
-H-0208,Riza Torres,"Purok 5, Liberation Street",Talacsan,5,3,1,0,09174741484,14.985366,120.939051,
-H-0209,Liza Del Rosario,"Purok 5, Del Pilar Street",Talacsan,3,0,1,1,09173023366,14.984521,120.93922,
-H-0210,Rogelio Espino,"Purok 1, Luna Street",Talacsan,3,2,0,0,09176538538,14.983001,120.94212,Recently relocated from flood-prone area
-H-0211,Rogelio Lucero,"Purok 5, P. Burgos Street",Talacsan,8,2,0,0,09176554661,14.987583,120.9412,
-H-0212,Imelda Marquez,"Purok 2, Luna Street",Tambubong,4,0,0,0,09177838450,14.935583,120.949664,
-H-0213,Elena Cruz,"Purok 2, Bonifacio Street",Tambubong,4,1,0,0,09173441137,14.935142,120.949508,
-H-0214,Romeo Flores,"Purok 4, Gov. Padilla Street",Tambubong,8,0,1,0,09176981697,14.936124,120.952189,
-H-0215,Elena Aquino,"Purok 6, Bonifacio Street",Tambubong,3,3,0,0,09173041083,14.937524,120.949057,
-H-0216,Divina Pascual,"Purok 3, Gov. Padilla Street",Tambubong,5,2,0,0,09174403420,14.934906,120.950035,
-H-0217,Mercedes Del Rosario,"Purok 5, Rizal Street",Tambubong,4,2,1,0,09174029485,14.939432,120.951172,
-H-0218,Antonio Salazar,"Purok 5, Katubusan Street",Tambubong,2,0,0,0,09170847634,14.937605,120.953338,
-H-0219,Edwin Alcantara,"Purok 4, Liberation Street",Tambubong,2,1,1,0,09173487143,14.936232,120.951219,
-H-0220,Ramon Reyes,"Purok 1, M.H. del Pilar Street",Tukod,5,3,1,0,09177741889,14.94656,120.942194,Single income earner
-H-0221,Jose Espino,"Purok 1, M.H. del Pilar Street",Tukod,4,1,0,0,09177686592,14.948025,120.942395,
-H-0222,Isagani Torres,"Purok 3, Rizal Street",Tukod,6,3,1,0,09170415307,14.948388,120.937648,
-H-0223,Ana Castillo,"Purok 1, Luna Street",Tukod,2,0,1,1,09176255045,14.945764,120.93743,
-H-0224,Juan Torres,"Purok 1, Gov. Padilla Street",Tukod,6,2,0,0,09170140014,14.946936,120.942723,
-H-0225,Ferdinand Cruz,"Purok 6, Jacinto Street",Tukod,7,3,0,0,09172392714,14.948538,120.939194,
-H-0226,Marites Santos,"Purok 1, Katubusan Street",Ulingao,4,1,2,0,09179950392,14.988658,120.973583,
-H-0227,Imelda Santiago,"Purok 6, Luna Street",Ulingao,7,3,0,0,09173467751,14.987037,120.971213,
-H-0228,Romeo Soriano,"Purok 6, M.H. del Pilar Street",Ulingao,3,2,0,0,09174869858,14.986152,120.970265,
-H-0229,Ana Reyes,"Purok 2, Bonifacio Street",Ulingao,5,0,2,1,09177249842,14.986639,120.971148,Recently relocated from flood-prone area
-H-0230,Pedro Soriano,"Purok 5, P. Burgos Street",Ulingao,5,2,2,0,09177693850,14.985197,120.96978,
-H-0231,Carlos Santiago,"Purok 6, Jacinto Street",Ulingao,5,1,2,0,09175365369,14.989538,120.973126,
-H-0232,Mercedes Marquez,"Purok 3, Rizal Street",Ulingao,4,3,0,0,09170250013,14.988532,120.970023,
-H-0233,Carmen Soriano,"Purok 1, San Jose Street",Sapang Pahalang,5,3,2,0,09171253428,14.913235,120.989018,
-H-0234,Benito Mercado,"Purok 3, M. Hizon Street",Sapang Pahalang,5,0,0,0,09174636622,14.914767,120.990501,
-H-0235,Elena Torres,"Purok 5, Luna Street",Sapang Pahalang,5,0,0,0,09171248836,14.914769,120.990189,Assisted breathing device
-H-0236,Liza Marquez,"Purok 2, Mabini Street",Sapang Pahalang,5,0,1,0,09171700769,14.917898,120.990805,
-H-0237,Edwin Salazar,"Purok 4, Quezon Street",Sapang Pahalang,5,0,1,0,09179494441,14.914276,120.986722,
-H-0238,Myra Manalo,"Purok 2, Burgos Street",Sapang Pahalang,6,3,0,0,09177492252,14.917263,120.987012,
-H-0239,Jonalyn Bautista,"Purok 3, Mabini Street",Sapang Pahalang,5,2,0,0,09174509729,14.915483,120.989043,
-H-0240,Fe Ilustre,"Purok 1, Liberation Street",Sapang Pahalang,2,0,0,0,09170558086,14.915896,120.989124,No electricity connection
+H-0001,Divina Ong,"Purok 2, San Jose Street",BMA-Balagtas,6,2,0,0,09176773022,14.966776,120.967568,Two infants in household
+H-0002,Benito Serrano,"Purok 2, Quezon Street",BMA-Balagtas,6,3,0,1,09172246884,14.970842,120.967841,
+H-0003,Gregorio Mercado,"Purok 2, Jacinto Street",BMA-Balagtas,6,0,0,0,09178788190,14.966857,120.964553,
+H-0004,Rogelio Gutierrez,"Purok 3, M.H. del Pilar Street",BMA-Balagtas,3,0,2,0,09174252716,14.97064,120.964713,Elderly resident living alone
+H-0005,Luzviminda Mercado,"Purok 1, Katubusan Street",BMA-Balagtas,5,2,0,0,09174726463,14.967194,120.969921,Pregnant member
+H-0006,Jonalyn Aquino,"Purok 2, Aguinaldo Street",BMA-Balagtas,6,0,0,0,09174325589,14.966905,120.964604,Assisted breathing device
+H-0007,Ana Buenaventura,"Purok 1, Del Pilar Street",Banca-banca,3,0,0,0,09177211783,15.024999,120.924209,
+H-0008,Reynaldo Espino,"Purok 5, Katubusan Street",Banca-banca,4,1,2,0,09177001601,15.027076,120.919568,
+H-0009,Juan Domingo,"Purok 1, Del Pilar Street",Banca-banca,5,0,2,0,09173789977,15.026295,120.921767,
+H-0010,Riza Aquino,"Purok 6, Del Pilar Street",Banca-banca,6,1,1,0,09175210492,15.022748,120.922766,
+H-0011,Maria Tomas,"Purok 1, Liberation Street",Banca-banca,6,3,0,0,09179955436,15.025221,120.923906,Elderly resident living alone
+H-0012,Reynaldo Yson,"Purok 1, M.H. del Pilar Street",Banca-banca,1,1,0,0,09170793447,15.021918,120.922383,Recently relocated from flood-prone area
+H-0013,Rogelio Buenaventura,"Purok 5, Katubusan Street",Banca-banca,3,2,0,0,09177066298,15.024999,120.921956,
+H-0014,Edwin Salazar,"Purok 5, Rizal Street",Caingin,3,0,1,0,09171006939,14.972306,120.945789,
+H-0015,Mercedes Navarro,"Purok 3, San Jose Street",Caingin,4,0,0,0,09170232298,14.968761,120.944015,
+H-0016,Cecilia Tomas,"Purok 6, Gov. Padilla Street",Caingin,1,0,0,0,09171529627,14.970271,120.945492,Assisted breathing device
+H-0017,Maria Mercado,"Purok 4, Liberation Street",Caingin,8,3,0,0,09176826198,14.972525,120.944289,
+H-0018,Jose Aquino,"Purok 1, Rizal Street",Caingin,4,0,0,0,09174289469,14.968821,120.946189,
+H-0019,Nestor Carpio,"Purok 2, M. Hizon Street",Caingin,5,1,1,0,09172045070,14.971017,120.941353,No electricity connection
+H-0020,Riza Mercado,"Purok 4, P. Burgos Street",Caingin,6,0,1,1,09176212388,14.969758,120.942784,
+H-0021,Rogelio Mercado,"Purok 6, Del Pilar Street",Coral na Bato,6,3,1,0,09174962828,14.992827,120.980901,
+H-0022,Andres Mendoza,"Purok 3, Jacinto Street",Coral na Bato,7,2,2,0,09174492730,14.993572,120.978055,
+H-0023,Jonalyn Navarro,"Purok 6, P. Burgos Street",Coral na Bato,3,0,1,0,09172274019,14.996065,120.980699,
+H-0024,Antonio Buenaventura,"Purok 5, Quezon Street",Coral na Bato,5,3,2,0,09171380895,14.993077,120.976321,
+H-0025,Cecilia Mercado,"Purok 2, P. Burgos Street",Coral na Bato,7,1,1,1,09178278525,14.995755,120.979756,
+H-0026,Lourdes Magpayo,"Purok 6, Del Pilar Street",Coral na Bato,1,0,1,0,09175824381,14.992841,120.978805,
+H-0027,Corazon Alcantara,"Purok 1, Luna Street",Cruz na Daan,8,0,2,0,09178557414,15.03251,120.933127,
+H-0028,Teresa Aquino,"Purok 3, Rizal Street",Cruz na Daan,4,1,0,1,09172491624,15.030527,120.935742,
+H-0029,Nestor Torres,"Purok 6, Luna Street",Cruz na Daan,5,3,1,0,09175972682,15.032552,120.933923,Elderly resident living alone
+H-0030,Liza Salazar,"Purok 2, Katubusan Street",Cruz na Daan,5,0,0,0,09171437236,15.029411,120.932516,Two infants in household
+H-0031,Gregorio Salazar,"Purok 5, Gov. Padilla Street",Cruz na Daan,5,0,0,0,09173369935,15.029921,120.933151,
+H-0032,Andres Yson,"Purok 3, M. Hizon Street",Cruz na Daan,5,3,1,0,09175377139,15.032117,120.936787,
+H-0033,Romeo Yson,"Purok 4, Burgos Street",Dagat-dagatan,8,0,1,0,09176163174,15.033619,120.912821,Needs wheelchair access
+H-0034,Dante Cruz,"Purok 3, Rizal Street",Dagat-dagatan,6,1,1,1,09178182892,15.036625,120.912786,
+H-0035,Romeo Gutierrez,"Purok 3, M. Hizon Street",Dagat-dagatan,6,0,0,0,09175323272,15.035888,120.91443,
+H-0036,Benito Bautista,"Purok 4, Rizal Street",Dagat-dagatan,4,2,0,0,09177852936,15.035977,120.912403,
+H-0037,Ferdinand Aquino,"Purok 6, Gov. Padilla Street",Dagat-dagatan,4,0,2,1,09172917994,15.03342,120.917415,
+H-0038,Corazon Ong,"Purok 4, Katubusan Street",Dagat-dagatan,6,1,1,0,09172401779,15.031812,120.917379,Pregnant member
+H-0039,Miguel Vergara,"Purok 5, Rizal Street",Dagat-dagatan,6,2,2,1,09175038615,15.031392,120.914674,
+H-0040,Isagani Flores,"Purok 2, Jacinto Street",Diliman I,4,1,0,0,09173226020,15.023951,120.948366,
+H-0041,Marites Castillo,"Purok 4, Jacinto Street",Diliman I,5,1,1,0,09175770337,15.022761,120.94885,
+H-0042,Edwin Mendoza,"Purok 4, Del Pilar Street",Diliman I,6,2,2,0,09175892816,15.022572,120.950859,Recently relocated from flood-prone area
+H-0043,Jose Garcia,"Purok 3, Mabini Street",Diliman I,4,3,0,0,09176939659,15.024081,120.94653,
+H-0044,Andres Mendoza,"Purok 3, Burgos Street",Diliman I,4,0,1,0,09177560007,15.026217,120.949251,
+H-0045,Teresa Flores,"Purok 6, Katubusan Street",Diliman I,4,1,0,0,09176069296,15.025573,120.951131,Recently relocated from flood-prone area
+H-0046,Rogelio Domingo,"Purok 4, Quezon Street",Diliman I,4,2,1,0,09177196384,15.022715,120.947116,
+H-0047,Juan Marquez,"Purok 3, Luna Street",Diliman I,7,0,1,0,09171282727,15.021551,120.947089,
+H-0048,Liza Aquino,"Purok 2, Bonifacio Street",Diliman II,6,3,2,0,09179236452,15.032912,120.951395,No electricity connection
+H-0049,Gregorio Gonzales,"Purok 5, Liberation Street",Diliman II,3,0,1,0,09176004545,15.033203,120.951491,Pregnant member
+H-0050,Teresa Flores,"Purok 6, Mabini Street",Diliman II,2,0,1,0,09177514061,15.030801,120.951182,
+H-0051,Dante Reyes,"Purok 1, Mabini Street",Diliman II,7,3,2,0,09179321469,15.032967,120.955259,
+H-0052,Maria Ong,"Purok 1, Jacinto Street",Diliman II,3,1,2,0,09177768127,15.032194,120.952996,
+H-0053,Miguel Reyes,"Purok 3, Rizal Street",Diliman II,4,1,2,0,09179480494,15.032531,120.953994,
+H-0054,Marites Buenaventura,"Purok 6, Gov. Padilla Street",Diliman II,5,3,2,0,09179301812,15.033562,120.954903,
+H-0055,Edwin Manalo,"Purok 2, Aguinaldo Street",Capihan,4,3,0,0,09178640565,15.001212,120.930855,Elderly resident living alone
+H-0056,Andres Manalo,"Purok 3, Gov. Padilla Street",Capihan,4,3,0,0,09174376761,15.000803,120.929753,
+H-0057,Myra Ramos,"Purok 5, Quezon Street",Capihan,4,0,0,0,09174296371,14.999585,120.932939,
+H-0058,Teresa Marquez,"Purok 1, M. Hizon Street",Capihan,3,3,0,0,09173241255,14.999981,120.932951,
+H-0059,Nestor Tomas,"Purok 2, Gov. Padilla Street",Capihan,6,2,1,1,09171097259,14.996384,120.92974,
+H-0060,Carlos Mercado,"Purok 4, San Jose Street",Capihan,6,3,0,0,09175023226,14.998097,120.932178,
+H-0061,Mario Aquino,"Purok 6, San Jose Street",Libis,3,2,1,0,09175883398,14.955471,120.967435,
+H-0062,Marites Santiago,"Purok 4, M. Hizon Street",Libis,4,1,0,0,09172200844,14.956183,120.969047,
+H-0063,Pedro Santos,"Purok 2, P. Burgos Street",Libis,4,3,1,0,09179338671,14.957566,120.969168,
+H-0064,Mercedes Ilustre,"Purok 5, Burgos Street",Libis,2,1,0,0,09179538276,14.959159,120.968686,Pregnant member
+H-0065,Edwin Marquez,"Purok 1, Mabini Street",Libis,3,2,1,0,09179817320,14.955394,120.96891,
+H-0066,Ana Bautista,"Purok 1, Jacinto Street",Libis,4,3,0,0,09175564559,14.957823,120.969594,Pregnant member
+H-0067,Gregorio Navarro,"Purok 1, Liberation Street",Libis,3,1,1,0,09176963644,14.956584,120.972154,
+H-0068,Isagani Ilustre,"Purok 2, Jacinto Street",Lico,7,2,0,0,09177062058,14.959766,120.956756,
+H-0069,Noli Espino,"Purok 4, Jacinto Street",Lico,3,1,2,0,09175310022,14.958409,120.958623,Pregnant member
+H-0070,Carlos Domingo,"Purok 6, Gov. Padilla Street",Lico,4,3,0,1,09172873606,14.959821,120.957701,
+H-0071,Noli Cruz,"Purok 2, Burgos Street",Lico,4,0,1,0,09172708357,14.962585,120.954011,
+H-0072,Nestor Alcantara,"Purok 5, Gov. Padilla Street",Lico,5,2,2,0,09171398921,14.962497,120.958365,
+H-0073,Dante Gonzales,"Purok 1, Del Pilar Street",Lico,4,1,2,1,09176928486,14.958277,120.955281,
+H-0074,Carmen Alcantara,"Purok 3, Aguinaldo Street",Lico,2,1,0,1,09173598122,14.960864,120.956163,Single income earner
+H-0075,Juan Aquino,"Purok 2, M. Hizon Street",Maasim,2,2,0,0,09178727422,15.036324,120.937646,
+H-0076,Marites Flores,"Purok 3, Del Pilar Street",Maasim,8,3,2,0,09172143137,15.037032,120.93643,
+H-0077,Rosa Garcia,"Purok 4, Katubusan Street",Maasim,3,0,2,0,09178294021,15.033113,120.933775,
+H-0078,Carlos Del Rosario,"Purok 1, Luna Street",Maasim,6,3,0,0,09175054984,15.034115,120.933466,
+H-0079,Mario Vergara,"Purok 4, Liberation Street",Maasim,6,3,0,0,09172161530,15.032303,120.938352,
+H-0080,Maria Villanueva,"Purok 2, Burgos Street",Maasim,5,0,1,0,09178120525,15.038059,120.938457,
+H-0081,Marites Yson,"Purok 5, M. Hizon Street",Maasim,7,0,2,0,09171821731,15.033473,120.93421,Single income earner
+H-0082,Ferdinand Lucero,"Purok 4, Gov. Padilla Street",Mabalas-balas,2,1,1,0,09177403590,15.023327,120.942277,
+H-0083,Luzviminda Flores,"Purok 1, Bonifacio Street",Mabalas-balas,8,2,0,1,09176141917,15.027084,120.943074,Single income earner
+H-0084,Juan Espino,"Purok 1, Del Pilar Street",Mabalas-balas,7,2,1,0,09179403837,15.026418,120.940786,Elderly resident living alone
+H-0085,Mario Tomas,"Purok 3, Bonifacio Street",Mabalas-balas,1,1,0,0,09170294717,15.026317,120.942921,
+H-0086,Gloria Ilustre,"Purok 6, Burgos Street",Mabalas-balas,2,1,1,0,09171590885,15.025116,120.940114,
+H-0087,Gregorio Cruz,"Purok 5, Mabini Street",Mabalas-balas,6,2,0,0,09172644643,15.026911,120.941853,
+H-0088,Carlos Castillo,"Purok 2, Rizal Street",Mabalas-balas,2,1,1,0,09178313563,15.024858,120.944032,
+H-0089,Isagani Soriano,"Purok 6, Del Pilar Street",Mabalas-balas,5,2,1,1,09177274906,15.025303,120.939961,
+H-0090,Pedro Mendoza,"Purok 5, Quezon Street",Mabalas-balas,3,1,0,0,09176479083,15.025239,120.942501,Two infants in household
+H-0091,Marites Buenaventura,"Purok 2, Katubusan Street",Maguinao,5,3,1,0,09177112343,15.023466,120.933868,
+H-0092,Mario Flores,"Purok 6, Liberation Street",Maguinao,5,2,2,0,09175002970,15.02543,120.930681,
+H-0093,Romeo Mercado,"Purok 5, San Jose Street",Maguinao,3,3,0,0,09172583545,15.021198,120.935899,
+H-0094,Lourdes Santianez,"Purok 6, Rizal Street",Maguinao,1,0,0,0,09178716369,15.021013,120.935094,
+H-0095,Myra Domingo,"Purok 6, Del Pilar Street",Maguinao,5,2,2,0,09179349818,15.024314,120.935695,
+H-0096,Cecilia Castillo,"Purok 4, Aguinaldo Street",Maguinao,4,3,0,0,09171259889,15.021984,120.936511,Elderly resident living alone
+H-0097,Fe Magpayo,"Purok 6, Mabini Street",Maguinao,7,1,2,0,09179760818,15.023777,120.934164,Assisted breathing device
+H-0098,Ferdinand Domingo,"Purok 5, San Jose Street",Maronquillo,2,1,0,0,09179184166,14.968442,121.000299,
+H-0099,Gloria Vergara,"Purok 5, P. Burgos Street",Maronquillo,6,0,1,0,09170813043,14.967641,121.000266,
+H-0100,Liza Flores,"Purok 1, Del Pilar Street",Maronquillo,4,3,0,0,09176087549,14.970151,121.000151,
+H-0101,Ana Ong,"Purok 6, San Jose Street",Maronquillo,6,2,2,0,09173772947,14.965486,121.003345,
+H-0102,Fe Ong,"Purok 5, Aguinaldo Street",Maronquillo,6,2,0,0,09176529314,14.965547,120.999687,
+H-0103,Teresa Gonzales,"Purok 3, Gov. Padilla Street",Maronquillo,3,0,1,1,09173186512,14.967107,121.004059,
+H-0104,Dante Del Rosario,"Purok 2, San Jose Street",Maronquillo,3,2,1,0,09171451346,14.965884,120.999888,
+H-0105,Maria Ong,"Purok 6, Liberation Street",Maronquillo,6,3,1,0,09170443677,14.967147,120.998519,
+H-0106,Liza Tomas,"Purok 6, Jacinto Street",Paco,5,2,0,0,09177965345,14.995141,120.906678,
+H-0107,Pedro Domingo,"Purok 2, San Jose Street",Paco,4,3,1,0,09179873541,14.998056,120.903004,
+H-0108,Reynaldo Ocampo,"Purok 6, Aguinaldo Street",Paco,2,0,0,1,09173419349,14.998735,120.905875,
+H-0109,Gloria Buenaventura,"Purok 2, Gov. Padilla Street",Paco,6,2,0,0,09174256656,14.997075,120.905702,
+H-0110,Liza Vergara,"Purok 1, Quezon Street",Paco,3,1,1,0,09170865438,14.996965,120.903345,
+H-0111,Isagani Castillo,"Purok 1, Mabini Street",Paco,4,3,1,0,09172690965,14.997195,120.903539,Elderly resident living alone
+H-0112,Divina Gutierrez,"Purok 5, M. Hizon Street",Paco,6,3,2,0,09171125091,14.996915,120.904999,
+H-0113,Gloria Pascual,"Purok 2, P. Burgos Street",Paco,6,1,2,0,09173793889,14.994891,120.903359,
+H-0114,Elena Yson,"Purok 3, San Jose Street",Paco,4,0,1,0,09172279436,14.993124,120.903574,
+H-0115,Gregorio Ocampo,"Purok 6, M. Hizon Street",Pansumaloc,6,1,1,0,09175771909,15.016283,120.89642,
+H-0116,Andres Tomas,"Purok 5, Gov. Padilla Street",Pansumaloc,4,3,0,0,09171176926,15.019725,120.897073,Single income earner
+H-0117,Elena Domingo,"Purok 3, Rizal Street",Pansumaloc,3,2,0,0,09173510283,15.019514,120.899757,
+H-0118,Divina Lucero,"Purok 2, Del Pilar Street",Pansumaloc,7,1,2,0,09172274453,15.019235,120.896678,No electricity connection
+H-0119,Mario Lucero,"Purok 5, Liberation Street",Pansumaloc,1,1,0,0,09177171246,15.016995,120.895773,
+H-0120,Gregorio Gonzales,"Purok 4, San Jose Street",Pansumaloc,5,0,0,0,09179902625,15.016284,120.89813,
+H-0121,Liza Mercado,"Purok 1, M. Hizon Street",Pansumaloc,4,1,1,0,09176357654,15.016583,120.897046,
+H-0122,Ferdinand Lucero,"Purok 2, Del Pilar Street",Pansumaloc,6,0,2,0,09175776567,15.018596,120.899812,
+H-0123,Cecilia Ramos,"Purok 5, Aguinaldo Street",Pantubig,8,1,0,0,09170213269,14.966289,120.95093,
+H-0124,Liza Buenaventura,"Purok 6, Bonifacio Street",Pantubig,4,0,1,0,09175304116,14.963747,120.955238,
+H-0125,Benito Ramos,"Purok 2, Mabini Street",Pantubig,5,2,1,1,09171011030,14.967457,120.952786,
+H-0126,Gloria Torres,"Purok 3, Katubusan Street",Pantubig,8,2,1,0,09171975919,14.967144,120.950566,
+H-0127,Lourdes Serrano,"Purok 5, Quezon Street",Pantubig,4,2,1,0,09170189106,14.96313,120.951762,Recently relocated from flood-prone area
+H-0128,Ramon Reyes,"Purok 2, San Jose Street",Pasong Bangkal,1,0,0,1,09172849630,15.007247,121.009222,No electricity connection
+H-0129,Edwin Gonzales,"Purok 2, P. Burgos Street",Pasong Bangkal,8,3,1,0,09170805716,15.004304,121.011754,
+H-0130,Rosa Del Rosario,"Purok 4, Aguinaldo Street",Pasong Bangkal,3,0,1,0,09172645042,15.005617,121.009752,
+H-0131,Divina Domingo,"Purok 2, Gov. Padilla Street",Pasong Bangkal,3,1,0,0,09177724827,15.003022,121.007734,
+H-0132,Ferdinand Yson,"Purok 2, Rizal Street",Pasong Bangkal,7,3,1,0,09173500722,15.006362,121.007129,Elderly resident living alone
+H-0133,Lourdes Alcantara,"Purok 6, Luna Street",Pasong Bangkal,4,1,1,0,09171450007,15.003667,121.012337,
+H-0134,Gloria Buenaventura,"Purok 5, Mabini Street",Pasong Callos,4,1,1,0,09171995752,14.998934,120.998289,
+H-0135,Nestor Salazar,"Purok 6, Liberation Street",Pasong Callos,7,2,0,0,09176662931,14.998939,121.003288,
+H-0136,Imelda Ilustre,"Purok 4, Mabini Street",Pasong Callos,3,3,0,0,09179044733,15.000363,121.002923,
+H-0137,Mercedes Santos,"Purok 1, Liberation Street",Pasong Callos,4,0,2,0,09178979660,15.00089,120.999789,
+H-0138,Dante Gutierrez,"Purok 2, Bonifacio Street",Pasong Callos,8,0,0,0,09175681718,14.998357,121.001308,
+H-0139,Dante Ong,"Purok 3, Aguinaldo Street",Pasong Callos,3,0,2,0,09172322886,15.001207,121.002693,
+H-0140,Antonio Santos,"Purok 2, San Jose Street",Pasong Callos,5,3,1,0,09170592644,15.003248,121.000082,
+H-0141,Liza Pascual,"Purok 1, Katubusan Street",Pasong Intsik,4,3,0,0,09171819217,15.013173,120.970653,
+H-0142,Ana Yson,"Purok 1, Bonifacio Street",Pasong Intsik,7,2,2,0,09172518667,15.009812,120.970274,
+H-0143,Carlos Espino,"Purok 6, Katubusan Street",Pasong Intsik,1,0,1,0,09177106067,15.009234,120.965969,
+H-0144,Divina Reyes,"Purok 6, Jacinto Street",Pasong Intsik,1,0,0,0,09175047714,15.010427,120.971101,
+H-0145,Ferdinand Domingo,"Purok 1, P. Burgos Street",Pasong Intsik,8,1,1,0,09173800286,15.012028,120.970644,Pregnant member
+H-0146,Carlos Espino,"Purok 2, Burgos Street",Pasong Intsik,5,2,2,0,09179769597,15.009599,120.970455,Elderly resident living alone
+H-0147,Miguel Marquez,"Purok 5, M.H. del Pilar Street",Pinacpinacan,7,1,0,0,09171097060,15.000476,120.915123,
+H-0148,Riza Gutierrez,"Purok 2, Aguinaldo Street",Pinacpinacan,1,0,1,0,09171492855,14.995263,120.914144,
+H-0149,Noli Gutierrez,"Purok 3, M.H. del Pilar Street",Pinacpinacan,4,2,1,0,09179533650,14.996902,120.914559,Assisted breathing device
+H-0150,Maria Santos,"Purok 5, Bonifacio Street",Pinacpinacan,3,2,1,0,09171412665,15.000369,120.914704,
+H-0151,Imelda Cruz,"Purok 5, Quezon Street",Pinacpinacan,4,0,1,0,09178314716,15.000628,120.912084,
+H-0152,Elena Reyes,"Purok 1, Gov. Padilla Street",Pinacpinacan,3,0,1,1,09177655764,14.998225,120.913795,
+H-0153,Lourdes Cruz,"Purok 3, Mabini Street",Pinacpinacan,4,2,1,0,09176066600,14.996482,120.915532,
+H-0154,Rogelio Santos,"Purok 4, Burgos Street",Pinacpinacan,8,3,1,0,09176614940,14.99714,120.910778,
+H-0155,Isagani Domingo,"Purok 5, Jacinto Street",Poblacion,2,0,1,0,09176595517,14.952797,120.963062,Recently relocated from flood-prone area
+H-0156,Gregorio Santos,"Purok 5, Mabini Street",Poblacion,2,0,2,0,09171323898,14.958101,120.966558,
+H-0157,Elena Carpio,"Purok 2, Burgos Street",Poblacion,4,3,0,0,09173001977,14.95478,120.960908,
+H-0158,Luzviminda Torres,"Purok 2, M. Hizon Street",Poblacion,6,3,0,0,09171466129,14.952703,120.962771,
+H-0159,Antonio Reyes,"Purok 1, M.H. del Pilar Street",Poblacion,6,1,1,0,09176218847,14.953697,120.966632,No electricity connection
+H-0160,Corazon Gonzales,"Purok 4, Bonifacio Street",Poblacion,1,0,0,0,09179036756,14.955578,120.966097,
+H-0161,Pedro Yson,"Purok 3, Aguinaldo Street",Poblacion,6,0,2,0,09173102812,14.953938,120.966496,
+H-0162,Noli Gutierrez,"Purok 1, Katubusan Street",Pulo,4,2,0,0,09178592889,14.963678,121.014497,
+H-0163,Marites Vergara,"Purok 5, Jacinto Street",Pulo,8,2,0,0,09171102075,14.959286,121.012077,
+H-0164,Antonio Alcantara,"Purok 3, Liberation Street",Pulo,5,3,0,0,09176310742,14.963331,121.014846,
+H-0165,Mario Santianez,"Purok 2, Luna Street",Pulo,6,1,0,1,09179800470,14.959387,121.013001,Two infants in household
+H-0166,Luzviminda Santiago,"Purok 5, San Jose Street",Pulo,5,3,2,0,09174352380,14.959121,121.013887,
+H-0167,Lourdes Pascual,"Purok 4, Mabini Street",Pulo,7,0,1,0,09170834237,14.963038,121.013433,
+H-0168,Carmen Cruz,"Purok 4, Bonifacio Street",Pulong Bayabas,1,1,0,0,09170157026,15.01482,120.902476,Needs wheelchair access
+H-0169,Gregorio Serrano,"Purok 2, Katubusan Street",Pulong Bayabas,3,2,0,0,09171837955,15.013469,120.904934,
+H-0170,Andres Ramos,"Purok 6, Luna Street",Pulong Bayabas,3,0,0,0,09171360951,15.010968,120.905315,
+H-0171,Nestor Del Rosario,"Purok 4, M.H. del Pilar Street",Pulong Bayabas,4,2,1,0,09174765205,15.014212,120.907282,
+H-0172,Ramon Manalo,"Purok 1, Jacinto Street",Pulong Bayabas,4,3,1,0,09170537969,15.009533,120.902464,
+H-0173,Gregorio Alcantara,"Purok 6, Aguinaldo Street",Salapongan,4,3,1,0,09170710428,15.022298,120.966077,
+H-0174,Nestor Navarro,"Purok 5, Luna Street",Salapongan,3,0,2,0,09172569683,15.022238,120.966278,
+H-0175,Ferdinand Tomas,"Purok 1, Mabini Street",Salapongan,7,0,1,0,09173872411,15.022521,120.962197,
+H-0176,Jonalyn Vergara,"Purok 5, Jacinto Street",Salapongan,8,3,2,0,09175636743,15.018014,120.963833,
+H-0177,Carlos Serrano,"Purok 5, Bonifacio Street",Salapongan,6,0,2,0,09171683437,15.018451,120.966075,
+H-0178,Riza Garcia,"Purok 4, M. Hizon Street",Salapongan,4,3,1,0,09173998346,15.016736,120.96241,
+H-0179,Corazon Buenaventura,"Purok 2, Katubusan Street",Salapongan,6,0,0,0,09176393031,15.021378,120.965109,
+H-0180,Edwin Santiago,"Purok 1, Quezon Street",Sampaloc,8,0,2,0,09170681742,14.984447,120.928319,
+H-0181,Jonalyn Mercado,"Purok 4, Aguinaldo Street",Sampaloc,6,3,2,0,09172849819,14.984579,120.923723,
+H-0182,Romeo Reyes,"Purok 6, Bonifacio Street",Sampaloc,4,3,1,0,09171156567,14.983161,120.927605,
+H-0183,Nestor Ong,"Purok 3, M.H. del Pilar Street",Sampaloc,8,2,0,0,09174905608,14.984493,120.926538,
+H-0184,Divina Torres,"Purok 5, Burgos Street",Sampaloc,2,2,0,0,09173812631,14.981004,120.927234,
+H-0185,Imelda Alcantara,"Purok 4, Bonifacio Street",Sampaloc,6,3,0,1,09178430967,14.98322,120.928632,
+H-0186,Maria Santiago,"Purok 5, Liberation Street",Sampaloc,3,2,1,0,09172367264,14.980761,120.927775,
+H-0187,Carmen Bautista,"Purok 3, Quezon Street",San Agustin,4,1,2,0,09179493410,15.031167,120.925409,
+H-0188,Ramon Gutierrez,"Purok 1, P. Burgos Street",San Agustin,3,1,2,0,09178484563,15.030484,120.927215,
+H-0189,Miguel Bautista,"Purok 3, Del Pilar Street",San Agustin,3,2,0,0,09178853947,15.033044,120.929768,
+H-0190,Mercedes Vergara,"Purok 1, Bonifacio Street",San Agustin,7,1,2,0,09179225883,15.027486,120.927355,
+H-0191,Imelda Navarro,"Purok 2, San Jose Street",San Agustin,5,2,2,0,09176164581,15.032885,120.928565,
+H-0192,Reynaldo Soriano,"Purok 1, Liberation Street",San Agustin,4,0,1,0,09173161249,15.032705,120.925977,Single income earner
+H-0193,Fe Buenaventura,"Purok 3, P. Burgos Street",San Agustin,1,1,0,0,09176593585,15.029704,120.928962,
+H-0194,Mario Alcantara,"Purok 4, Gov. Padilla Street",San Agustin,6,2,1,0,09179191134,15.02945,120.927505,Pregnant member
+H-0195,Benito Soriano,"Purok 1, Burgos Street",San Agustin,4,2,2,0,09175237958,15.030462,120.925813,
+H-0196,Andres Serrano,"Purok 1, Quezon Street",San Roque,2,1,0,0,09178668703,15.009557,120.935384,Needs wheelchair access
+H-0197,Gregorio Ilustre,"Purok 6, San Jose Street",San Roque,6,3,0,1,09175575886,15.010811,120.929706,
+H-0198,Ana Ramos,"Purok 1, San Jose Street",San Roque,4,1,1,0,09176688222,15.009441,120.933343,Recently relocated from flood-prone area
+H-0199,Fe Flores,"Purok 6, Jacinto Street",San Roque,7,3,0,0,09176903787,15.009664,120.931057,
+H-0200,Benito Torres,"Purok 2, Luna Street",San Roque,3,1,1,0,09174858756,15.011284,120.931866,
+H-0201,Liza Flores,"Purok 3, Rizal Street",San Roque,1,1,0,0,09172801412,15.011507,120.931418,
+H-0202,Antonio Magpayo,"Purok 4, Jacinto Street",San Roque,4,2,0,0,09172450954,15.01017,120.93243,No electricity connection
+H-0203,Carlos Magpayo,"Purok 3, P. Burgos Street",San Roque,6,3,2,0,09170001926,15.010933,120.930169,
+H-0204,Carmen Marquez,"Purok 4, Jacinto Street",Talacsan,3,1,1,1,09177664746,14.961243,120.981373,
+H-0205,Nestor Espino,"Purok 6, San Jose Street",Talacsan,5,1,1,1,09177499778,14.958009,120.976759,
+H-0206,Jose Soriano,"Purok 6, Del Pilar Street",Talacsan,5,0,1,0,09171728668,14.962412,120.978041,
+H-0207,Nestor Gutierrez,"Purok 1, Aguinaldo Street",Talacsan,4,1,0,0,09177130947,14.96132,120.978951,
+H-0208,Riza Torres,"Purok 5, Liberation Street",Talacsan,5,3,1,0,09174741484,14.959896,120.978231,
+H-0209,Liza Del Rosario,"Purok 5, Del Pilar Street",Talacsan,3,0,1,1,09173023366,14.959051,120.9784,
+H-0210,Rogelio Espino,"Purok 1, Luna Street",Talacsan,3,2,0,0,09176538538,14.957531,120.9813,Recently relocated from flood-prone area
+H-0211,Rogelio Lucero,"Purok 5, P. Burgos Street",Talacsan,8,2,0,0,09176554661,14.962113,120.98038,
+H-0212,Imelda Marquez,"Purok 2, Luna Street",Tambubong,4,0,0,0,09177838450,14.967253,120.924084,
+H-0213,Elena Cruz,"Purok 2, Bonifacio Street",Tambubong,4,1,0,0,09173441137,14.966812,120.923928,
+H-0214,Romeo Flores,"Purok 4, Gov. Padilla Street",Tambubong,8,0,1,0,09176981697,14.967794,120.926609,
+H-0215,Elena Aquino,"Purok 6, Bonifacio Street",Tambubong,3,3,0,0,09173041083,14.969194,120.923477,
+H-0216,Divina Pascual,"Purok 3, Gov. Padilla Street",Tambubong,5,2,0,0,09174403420,14.966576,120.924455,
+H-0217,Mercedes Del Rosario,"Purok 5, Rizal Street",Tambubong,4,2,1,0,09174029485,14.971102,120.925592,
+H-0218,Antonio Salazar,"Purok 5, Katubusan Street",Tambubong,2,0,0,0,09170847634,14.969275,120.927758,
+H-0219,Edwin Alcantara,"Purok 4, Liberation Street",Tambubong,2,1,1,0,09173487143,14.967902,120.925639,
+H-0220,Ramon Reyes,"Purok 1, M.H. del Pilar Street",Tukod,5,3,1,0,09177741889,14.99307,121.051544,Single income earner
+H-0221,Jose Espino,"Purok 1, M.H. del Pilar Street",Tukod,4,1,0,0,09177686592,14.994535,121.051745,
+H-0222,Isagani Torres,"Purok 3, Rizal Street",Tukod,6,3,1,0,09170415307,14.994898,121.046998,
+H-0223,Ana Castillo,"Purok 1, Luna Street",Tukod,2,0,1,1,09176255045,14.992274,121.04678,
+H-0224,Juan Torres,"Purok 1, Gov. Padilla Street",Tukod,6,2,0,0,09170140014,14.993446,121.052073,
+H-0225,Ferdinand Cruz,"Purok 6, Jacinto Street",Tukod,7,3,0,0,09172392714,14.995048,121.048544,
+H-0226,Marites Santos,"Purok 1, Katubusan Street",Ulingao,4,1,2,0,09179950392,14.972208,120.914683,
+H-0227,Imelda Santiago,"Purok 6, Luna Street",Ulingao,7,3,0,0,09173467751,14.970587,120.912313,
+H-0228,Romeo Soriano,"Purok 6, M.H. del Pilar Street",Ulingao,3,2,0,0,09174869858,14.969702,120.911365,
+H-0229,Ana Reyes,"Purok 2, Bonifacio Street",Ulingao,5,0,2,1,09177249842,14.970189,120.912248,Recently relocated from flood-prone area
+H-0230,Pedro Soriano,"Purok 5, P. Burgos Street",Ulingao,5,2,2,0,09177693850,14.968747,120.91088,
+H-0231,Carlos Santiago,"Purok 6, Jacinto Street",Ulingao,5,1,2,0,09175365369,14.973088,120.914226,
+H-0232,Mercedes Marquez,"Purok 3, Rizal Street",Ulingao,4,3,0,0,09170250013,14.972082,120.911123,
+H-0233,Carmen Soriano,"Purok 1, San Jose Street",Sapang Pahalang,5,3,2,0,09171253428,14.995695,121.039818,
+H-0234,Benito Mercado,"Purok 3, M. Hizon Street",Sapang Pahalang,5,0,0,0,09174636622,14.997227,121.041301,
+H-0235,Elena Torres,"Purok 5, Luna Street",Sapang Pahalang,5,0,0,0,09171248836,14.997229,121.040989,Assisted breathing device
+H-0236,Liza Marquez,"Purok 2, Mabini Street",Sapang Pahalang,5,0,1,0,09171700769,15.000358,121.041605,
+H-0237,Edwin Salazar,"Purok 4, Quezon Street",Sapang Pahalang,5,0,1,0,09179494441,14.996736,121.037522,
+H-0238,Myra Manalo,"Purok 2, Burgos Street",Sapang Pahalang,6,3,0,0,09177492252,14.999723,121.037812,
+H-0239,Jonalyn Bautista,"Purok 3, Mabini Street",Sapang Pahalang,5,2,0,0,09174509729,14.997943,121.039843,
+H-0240,Fe Ilustre,"Purok 1, Liberation Street",Sapang Pahalang,2,0,0,0,09170558086,14.998356,121.039924,No electricity connection

@@ -18,7 +18,7 @@ import random
 from typing import Any
 
 from app.core.barangays import SAN_RAFAEL_BARANGAYS
-from app.core.location import BARANGAY_CENTROIDS
+from app.core.location import coordinates_for
 
 DATA_SEED = 20260929
 TARGET_HOUSEHOLDS = 240
@@ -161,7 +161,7 @@ def generate_households(rng: random.Random | None = None) -> list[dict[str, Any]
     households: list[dict[str, Any]] = []
     sequence = 1
     for barangay, count in zip(SAN_RAFAEL_BARANGAYS, counts, strict=True):
-        center_lat, center_lng = BARANGAY_CENTROIDS.get(barangay, (14.9571, 120.9629))
+        center_lat, center_lng = coordinates_for(barangay)
         for _ in range(count):
             size = rng.choice([1, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 8])
             children, elderly, pwd = _random_vulnerable_counts(rng, size)
@@ -186,21 +186,24 @@ def generate_households(rng: random.Random | None = None) -> list[dict[str, Any]
 
 
 def generate_centers() -> list[dict[str, Any]]:
-    return [
-        {
-            "name": tuple_[0],
-            "barangay": tuple_[1],
-            "address": f"{tuple_[0]} compound, {tuple_[1]}",
-            "capacity": tuple_[2],
-            "current_occupants": tuple_[3],
-            "facilities": tuple_[4],
-            "contact": tuple_[6],
-            "lat": BARANGAY_CENTROIDS.get(tuple_[1], (14.9571, 120.9629))[0],
-            "lng": BARANGAY_CENTROIDS.get(tuple_[1], (14.9571, 120.9629))[1],
-            "status": tuple_[5],
-        }
-        for tuple_ in DEMO_CENTERS
-    ]
+    centers: list[dict[str, Any]] = []
+    for tuple_ in DEMO_CENTERS:
+        lat, lng = coordinates_for(tuple_[1])
+        centers.append(
+            {
+                "name": tuple_[0],
+                "barangay": tuple_[1],
+                "address": f"{tuple_[0]} compound, {tuple_[1]}",
+                "capacity": tuple_[2],
+                "current_occupants": tuple_[3],
+                "facilities": tuple_[4],
+                "contact": tuple_[6],
+                "lat": lat,
+                "lng": lng,
+                "status": tuple_[5],
+            }
+        )
+    return centers
 
 
 def generate_resources() -> list[dict[str, Any]]:
@@ -238,7 +241,7 @@ def _incident_zone(lat: float, lng: float) -> dict[str, Any]:
 def generate_incidents(now: str = "2026-09-26T07:30:00+00:00") -> list[dict[str, Any]]:
     incidents = []
     for tuple_ in DEMO_INCIDENTS:
-        lat, lng = BARANGAY_CENTROIDS.get(tuple_[2], (14.9571, 120.9629))
+        lat, lng = coordinates_for(tuple_[2])
         incidents.append(
             {
                 "title": tuple_[0],

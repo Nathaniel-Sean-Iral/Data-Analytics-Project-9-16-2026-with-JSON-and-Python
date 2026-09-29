@@ -27,7 +27,14 @@ The system is scoped to the **Municipality of San Rafael, Bulacan** (PSGC `03142
 | `GET /api/location` | Serves the above to any client |
 | `frontend/src/lib/location.ts` | Frontend mirror, used for the map's default viewport |
 
-Municipal center (Poblacion): `14.9571, 120.9629`.
+Municipal center (Poblacion): `14.9581, 120.9637`.
+
+Coordinates are taken from OpenStreetMap (ODbL 1.0) via Nominatim and Photon:
+the San Rafael boundary relation (8404894) for the center and extent, and the
+OSM centroid of each barangay boundary for its marker. Update
+`backend/app/core/location.py` and mirror it in `frontend/src/lib/location.ts`
+and `frontend/src/api/mock.ts`; `backend/tests/test_location.py` fails if the
+copies drift apart.
 
 All bundled data is fabricated sample data for demonstration purposes only — it
 is not a census extract or an official DRRM record.
