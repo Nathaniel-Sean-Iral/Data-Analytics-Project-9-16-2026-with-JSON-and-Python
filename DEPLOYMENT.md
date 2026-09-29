@@ -69,6 +69,31 @@ Demo accounts (`SEED_DEMO_DATA=true`) log in as `admin`, `responder`, or
 `viewer` with `DEMO_PASSWORD`. Disable demo seeding and rotate the password
 before real use.
 
+### Demo dataset
+
+A first boot seeds a deterministic, demo-only San Rafael dataset: ~240
+households across all 34 barangays, 9 evacuation centers, 8 resource types
+(four below threshold, to exercise low-stock alerts), and 3 incidents with
+GeoJSON zones on the map. It is fabricated sample data, not a census extract.
+
+To wipe and re-seed for a clean demo, delete the database and restart the API:
+
+```powershell
+Stop-Process -Name python -Force   # the uvicorn holding the file
+Remove-Item backend\disaster_prep.db
+cd backend
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
+```
+
+Sample files for the import flow (regenerate with
+`backend\python -m scripts.generate_sample_data`):
+
+- `sample-data/households_san_rafael.csv` → `POST /api/households/import` (Households page)
+- `sample-data/households_san_rafael.geojson` → `POST /api/households/import/geojson`
+
+Importing the sample files into a freshly seeded DB is idempotent: rows already
+in the DB are skipped by `household_no` dedupe.
+
 ## Migrations
 
 On a fresh clone `create_all` + seeds run automatically. For schema changes:

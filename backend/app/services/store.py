@@ -17,6 +17,7 @@ from app.models.incident import Incident
 from app.models.resource import ResourceItem
 from app.models.resource_transaction import ResourceTransaction
 from app.models.user import User
+from app.services.demo_data import generate_centers, generate_households, generate_incidents, generate_resources
 from app.services.pagination import PageParams, apply_sort_and_search, build_page
 
 DEMO_USERS = [
@@ -195,47 +196,20 @@ def seed_demo_data():
             db.add_all(
                 [
                     Household(
-                        household_no="H-001",
-                        head_name="Maria Santos",
-                        address="24 Rizal St",
-                        barangay="Poblacion",
-                        size=5,
-                        children_count=2,
-                        elderly_count=1,
-                        pwd_count=0,
-                        contact="09170001234",
-                        lat=14.9574,
-                        lng=120.9634,
-                        notes="Needs wheelchair access",
-                    ),
-                    Household(
-                        household_no="H-002",
-                        head_name="Jose Dela Cruz",
-                        address="12 Mabini Ave",
-                        barangay="San Roque",
-                        size=4,
-                        children_count=1,
-                        elderly_count=1,
-                        pwd_count=1,
-                        contact="09170005678",
-                        lat=14.9703,
-                        lng=120.9785,
-                        notes="Two infants in household",
-                    ),
-                    Household(
-                        household_no="H-003",
-                        head_name="Alicia Ramos",
-                        address="33 Luna Street",
-                        barangay="BMA-Balagtas",
-                        size=3,
-                        children_count=1,
-                        elderly_count=0,
-                        pwd_count=0,
-                        contact="09170009999",
-                        lat=14.9565,
-                        lng=120.9524,
-                        notes="Senior caregiver on site",
-                    ),
+                        household_no=record["household_no"],
+                        head_name=record["head_name"],
+                        address=record["address"],
+                        barangay=record["barangay"],
+                        size=record["size"],
+                        children_count=record["children_count"],
+                        elderly_count=record["elderly_count"],
+                        pwd_count=record["pwd_count"],
+                        contact=record["contact"],
+                        lat=record["lat"],
+                        lng=record["lng"],
+                        notes=record["notes"],
+                    )
+                    for record in generate_households()
                 ]
             )
 
@@ -243,41 +217,18 @@ def seed_demo_data():
             db.add_all(
                 [
                     EvacuationCenter(
-                        name="Poblacion Evacuation Center",
-                        barangay="Poblacion",
-                        address="San Jose Avenue",
-                        capacity=120,
-                        current_occupants=18,
-                        facilities="kitchen,water,power",
-                        contact="09180001111",
-                        lat=14.9578,
-                        lng=120.9642,
-                        status="active",
-                    ),
-                    EvacuationCenter(
-                        name="San Roque Relief Hub",
-                        barangay="San Roque",
-                        address="Mabini Extension",
-                        capacity=80,
-                        current_occupants=12,
-                        facilities="water,power",
-                        contact="09180002222",
-                        lat=14.9692,
-                        lng=120.9788,
-                        status="active",
-                    ),
-                    EvacuationCenter(
-                        name="Maronquillo Safe Haven",
-                        barangay="Maronquillo",
-                        address="Purok 3 Road",
-                        capacity=60,
-                        current_occupants=5,
-                        facilities="kitchen,water",
-                        contact="09180003333",
-                        lat=14.9903,
-                        lng=120.9625,
-                        status="standby",
-                    ),
+                        name=record["name"],
+                        barangay=record["barangay"],
+                        address=record["address"],
+                        capacity=record["capacity"],
+                        current_occupants=record["current_occupants"],
+                        facilities=record["facilities"],
+                        contact=record["contact"],
+                        lat=record["lat"],
+                        lng=record["lng"],
+                        status=record["status"],
+                    )
+                    for record in generate_centers()
                 ]
             )
 
@@ -285,45 +236,16 @@ def seed_demo_data():
             db.add_all(
                 [
                     ResourceItem(
-                        name="Rice",
-                        type="rice",
-                        unit="kg",
-                        quantity_on_hand=420,
-                        threshold=300,
-                        expiry="2027-01-15",
-                        stored_in="Warehouse A",
-                        updated_at="2026-09-25T10:00:00+00:00",
-                    ),
-                    ResourceItem(
-                        name="Water",
-                        type="water",
-                        unit="liters",
-                        quantity_on_hand=1500,
-                        threshold=1200,
-                        expiry="2027-02-01",
-                        stored_in="Warehouse B",
-                        updated_at="2026-09-25T10:00:00+00:00",
-                    ),
-                    ResourceItem(
-                        name="Medicine",
-                        type="medicine",
-                        unit="boxes",
-                        quantity_on_hand=80,
-                        threshold=100,
-                        expiry="2026-12-31",
-                        stored_in="Clinic Store",
-                        updated_at="2026-09-25T10:00:00+00:00",
-                    ),
-                    ResourceItem(
-                        name="Blankets",
-                        type="blankets",
-                        unit="pieces",
-                        quantity_on_hand=180,
-                        threshold=160,
-                        expiry=None,
-                        stored_in="Relief Shelf",
-                        updated_at="2026-09-25T10:00:00+00:00",
-                    ),
+                        name=record["name"],
+                        type=record["type"],
+                        unit=record["unit"],
+                        quantity_on_hand=record["quantity_on_hand"],
+                        threshold=record["threshold"],
+                        expiry=record["expiry"],
+                        stored_in=record["stored_in"],
+                        updated_at=record["updated_at"],
+                    )
+                    for record in generate_resources()
                 ]
             )
 
@@ -331,33 +253,21 @@ def seed_demo_data():
             db.add_all(
                 [
                     Incident(
-                        title="Flooding near creek",
-                        type="flood",
-                        barangay="BMA-Balagtas",
-                        severity="high",
-                        status="responding",
-                        description="Water level rising near the creek after heavy rain.",
-                        reported_at="2026-09-24T08:15:00+00:00",
-                        updated_at="2026-09-25T09:00:00+00:00",
-                        lat=14.9560,
-                        lng=120.9530,
-                        affected_households=18,
-                        reported_by="admin",
-                    ),
-                    Incident(
-                        title="Electrical fire report",
-                        type="fire",
-                        barangay="Poblacion",
-                        severity="moderate",
-                        status="assessing",
-                        description="Small electrical fire reported near a residential unit.",
-                        reported_at="2026-09-25T06:45:00+00:00",
-                        updated_at="2026-09-25T07:15:00+00:00",
-                        lat=14.9585,
-                        lng=120.9660,
-                        affected_households=6,
-                        reported_by="responder",
-                    ),
+                        title=record["title"],
+                        type=record["type"],
+                        barangay=record["barangay"],
+                        severity=record["severity"],
+                        status=record["status"],
+                        description=record["description"],
+                        reported_at=record["reported_at"],
+                        updated_at=record["updated_at"],
+                        lat=record["lat"],
+                        lng=record["lng"],
+                        affected_households=record["affected_households"],
+                        reported_by=record["reported_by"],
+                        zone_geojson=record["zone_geojson"],
+                    )
+                    for record in generate_incidents()
                 ]
             )
 

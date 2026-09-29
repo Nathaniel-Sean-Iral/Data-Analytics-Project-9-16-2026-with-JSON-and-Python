@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 
 from app.services.allocation import haversine_km
+from app.services.store import RESOURCE_TYPE_LABELS
 
 # ---------------------------------------------------------------- pagination
 
@@ -408,8 +409,17 @@ def test_dashboard_does_not_persist_assignments(client, viewer_headers):
 
 def test_scenario_requirements_scale_with_people(client, responder_headers):
     """Relief needs must be computed from people, not household count."""
-    # Bancabanca has no seeded households, so the selected set is fully controlled
-    # here and the assertions below are exact.
+    # Clear any seeded households out of Banca-banca first so the selected set
+    # is fully controlled here and the assertions below are exact.
+    seeded = client.get(
+        "/api/households", params={"barangay": "Banca-banca", "page_size": 200}, headers=responder_headers
+    ).json()
+    for item in seeded["items"]:
+        assert client.delete(f"/api/households/{item['id']}", headers=responder_headers).status_code in (
+            200,
+            204,
+        )
+
     for index in range(6):
         created = client.post(
             "/api/households",
@@ -448,6 +458,5 @@ def test_resource_summary_labels_are_types_not_item_names(client, viewer_headers
     summaries = client.get("/api/resources/summary", headers=viewer_headers).json()
     for summary in summaries:
         assert summary["label"] != summary["type"], "label must be a human label, not the raw type"
-        expected = summary["type"].replace("_", " ").title()
-        assert summary["label"].lower().startswith(expected.split()[0].lower())
+        assert summary["label"] == RESOURCE_TYPE_LABELS[summary["type"]]
         assert summary["gap"] == summary["total_on_hand"] - summary["total_required"]
