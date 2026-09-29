@@ -125,7 +125,10 @@ function buildIncidentZonesGeoJson(
   const points = 24;
   const radius = 0.0018;
   const circles = items
-    .filter((incident) => Number.isFinite(incident.lat) && Number.isFinite(incident.lng))
+    .filter(
+      (incident) =>
+        !incident.zone_geojson?.type && Number.isFinite(incident.lat) && Number.isFinite(incident.lng),
+    )
     .map((incident) => {
       const centerLng = Number(incident.lng);
       const centerLat = Number(incident.lat);
