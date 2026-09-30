@@ -20,12 +20,19 @@ const MAP_STYLES = [
   'https://tiles.openfreemap.org/styles/liberty',
   'https://demotiles.maplibre.org/style.json',
 ] as const;
+<<<<<<< HEAD
 const DEFAULT_CENTER: [number, number] = [MUNICIPALITY_CENTER[1], MUNICIPALITY_CENTER[0]];
+<<<<<<< HEAD
 const MUNICIPALITY_BOUNDS_TUPLE: [[number, number], [number, number]] = [
   [MUNICIPALITY_BOUNDS.minLng, MUNICIPALITY_BOUNDS.minLat],
   [MUNICIPALITY_BOUNDS.maxLng, MUNICIPALITY_BOUNDS.maxLat],
 ];
 const MAX_SEARCH_RESULTS = 8;
+=======
+=======
+const DEFAULT_CENTER: [number, number] = [120.964, 15.00];
+>>>>>>> 9845aeb (Your descriptive commit message here)
+>>>>>>> a941357 (Your descriptive commit message here)
 
 const SEVERITY_COLOR: Record<IncidentSeverity, string> = {
   low: '#10b981',
@@ -412,6 +419,7 @@ export function MapPage() {
       const data = dataRef.current;
 
       if (!map.getSource('households')) {
+<<<<<<< HEAD
         map.addSource('households', { type: 'geojson', data: data.householdGeoJson as GeoJSON.GeoJSON });
       }
 
@@ -443,6 +451,29 @@ export function MapPage() {
             'circle-stroke-width': 2,
           },
         });
+=======
+        map.addSource('households', { type: 'geojson', data: householdGeoJson });
+      } else {
+        (map.getSource('households') as maplibregl.GeoJSONSource | undefined)?.setData(householdGeoJson as any);
+      }
+
+      if (!map.getSource('centers')) {
+        map.addSource('centers', { type: 'geojson', data: centerGeoJson });
+      } else {
+        (map.getSource('centers') as maplibregl.GeoJSONSource | undefined)?.setData(centerGeoJson as any);
+      }
+
+      if (!map.getSource('incidents')) {
+        map.addSource('incidents', { type: 'geojson', data: incidentGeoJson });
+      } else {
+        (map.getSource('incidents') as maplibregl.GeoJSONSource | undefined)?.setData(incidentGeoJson as any);
+      }
+
+      if (!map.getSource('incident-zones')) {
+        map.addSource('incident-zones', { type: 'geojson', data: incidentZoneGeoJson });
+      } else {
+        (map.getSource('incident-zones') as maplibregl.GeoJSONSource | undefined)?.setData(incidentZoneGeoJson as any);
+>>>>>>> a941357 (Your descriptive commit message here)
       }
 
       if (!map.getLayer('households-layer')) {
@@ -578,7 +609,7 @@ export function MapPage() {
     const updateSource = (id: 'households' | 'centers' | 'incidents' | 'incident-zones', data: unknown) => {
       const source = map.getSource(id) as maplibregl.GeoJSONSource | undefined;
       if (source) {
-        source.setData(data as GeoJSON.GeoJSON);
+        source.setData(data as any);
       }
     };
 
@@ -662,6 +693,7 @@ export function MapPage() {
         )}
 
         <div ref={mapContainer} className="absolute inset-0 h-full w-full" />
+<<<<<<< HEAD
 
         {/* Search + barangay filter */}
         <div className="absolute left-3 top-3 z-[600] w-[19rem] max-w-[calc(100%-1.5rem)] space-y-2">
@@ -770,6 +802,13 @@ export function MapPage() {
 
         {/* Layers + legend */}
         <div className="absolute right-3 top-3 z-[600] w-56 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9845aeb (Your descriptive commit message here)
+        <div className="absolute left-3 top-3 z-[600] rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+>>>>>>> a941357 (Your descriptive commit message here)
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
             <Layers className="h-3.5 w-3.5 text-brand-600" />
             Data layers

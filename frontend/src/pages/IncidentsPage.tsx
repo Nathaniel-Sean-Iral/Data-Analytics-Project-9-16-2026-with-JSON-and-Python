@@ -247,10 +247,17 @@ export function IncidentsPage() {
             <Input type="number" min={0} value={form.affected_households} onChange={(e) => set('affected_households', Number(e.target.value))} />
           </FormField>
           <FormField label="Latitude">
+<<<<<<< HEAD
             <Input value={form.lat} onChange={(e) => set('lat', e.target.value)} placeholder="14.9571" />
           </FormField>
           <FormField label="Longitude">
             <Input value={form.lng} onChange={(e) => set('lng', e.target.value)} placeholder="120.9629" />
+=======
+            <Input value={form.lat} onChange={(e) => set('lat', e.target.value)} placeholder="14.9500" />
+          </FormField>
+          <FormField label="Longitude">
+            <Input value={form.lng} onChange={(e) => set('lng', e.target.value)} placeholder="121.1000" />
+>>>>>>> 9845aeb (Your descriptive commit message here)
           </FormField>
           <div className="sm:col-span-2">
             <FormField label="Description">
