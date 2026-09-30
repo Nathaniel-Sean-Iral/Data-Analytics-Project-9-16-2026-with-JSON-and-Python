@@ -132,43 +132,20 @@ function makeHouseholds(count: number): Household[] {
       elderly_count: rand(2) % 3,
       pwd_count: rand(3) % 2,
       contact: `09${String((i * 123456 + 1000000) % 100000000).padStart(8, '0')}`,
-<<<<<<< HEAD
       lat: baseLat + ((i % 5) - 2) * 0.0015,
       lng: baseLng + (((i * 3) % 5) - 2) * 0.0015,
-=======
-      lat: 14.91 + (i % 8) * 0.015,
-      lng: 121.06 + ((i * 3) % 8) * 0.012,
->>>>>>> 9845aeb (Your descriptive commit message here)
     });
   }
   return households;
 }
 
 const centers: EvacuationCenter[] = [
-<<<<<<< HEAD
   { id: 1, name: 'Poblacion Elementary School', barangay: 'Poblacion', address: 'Brgy Hall Rd', capacity: 500, current_occupants: 210, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234001', lat: 14.956, lng: 120.9652, status: 'active' },
   { id: 2, name: 'San Roque Covered Court', barangay: 'San Roque', address: 'Mabini St', capacity: 300, current_occupants: 120, facilities: ['water', 'power'], contact: '09171234002', lat: 15.0095, lng: 120.9334, status: 'active' },
   { id: 3, name: 'Maronquillo High School', barangay: 'Maronquillo', address: 'DRT Highway', capacity: 450, current_occupants: 305, facilities: ['kitchen', 'water', 'power', 'bathrooms', 'clinic'], contact: '09171234003', lat: 14.9681, lng: 121.0019, status: 'active' },
   { id: 4, name: 'BMA-Balagtas Gymnasium', barangay: 'BMA-Balagtas', address: 'Rizal Ave', capacity: 200, current_occupants: 15, facilities: ['water', 'power'], contact: '09171234004', lat: 14.9687, lng: 120.9676, status: 'standby' },
   { id: 5, name: 'Pantubig Barangay Hall', barangay: 'Pantubig', address: 'Pantubig Road', capacity: 150, current_occupants: 88, facilities: ['kitchen', 'water'], contact: '09171234005', lat: 14.9655, lng: 120.953, status: 'active' },
   { id: 6, name: 'Sampaloc Community Center', barangay: 'Sampaloc', address: 'Sampaloc Road', capacity: 400, current_occupants: 240, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234006', lat: 14.9818, lng: 120.9265, status: 'active' },
-=======
-<<<<<<< HEAD
-  { id: 1, name: 'Poblacion Elementary School', barangay: 'Poblacion', address: 'Brgy Hall Rd', capacity: 500, current_occupants: 210, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234001', lat: 14.9578, lng: 120.9642, status: 'active' },
-  { id: 2, name: 'San Roque Covered Court', barangay: 'San Roque', address: 'Mabini St', capacity: 300, current_occupants: 120, facilities: ['water', 'power'], contact: '09171234002', lat: 14.9692, lng: 120.9788, status: 'active' },
-  { id: 3, name: 'Maronquillo High School', barangay: 'Maronquillo', address: 'DRT Highway', capacity: 450, current_occupants: 305, facilities: ['kitchen', 'water', 'power', 'bathrooms', 'clinic'], contact: '09171234003', lat: 14.9903, lng: 120.9625, status: 'active' },
-  { id: 4, name: 'BMA-Balagtas Gymnasium', barangay: 'BMA-Balagtas', address: 'Rizal Ave', capacity: 200, current_occupants: 15, facilities: ['water', 'power'], contact: '09171234004', lat: 14.9565, lng: 120.9524, status: 'standby' },
-  { id: 5, name: 'Pantubig Barangay Hall', barangay: 'Pantubig', address: 'Pantubig Road', capacity: 150, current_occupants: 88, facilities: ['kitchen', 'water'], contact: '09171234005', lat: 14.968, lng: 120.935, status: 'active' },
-  { id: 6, name: 'Sampaloc Community Center', barangay: 'Sampaloc', address: 'Sampaloc Road', capacity: 400, current_occupants: 240, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234006', lat: 14.964, lng: 120.959, status: 'active' },
-=======
-  { id: 1, name: 'Poblacion Elementary School', barangay: 'Poblacion', address: 'Brgy Hall Rd', capacity: 500, current_occupants: 210, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234001', lat: 14.95, lng: 121.09, status: 'active' },
-  { id: 2, name: 'San Roque Covered Court', barangay: 'San Roque', address: 'Mabini St', capacity: 300, current_occupants: 120, facilities: ['water', 'power'], contact: '09171234002', lat: 14.94, lng: 121.08, status: 'active' },
-  { id: 3, name: 'San Juan High School', barangay: 'San Juan', address: 'National Rd', capacity: 450, current_occupants: 305, facilities: ['kitchen', 'water', 'power', 'bathrooms', 'clinic'], contact: '09171234003', lat: 14.97, lng: 121.12, status: 'active' },
-  { id: 4, name: 'Santo Niño Gymnasium', barangay: 'Santo Niño', address: 'Rizal Ave', capacity: 200, current_occupants: 15, facilities: ['water', 'power'], contact: '09171234004', lat: 14.93, lng: 121.06, status: 'standby' },
-  { id: 5, name: 'Bagong Silang Barangay Hall', barangay: 'Bagong Silang', address: 'Diversity Rd', capacity: 150, current_occupants: 88, facilities: ['kitchen', 'water'], contact: '09171234005', lat: 14.98, lng: 121.13, status: 'active' },
-  { id: 6, name: 'Malanday Community Center', barangay: 'Malanday', address: 'Seaside Rd', capacity: 400, current_occupants: 240, facilities: ['kitchen', 'water', 'power', 'bathrooms'], contact: '09171234006', lat: 14.91, lng: 121.07, status: 'active' },
->>>>>>> 9845aeb (Your descriptive commit message here)
->>>>>>> a941357 (Your descriptive commit message here)
 ];
 
 const resources: Resource[] = [
@@ -183,27 +160,11 @@ const resources: Resource[] = [
 ];
 
 const incidents: Incident[] = [
-<<<<<<< HEAD
   { id: 1, title: 'Flash flood due to monsoon rains', type: 'flood', barangay: 'Mabalas-balas', severity: 'high', status: 'responding', description: 'River overflow submerged low-lying streets. Residents moved to Sampaloc Community Center.', reported_at: '2026-09-15T06:15:00Z', updated_at: '2026-09-16T08:00:00Z', lat: 15.0253, lng: 120.9427, affected_households: 45, reported_by: 'MDRRMO' },
   { id: 2, title: 'Fire broke out in residential area', type: 'fire', barangay: 'Poblacion', severity: 'critical', status: 'assessing', description: 'Fire affected 8 houses near the public market. Fire trucks on scene.', reported_at: '2026-09-16T11:40:00Z', updated_at: '2026-09-16T12:10:00Z', lat: 14.9553, lng: 120.9639, affected_households: 8, reported_by: 'BFP' },
   { id: 3, title: 'Landslide along mountain road', type: 'landslide', barangay: 'Coral na Bato', severity: 'moderate', status: 'assessing', description: 'Debris blocked access road; no casualties reported yet.', reported_at: '2026-09-14T14:05:00Z', updated_at: '2026-09-15T07:30:00Z', lat: 14.9942, lng: 120.9792, affected_households: 3, reported_by: 'Barangay Coral na Bato' },
   { id: 4, title: 'Storm surge warning issued', type: 'typhoon', barangay: 'Ulingao', severity: 'low', status: 'reported', description: 'Pre-emptive evacuation being organized ahead of projected storm surge.', reported_at: '2026-09-16T02:00:00Z', updated_at: '2026-09-16T02:00:00Z', lat: 14.9716, lng: 120.9131, affected_households: 20, reported_by: 'PAGASA' },
   { id: 5, title: 'River overflow in low-lying areas', type: 'flood', barangay: 'San Roque', severity: 'high', status: 'responding', description: 'Water level at knee-to-waist height along Mabini St.', reported_at: '2026-09-15T05:45:00Z', updated_at: '2026-09-16T07:00:00Z', lat: 15.0088, lng: 120.9326, affected_households: 32, reported_by: 'MDRRMO' },
-=======
-<<<<<<< HEAD
-  { id: 1, title: 'Flash flood due to monsoon rains', type: 'flood', barangay: 'Mabalas-balas', severity: 'high', status: 'responding', description: 'River overflow submerged low-lying streets. Residents moved to Sampaloc Community Center.', reported_at: '2026-09-15T06:15:00Z', updated_at: '2026-09-16T08:00:00Z', lat: 14.9085, lng: 120.97, affected_households: 45, reported_by: 'MDRRMO' },
-  { id: 2, title: 'Fire broke out in residential area', type: 'fire', barangay: 'Poblacion', severity: 'critical', status: 'assessing', description: 'Fire affected 8 houses near the public market. Fire trucks on scene.', reported_at: '2026-09-16T11:40:00Z', updated_at: '2026-09-16T12:10:00Z', lat: 14.9565, lng: 120.966, affected_households: 8, reported_by: 'BFP' },
-  { id: 3, title: 'Landslide along mountain road', type: 'landslide', barangay: 'Coral na Bato', severity: 'moderate', status: 'assessing', description: 'Debris blocked access road; no casualties reported yet.', reported_at: '2026-09-14T14:05:00Z', updated_at: '2026-09-15T07:30:00Z', lat: 14.925, lng: 120.992, affected_households: 3, reported_by: 'Barangay Coral na Bato' },
-  { id: 4, title: 'Storm surge warning issued', type: 'typhoon', barangay: 'Ulingao', severity: 'low', status: 'reported', description: 'Pre-emptive evacuation being organized ahead of projected storm surge.', reported_at: '2026-09-16T02:00:00Z', updated_at: '2026-09-16T02:00:00Z', lat: 14.988, lng: 120.972, affected_households: 20, reported_by: 'PAGASA' },
-  { id: 5, title: 'River overflow in low-lying areas', type: 'flood', barangay: 'San Roque', severity: 'high', status: 'responding', description: 'Water level at knee-to-waist height along Mabini St.', reported_at: '2026-09-15T05:45:00Z', updated_at: '2026-09-16T07:00:00Z', lat: 14.9698, lng: 120.9782, affected_households: 32, reported_by: 'MDRRMO' },
-=======
-  { id: 1, title: 'Flash flood due to monsoon rains', type: 'flood', barangay: 'Malanday', severity: 'high', status: 'responding', description: 'River overflow submerged low-lying streets. Residents moved to Malanday Community Center.', reported_at: '2026-09-15T06:15:00Z', updated_at: '2026-09-16T08:00:00Z', lat: 14.91, lng: 121.07, affected_households: 45, reported_by: 'MDRRMO' },
-  { id: 2, title: 'Fire broke out in residential area', type: 'fire', barangay: 'Poblacion', severity: 'critical', status: 'assessing', description: 'Fire affected 8 houses near the public market. Fire trucks on scene.', reported_at: '2026-09-16T11:40:00Z', updated_at: '2026-09-16T12:10:00Z', lat: 14.95, lng: 121.09, affected_households: 8, reported_by: 'BFP' },
-  { id: 3, title: 'Landslide along mountain road', type: 'landslide', barangay: 'Kalayaan', severity: 'moderate', status: 'assessing', description: 'Debris blocked access road; no casualties reported yet.', reported_at: '2026-09-14T14:05:00Z', updated_at: '2026-09-15T07:30:00Z', lat: 14.98, lng: 121.15, affected_households: 3, reported_by: 'Barangay Tanod' },
-  { id: 4, title: 'Storm surge warning issued', type: 'typhoon', barangay: 'San Juan', severity: 'low', status: 'reported', description: 'Pre-emptive evacuation being organized ahead of projected storm surge.', reported_at: '2026-09-16T02:00:00Z', updated_at: '2026-09-16T02:00:00Z', lat: 14.96, lng: 121.11, affected_households: 20, reported_by: 'PAGASA' },
-  { id: 5, title: 'River overflow in low-lying areas', type: 'flood', barangay: 'San Roque', severity: 'high', status: 'responding', description: 'Water level at knee-to-waist height along Mabini St.', reported_at: '2026-09-15T05:45:00Z', updated_at: '2026-09-16T07:00:00Z', lat: 14.94, lng: 121.08, affected_households: 32, reported_by: 'MDRRMO' },
->>>>>>> 9845aeb (Your descriptive commit message here)
->>>>>>> a941357 (Your descriptive commit message here)
 ];
 
 const resourceLabels: Record<ResourceType, string> = {

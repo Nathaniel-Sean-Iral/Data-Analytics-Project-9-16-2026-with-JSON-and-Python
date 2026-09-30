@@ -33,13 +33,8 @@ const EMPTY_FORM: HouseholdForm = {
   elderly_count: 0,
   pwd_count: 0,
   contact: '',
-<<<<<<< HEAD
   lat: MUNICIPALITY_CENTER[0],
   lng: MUNICIPALITY_CENTER[1],
-=======
-  lat: 14.95,
-  lng: 121.10,
->>>>>>> 9845aeb (Your descriptive commit message here)
   notes: '',
 };
 

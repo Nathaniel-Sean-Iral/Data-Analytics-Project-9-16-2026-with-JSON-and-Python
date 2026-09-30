@@ -45,13 +45,8 @@ const EMPTY_FORM: CenterForm = {
   current_occupants: 0,
   facilities: ['water', 'power'],
   contact: '',
-<<<<<<< HEAD
   lat: MUNICIPALITY_CENTER[0],
   lng: MUNICIPALITY_CENTER[1],
-=======
-  lat: 14.95,
-  lng: 121.10,
->>>>>>> 9845aeb (Your descriptive commit message here)
   status: 'standby',
 };
 
