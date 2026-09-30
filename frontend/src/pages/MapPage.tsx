@@ -12,7 +12,8 @@ import { BARANGAYS } from '@/api/mock';
 import { cn } from '@/lib/cn';
 import { formatDateTime } from '@/lib/labels';
 import { MUNICIPALITY_BOUNDS, MUNICIPALITY_CENTER } from '@/lib/location';
-import type { IncidentSeverity } from '@/api/types';
+import type { GeoJSON as GeoJSONData } from 'geojson';
+import type { GeoJsonGeometry, IncidentSeverity } from '@/api/types';
 
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -69,6 +70,12 @@ function escapeHtml(value: unknown): string {
     .replace(/'/g, '&#39;');
 }
 
+type PolygonalGeometry = Extract<GeoJsonGeometry, { type: 'Polygon' | 'MultiPolygon' }>;
+
+function isPolygonGeometry(geometry?: GeoJsonGeometry): geometry is PolygonalGeometry {
+  return geometry?.type === 'Polygon' || geometry?.type === 'MultiPolygon';
+}
+
 function buildPointsGeoJson<T extends MapPointItem>(
   items: T[],
   kind: PointKind,
@@ -107,10 +114,10 @@ function buildIncidentZonesGeoJson(
   // Use saved zone polygons when present; otherwise fall back to a small circle
   // around the incident point so every incident still contributes a shape.
   const zones = items
-    .filter((incident) => incident.zone_geojson && incident.zone_geojson.type)
+    .filter((incident) => isPolygonGeometry(incident.zone_geojson))
     .map((incident) => ({
       type: 'Feature' as const,
-      geometry: incident.zone_geojson as GeoJSON.Geometry,
+      geometry: incident.zone_geojson,
       properties: {
         id: incident.id,
         kind: 'incident-zone',
@@ -127,7 +134,7 @@ function buildIncidentZonesGeoJson(
   const circles = items
     .filter(
       (incident) =>
-        !incident.zone_geojson?.type && Number.isFinite(incident.lat) && Number.isFinite(incident.lng),
+        !isPolygonGeometry(incident.zone_geojson) && Number.isFinite(incident.lat) && Number.isFinite(incident.lng),
     )
     .map((incident) => {
       const centerLng = Number(incident.lng);
@@ -367,7 +374,7 @@ export function MapPage() {
     source.setData({
       type: 'FeatureCollection',
       features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: [lng, lat] }, properties: {} }],
-    } as GeoJSON.GeoJSON);
+    } as GeoJSONData);
   }, []);
 
   const focusEntry = useCallback(
@@ -412,31 +419,31 @@ export function MapPage() {
       const data = dataRef.current;
 
       if (!map.getSource('households')) {
-        map.addSource('households', { type: 'geojson', data: data.householdGeoJson as GeoJSON.GeoJSON });
+        map.addSource('households', { type: 'geojson', data: data.householdGeoJson as GeoJSONData });
       } else {
-        (map.getSource('households') as maplibregl.GeoJSONSource | undefined)?.setData(data.householdGeoJson as GeoJSON.GeoJSON);
+        (map.getSource('households') as maplibregl.GeoJSONSource | undefined)?.setData(data.householdGeoJson as GeoJSONData);
       }
 
       if (!map.getSource('centers')) {
-        map.addSource('centers', { type: 'geojson', data: data.centerGeoJson as GeoJSON.GeoJSON });
+        map.addSource('centers', { type: 'geojson', data: data.centerGeoJson as GeoJSONData });
       } else {
-        (map.getSource('centers') as maplibregl.GeoJSONSource | undefined)?.setData(data.centerGeoJson as GeoJSON.GeoJSON);
+        (map.getSource('centers') as maplibregl.GeoJSONSource | undefined)?.setData(data.centerGeoJson as GeoJSONData);
       }
 
       if (!map.getSource('incidents')) {
-        map.addSource('incidents', { type: 'geojson', data: data.incidentGeoJson as GeoJSON.GeoJSON });
+        map.addSource('incidents', { type: 'geojson', data: data.incidentGeoJson as GeoJSONData });
       } else {
-        (map.getSource('incidents') as maplibregl.GeoJSONSource | undefined)?.setData(data.incidentGeoJson as GeoJSON.GeoJSON);
+        (map.getSource('incidents') as maplibregl.GeoJSONSource | undefined)?.setData(data.incidentGeoJson as GeoJSONData);
       }
 
       if (!map.getSource('incident-zones')) {
-        map.addSource('incident-zones', { type: 'geojson', data: data.incidentZoneGeoJson as GeoJSON.GeoJSON });
+        map.addSource('incident-zones', { type: 'geojson', data: data.incidentZoneGeoJson as GeoJSONData });
       } else {
-        (map.getSource('incident-zones') as maplibregl.GeoJSONSource | undefined)?.setData(data.incidentZoneGeoJson as GeoJSON.GeoJSON);
+        (map.getSource('incident-zones') as maplibregl.GeoJSONSource | undefined)?.setData(data.incidentZoneGeoJson as GeoJSONData);
       }
 
       if (!map.getSource('selection')) {
-        map.addSource('selection', { type: 'geojson', data: EMPTY_COLLECTION as unknown as GeoJSON.GeoJSON });
+        map.addSource('selection', { type: 'geojson', data: EMPTY_COLLECTION as unknown as GeoJSONData });
       }
 
       if (!map.getLayer('selection-layer')) {
@@ -599,7 +606,7 @@ export function MapPage() {
   useEffect(() => {
     if (!selectedKey) {
       const source = mapRef.current?.getSource('selection') as maplibregl.GeoJSONSource | undefined;
-      source?.setData(EMPTY_COLLECTION as unknown as GeoJSON.GeoJSON);
+      source?.setData(EMPTY_COLLECTION as unknown as GeoJSONData);
     }
   }, [selectedKey]);
 
@@ -670,8 +677,6 @@ export function MapPage() {
         )}
 
         <div ref={mapContainer} className="absolute inset-0 h-full w-full" />
-
-        {/* Search + barangay filter */}
         <div className="absolute left-3 top-3 z-[600] w-[19rem] max-w-[calc(100%-1.5rem)] space-y-2">
           <div className="relative rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
             <div className="flex items-center gap-2">
@@ -679,16 +684,16 @@ export function MapPage() {
               <input
                 ref={searchInput}
                 value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
+                onChange={(event) => {
+                  setQuery(event.target.value);
                   setActiveResult(0);
                   setSearchOpen(true);
                 }}
                 onFocus={() => setSearchOpen(true)}
                 onBlur={() => window.setTimeout(() => setSearchOpen(false), 150)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && results[activeResult]) {
-                    e.preventDefault();
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && results[activeResult]) {
+                    event.preventDefault();
                     focusEntry(results[activeResult]);
                     setQuery(results[activeResult].title);
                     setSearchOpen(false);
@@ -720,7 +725,7 @@ export function MapPage() {
                     <button
                       key={entry.key}
                       onMouseEnter={() => setActiveResult(index)}
-                      onMouseDown={(e) => e.preventDefault()}
+                      onMouseDown={(event) => event.preventDefault()}
                       onClick={() => {
                         focusEntry(entry);
                         setQuery(entry.title);
@@ -748,17 +753,17 @@ export function MapPage() {
               <LocateFixed className="h-3.5 w-3.5 shrink-0 text-slate-400" />
               <Select
                 value={barangay}
-                onChange={(e) => {
-                  setBarangay(e.target.value);
+                onChange={(event) => {
+                  setBarangay(event.target.value);
                   setSelectedKey(null);
                 }}
                 className="!py-1 text-xs"
                 aria-label="Filter by barangay"
               >
                 <option value="ALL">All barangays</option>
-                {BARANGAYS.map((b) => (
-                  <option key={b} value={b}>
-                    {b}
+                {BARANGAYS.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
                   </option>
                 ))}
               </Select>
@@ -776,8 +781,7 @@ export function MapPage() {
           </p>
         </div>
 
-        {/* Layers + legend */}
-        <div className="absolute right-3 top-3 z-[600] w-56 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+        <div className="absolute bottom-3 left-3 right-3 z-[600] rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:bottom-auto sm:left-auto sm:right-3 sm:top-3 sm:w-56">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-700">
             <Layers className="h-3.5 w-3.5 text-brand-600" />
             Data layers

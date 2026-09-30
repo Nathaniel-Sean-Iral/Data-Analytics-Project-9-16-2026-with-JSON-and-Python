@@ -75,7 +75,29 @@ def test_zone_can_be_saved_via_map_endpoint(client, responder_headers, admin_hea
     assert response.status_code == 200
     assert response.json()["zone_geojson"] == polygon
 
+    invalid = client.post(
+        "/api/map/zones",
+        json={"incident_id": incident["id"], "geometry": {"type": "Point", "coordinates": [120.96, 14.95]}},
+        headers=responder_headers,
+    )
+    assert invalid.status_code == 422
+
     client.delete(f"/api/incidents/{incident['id']}", headers=admin_headers)
+
+
+def test_incident_zone_rejects_non_polygon_geometry(client, responder_headers):
+    response = client.post(
+        "/api/incidents",
+        json={
+            "title": "Invalid Zone Test",
+            "type": "flood",
+            "barangay": "Poblacion",
+            "severity": "moderate",
+            "zone_geojson": {"type": "Point", "coordinates": [120.96, 14.95]},
+        },
+        headers=responder_headers,
+    )
+    assert response.status_code == 422
 
 
 def test_layer_requires_valid_layer_name(client, viewer_headers):

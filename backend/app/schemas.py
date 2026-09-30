@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
+from math import isfinite
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import AfterValidator, BaseModel, Field
 
 Role = Literal["admin", "responder", "viewer"]
 IncidentType = Literal["flood", "fire", "earthquake", "landslide", "typhoon", "other"]
@@ -21,6 +22,39 @@ ResourceType = Literal[
     "tents",
     "other",
 ]
+
+
+def _validate_zone_geometry(geometry: dict) -> dict:
+    geometry_type = geometry.get("type")
+    coordinates = geometry.get("coordinates")
+    if geometry_type not in ("Polygon", "MultiPolygon"):
+        raise ValueError("Incident zones must be a GeoJSON Polygon or MultiPolygon")
+    if not isinstance(coordinates, list) or not coordinates:
+        raise ValueError("Incident zone coordinates must not be empty")
+
+    polygons = [coordinates] if geometry_type == "Polygon" else coordinates
+    for polygon in polygons:
+        if not isinstance(polygon, list) or not polygon:
+            raise ValueError("Each incident zone polygon must contain at least one ring")
+        for ring in polygon:
+            if not isinstance(ring, list) or len(ring) < 4:
+                raise ValueError("Each incident zone ring must contain at least four positions")
+            for position in ring:
+                if (
+                    not isinstance(position, list)
+                    or len(position) < 2
+                    or any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in position[:2])
+                    or not all(isfinite(value) for value in position[:2])
+                    or not -180 <= position[0] <= 180
+                    or not -90 <= position[1] <= 90
+                ):
+                    raise ValueError("Incident zone positions must contain valid [longitude, latitude] coordinates")
+            if ring[0] != ring[-1]:
+                raise ValueError("Incident zone rings must be closed")
+    return geometry
+
+
+ZoneGeometry = Annotated[dict, AfterValidator(_validate_zone_geometry)]
 
 
 class User(BaseModel):
@@ -193,7 +227,7 @@ class IncidentBase(BaseModel):
     description: str | None = None
     lat: float | None = None
     lng: float | None = None
-    zone_geojson: dict | None = None
+    zone_geojson: ZoneGeometry | None = None
     affected_households: int | None = None
     reported_by: str | None = None
 
@@ -202,6 +236,7 @@ class Incident(IncidentBase):
     id: int
     reported_at: str
     updated_at: str
+    zone_geojson: dict | None = None
 
 
 class IncidentCreate(IncidentBase):
@@ -217,7 +252,12 @@ class IncidentUpdate(BaseModel):
     description: str | None = None
     lat: float | None = None
     lng: float | None = None
-    zone_geojson: dict | None = None
+    zone_geojson: ZoneGeometry | None = None
+
+
+class IncidentZoneSave(BaseModel):
+    incident_id: int = Field(gt=0)
+    geometry: ZoneGeometry
     affected_households: int | None = None
     reported_by: str | None = None
 

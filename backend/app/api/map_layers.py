@@ -8,6 +8,7 @@ from app.db.session import SessionLocal
 from app.models.center import EvacuationCenter
 from app.models.household import Household
 from app.models.incident import Incident
+from app.schemas import IncidentZoneSave
 
 router = APIRouter(tags=["map"])
 
@@ -146,20 +147,13 @@ def map_layers(
 
 @router.post("/map/zones")
 def save_incident_zone(
-    payload: dict,
+    payload: IncidentZoneSave,
     _user=Depends(require_roles("admin", "responder")),
 ):
     """Attach a GeoJSON polygon to an incident."""
     from app.services.store import update_incident
 
-    incident_id = payload.get("incident_id")
-    geometry = payload.get("geometry")
-    if incident_id is None or not isinstance(geometry, dict):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="incident_id and a GeoJSON geometry object are required",
-        )
-    incident = update_incident(int(incident_id), {"zone_geojson": geometry})
+    incident = update_incident(payload.incident_id, {"zone_geojson": payload.geometry})
     if incident is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incident not found")
     return incident
