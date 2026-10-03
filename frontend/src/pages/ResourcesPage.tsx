@@ -37,7 +37,8 @@ export function ResourcesPage() {
   const summaries = useAsync(() => fetchResourceSummaries());
   const { hasRole } = useAuth();
   const { success, error } = useToast();
-  const canEdit = hasRole('admin');
+  const canEdit = hasRole('responder');
+  const isViewer = !hasRole('responder');
 
   const [adjusting, setAdjusting] = useState<Resource | null>(null);
   const [delta, setDelta] = useState(0);
@@ -173,6 +174,7 @@ export function ResourcesPage() {
         title="Resources"
         description="Stock management for relief supplies. Low-stock items are highlighted for replenishment."
         icon={<Package className="h-5 w-5" />}
+        actions={isViewer ? <Badge tone="slate">View only</Badge> : undefined}
       />
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">

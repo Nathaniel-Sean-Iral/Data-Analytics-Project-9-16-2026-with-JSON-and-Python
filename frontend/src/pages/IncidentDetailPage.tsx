@@ -43,6 +43,7 @@ export function IncidentDetailPage() {
   const [updating, setUpdating] = useState(false);
 
   const canUpdate = hasRole('responder');
+  const isViewer = !hasRole('responder');
 
   const barangayHouseholds = useMemo(() => {
     if (!incident.data || !households.data) return 0;
@@ -112,6 +113,7 @@ export function IncidentDetailPage() {
               <Badge tone={INCIDENT_TYPE_TONES[inc.type]}>{INCIDENT_TYPE_LABELS[inc.type]}</Badge>
               <Badge tone={SEVERITY_TONES[inc.severity]} dot>{inc.severity}</Badge>
               <Badge tone={STATUS_TONES[inc.status]} dot>{STATUS_LABELS[inc.status]}</Badge>
+              {isViewer && <Badge tone="slate">View only</Badge>}
             </div>
           </div>
         </div>

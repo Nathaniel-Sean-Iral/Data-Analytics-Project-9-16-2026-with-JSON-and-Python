@@ -195,7 +195,9 @@ export function HouseholdsPage() {
   const { success, error } = useToast();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const canEdit = hasRole('admin');
+  const canEdit = hasRole('responder');
+  const canDelete = hasRole('admin');
+  const isViewer = !hasRole('responder');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
@@ -338,27 +340,31 @@ export function HouseholdsPage() {
       header: '',
       className: 'text-right',
       render: (r) =>
-        canEdit ? (
+        canEdit || canDelete ? (
           <div className="flex justify-end gap-1">
-            <Button
-              variant="ghost"
-              className="!px-2 !py-1.5"
-              onClick={() => {
-                setEditing(r);
-                setModalOpen(true);
-              }}
-              aria-label={`Edit ${r.household_no}`}
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              className="!px-2 !py-1.5 !text-danger-600 hover:!bg-danger-50"
-              onClick={() => setDeleting(r)}
-              aria-label={`Delete ${r.household_no}`}
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
+            {canEdit && (
+              <Button
+                variant="ghost"
+                className="!px-2 !py-1.5"
+                onClick={() => {
+                  setEditing(r);
+                  setModalOpen(true);
+                }}
+                aria-label={`Edit ${r.household_no}`}
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+            )}
+            {canDelete && (
+              <Button
+                variant="ghost"
+                className="!px-2 !py-1.5 !text-danger-600 hover:!bg-danger-50"
+                onClick={() => setDeleting(r)}
+                aria-label={`Delete ${r.household_no}`}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
           </div>
         ) : (
           <span className="text-xs text-slate-400">—</span>
@@ -373,7 +379,9 @@ export function HouseholdsPage() {
         description="Registry of households with vulnerable-member breakdown, used by the allocation engine."
         icon={<Users className="h-5 w-5" />}
         actions={
-          canEdit ? (
+          isViewer ? (
+            <Badge tone="slate">View only</Badge>
+          ) : canEdit ? (
             <>
               <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImport} />
               <Button variant="secondary" onClick={() => fileInputRef.current?.click()}>

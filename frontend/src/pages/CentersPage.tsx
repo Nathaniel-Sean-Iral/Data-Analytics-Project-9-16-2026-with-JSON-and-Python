@@ -173,7 +173,8 @@ export function CentersPage() {
   const { data, loading, refetch } = useAsync(() => fetchCenters());
   const { hasRole } = useAuth();
   const { success, error } = useToast();
-  const canEdit = hasRole('admin');
+  const canEdit = hasRole('responder');
+  const isViewer = !hasRole('responder');
 
   const [detail, setDetail] = useState<EvacuationCenter | null>(null);
   const [editing, setEditing] = useState<EvacuationCenter | null>(null);
@@ -211,7 +212,9 @@ export function CentersPage() {
         description="Facilities where affected households are assigned during operations."
         icon={<Building2 className="h-5 w-5" />}
         actions={
-          canEdit ? (
+          isViewer ? (
+            <Badge tone="slate">View only</Badge>
+          ) : canEdit ? (
             <Button
               onClick={() => {
                 setEditing(null);

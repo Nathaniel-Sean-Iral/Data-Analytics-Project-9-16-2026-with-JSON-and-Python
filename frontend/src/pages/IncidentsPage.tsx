@@ -50,6 +50,7 @@ export function IncidentsPage() {
   const { hasRole } = useAuth();
   const { success, error } = useToast();
   const canCreate = hasRole('responder');
+  const isViewer = !hasRole('responder');
 
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<NewIncidentForm>(EMPTY_INCIDENT);
@@ -167,7 +168,9 @@ export function IncidentsPage() {
         description="Reported hazards and emergencies across the municipality."
         icon={<Siren className="h-5 w-5" />}
         actions={
-          canCreate ? (
+          isViewer ? (
+            <Badge tone="slate">View only</Badge>
+          ) : canCreate ? (
             <>
               <Button
                 variant="secondary"
