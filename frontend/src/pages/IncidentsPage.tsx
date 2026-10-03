@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { Input, Select, Textarea, FormField } from '@/components/ui/form';
 import { useToast } from '@/components/ui/toast';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import { useAsync } from '@/lib/useAsync';
 import { fetchIncidents, createIncident, updateIncidentStatus } from '@/api/services';
 import { BARANGAYS } from '@/api/mock';
@@ -47,10 +47,9 @@ const EMPTY_INCIDENT: NewIncidentForm = {
 
 export function IncidentsPage() {
   const { data, loading, refetch } = useAsync(() => fetchIncidents());
-  const { hasRole } = useAuth();
   const { success, error } = useToast();
-  const canCreate = hasRole('responder');
-  const isViewer = !hasRole('responder');
+  const { can, isViewer } = usePermissions();
+  const canCreate = can('incident:create');
 
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<NewIncidentForm>(EMPTY_INCIDENT);

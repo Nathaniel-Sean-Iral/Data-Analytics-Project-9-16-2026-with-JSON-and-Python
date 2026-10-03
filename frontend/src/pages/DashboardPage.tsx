@@ -35,7 +35,7 @@ import {
   STATUS_TONES,
   formatDateTime,
 } from '@/lib/labels';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import type { CenterLoad, DashboardStats, Incident, IncidentSeverity } from '@/api/types';
 
 const SEVERITY_ORDER: Record<IncidentSeverity, number> = {
@@ -233,7 +233,7 @@ function QuickSummaryCard({ s, showActions }: { s: DashboardStats | null; showAc
 }
 
 export function DashboardPage() {
-  const { hasRole } = useAuth();
+  const { isAdmin, isResponder } = usePermissions();
   const stats = useAsync(() => fetchDashboardStats());
   const summaries = useAsync(() => fetchResourceSummaries());
   const incidents = useAsync(() => fetchIncidents());
@@ -248,9 +248,6 @@ export function DashboardPage() {
   }
 
   const s = stats.data;
-  const isAdmin = hasRole('admin');
-  const isResponder = !isAdmin && hasRole('responder');
-
   const activeIncidents = (incidents.data ?? []).filter((i) => i.status !== 'resolved');
   const severityFirst = [...activeIncidents].sort(
     (a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity],

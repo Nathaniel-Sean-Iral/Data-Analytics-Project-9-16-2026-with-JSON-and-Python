@@ -17,7 +17,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button, Spinner } from '@/components/ui/button';
 import { useToast } from '@/components/ui/toast';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import { useAsync } from '@/lib/useAsync';
 import { fetchIncident, updateIncidentStatus, fetchHouseholds, fetchCenters } from '@/api/services';
 import {
@@ -35,15 +35,14 @@ const WORKFLOW: IncidentStatus[] = ['reported', 'assessing', 'responding', 'reso
 
 export function IncidentDetailPage() {
   const { id } = useParams();
-  const { hasRole } = useAuth();
+  const { can, isViewer } = usePermissions();
   const { success, error } = useToast();
   const incident = useAsync(() => fetchIncident(Number(id)));
   const households = useAsync(() => fetchHouseholds());
   const centers = useAsync(() => fetchCenters());
   const [updating, setUpdating] = useState(false);
 
-  const canUpdate = hasRole('responder');
-  const isViewer = !hasRole('responder');
+  const canUpdate = can('incident:update');
 
   const barangayHouseholds = useMemo(() => {
     if (!incident.data || !households.data) return 0;

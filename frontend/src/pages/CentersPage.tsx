@@ -18,7 +18,7 @@ import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { Input, Select, FormField } from '@/components/ui/form';
 import { useToast } from '@/components/ui/toast';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import { useAsync } from '@/lib/useAsync';
 import { fetchCenters, createCenter, updateCenter } from '@/api/services';
 import { BARANGAYS } from '@/api/mock';
@@ -171,10 +171,9 @@ function CenterFormModal({
 
 export function CentersPage() {
   const { data, loading, refetch } = useAsync(() => fetchCenters());
-  const { hasRole } = useAuth();
   const { success, error } = useToast();
-  const canEdit = hasRole('responder');
-  const isViewer = !hasRole('responder');
+  const { can, isViewer } = usePermissions();
+  const canEdit = can('center:update');
 
   const [detail, setDetail] = useState<EvacuationCenter | null>(null);
   const [editing, setEditing] = useState<EvacuationCenter | null>(null);

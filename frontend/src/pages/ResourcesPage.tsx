@@ -17,12 +17,18 @@ import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { Input, Select, FormField } from '@/components/ui/form';
 import { useToast } from '@/components/ui/toast';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import { useAsync } from '@/lib/useAsync';
-import { fetchResources, fetchResourceSummaries, adjustStock, updateResourceThreshold } from '@/api/services';
+import {
+  fetchResources,
+  fetchResourceSummaries,
+  adjustStock,
+  createResource,
+  updateResourceThreshold,
+} from '@/api/services';
 import { RESOURCE_TYPE_LABELS } from '@/lib/labels';
 import { formatNumber, formatDateTime } from '@/lib/labels';
-import type { Resource } from '@/api/types';
+import type { Resource, ResourceType } from '@/api/types';
 
 const ADJUST_REASONS = [
   'New delivery',
@@ -32,13 +38,34 @@ const ADJUST_REASONS = [
   'Transfer to another warehouse',
 ];
 
+const RESOURCE_TYPES = Object.keys(RESOURCE_TYPE_LABELS) as ResourceType[];
+
+interface ResourceForm {
+  name: string;
+  type: ResourceType;
+  unit: string;
+  quantity_on_hand: number;
+  threshold: number;
+  stored_in: string;
+  expiry: string;
+}
+
+const EMPTY_RESOURCE: ResourceForm = {
+  name: '',
+  type: 'rice',
+  unit: 'sacks',
+  quantity_on_hand: 0,
+  threshold: 0,
+  stored_in: '',
+  expiry: '',
+};
+
 export function ResourcesPage() {
   const { data, loading, refetch } = useAsync(() => fetchResources());
   const summaries = useAsync(() => fetchResourceSummaries());
-  const { hasRole } = useAuth();
   const { success, error } = useToast();
-  const canEdit = hasRole('responder');
-  const isViewer = !hasRole('responder');
+  const { can, isViewer } = usePermissions();
+  const canEdit = can('resource:update');
 
   const [adjusting, setAdjusting] = useState<Resource | null>(null);
   const [delta, setDelta] = useState(0);
@@ -46,6 +73,8 @@ export function ResourcesPage() {
   const [saving, setSaving] = useState(false);
   const [thresholdEditing, setThresholdEditing] = useState<Resource | null>(null);
   const [thresholdValue, setThresholdValue] = useState(0);
+  const [createOpen, setCreateOpen] = useState(false);
+  const [form, setForm] = useState<ResourceForm>(EMPTY_RESOURCE);
 
   const lowStock = useMemo(() => (data ?? []).filter((r) => r.quantity_on_hand < r.threshold), [data]);
   const chartData = useMemo(
@@ -68,6 +97,34 @@ export function ResourcesPage() {
       void refetch();
     } catch (err) {
       error(err instanceof Error ? err.message : 'Failed to adjust stock');
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function openCreate() {
+    setForm(EMPTY_RESOURCE);
+    setCreateOpen(true);
+  }
+
+  async function handleCreate() {
+    if (!form.name.trim() || !form.unit.trim()) return;
+    setSaving(true);
+    try {
+      await createResource({
+        name: form.name.trim(),
+        type: form.type,
+        unit: form.unit.trim(),
+        quantity_on_hand: Math.max(0, form.quantity_on_hand),
+        threshold: Math.max(0, form.threshold),
+        stored_in: form.stored_in.trim() || undefined,
+        expiry: form.expiry || undefined,
+      });
+      success(`${form.name.trim()} added to tracked stock`);
+      setCreateOpen(false);
+      void refetch();
+    } catch (err) {
+      error(err instanceof Error ? err.message : 'Failed to add resource');
     } finally {
       setSaving(false);
     }
@@ -174,7 +231,16 @@ export function ResourcesPage() {
         title="Resources"
         description="Stock management for relief supplies. Low-stock items are highlighted for replenishment."
         icon={<Package className="h-5 w-5" />}
-        actions={isViewer ? <Badge tone="slate">View only</Badge> : undefined}
+        actions={
+          isViewer ? (
+            <Badge tone="slate">View only</Badge>
+          ) : canEdit ? (
+            <Button onClick={openCreate}>
+              <Plus className="h-4 w-4" />
+              Add item
+            </Button>
+          ) : undefined
+        }
       />
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -341,6 +407,93 @@ export function ResourcesPage() {
             onChange={(e) => setThresholdValue(Number(e.target.value))}
           />
         </FormField>
+      </Modal>
+
+      <Modal
+        open={createOpen}
+        onClose={() => setCreateOpen(false)}
+        title="Add tracked item"
+        description="Register a supply so availability is measured against requirements."
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setCreateOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleCreate}
+              loading={saving}
+              disabled={!form.name.trim() || !form.unit.trim()}
+            >
+              <Save className="h-4 w-4" />
+              Add item
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <FormField label="Item name" required>
+            <Input
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              placeholder="e.g. 50kg Rice Sack"
+            />
+          </FormField>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <FormField label="Category" required>
+              <Select
+                value={form.type}
+                onChange={(e) => setForm({ ...form, type: e.target.value as ResourceType })}
+              >
+                {RESOURCE_TYPES.map((t) => (
+                  <option key={t} value={t}>
+                    {RESOURCE_TYPE_LABELS[t]}
+                  </option>
+                ))}
+              </Select>
+            </FormField>
+            <FormField label="Unit" required hint="e.g. sacks, boxes, liters">
+              <Input
+                value={form.unit}
+                onChange={(e) => setForm({ ...form, unit: e.target.value })}
+                placeholder="sacks"
+              />
+            </FormField>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <FormField label="Quantity on hand" hint="Starting stock for this item">
+              <Input
+                type="number"
+                min={0}
+                value={form.quantity_on_hand}
+                onChange={(e) => setForm({ ...form, quantity_on_hand: Number(e.target.value) })}
+              />
+            </FormField>
+            <FormField label="Reorder threshold" hint="Flagged low below this level">
+              <Input
+                type="number"
+                min={0}
+                value={form.threshold}
+                onChange={(e) => setForm({ ...form, threshold: Number(e.target.value) })}
+              />
+            </FormField>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <FormField label="Stored in" hint="Warehouse or location">
+              <Input
+                value={form.stored_in}
+                onChange={(e) => setForm({ ...form, stored_in: e.target.value })}
+                placeholder="Optional"
+              />
+            </FormField>
+            <FormField label="Expiry" hint="Leave blank if not perishable">
+              <Input
+                type="date"
+                value={form.expiry}
+                onChange={(e) => setForm({ ...form, expiry: e.target.value })}
+              />
+            </FormField>
+          </div>
+        </div>
       </Modal>
     </div>
   );

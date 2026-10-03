@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { Input, Select, Textarea, FormField } from '@/components/ui/form';
 import { useToast } from '@/components/ui/toast';
-import { useAuth } from '@/auth/AuthContext';
+import { usePermissions } from '@/lib/permissions';
 import { useAsync } from '@/lib/useAsync';
 import {
   fetchHouseholds,
@@ -191,13 +191,13 @@ function ConfirmDeleteModal({
 
 export function HouseholdsPage() {
   const { data, loading, refetch } = useAsync(() => fetchHouseholds());
-  const { hasRole } = useAuth();
   const { success, error } = useToast();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const canEdit = hasRole('responder');
-  const canDelete = hasRole('admin');
-  const isViewer = !hasRole('responder');
+  const { can, isViewer } = usePermissions();
+  const canEdit = can('household:update');
+  const canDelete = can('household:delete');
+  const canImport = can('household:import');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
@@ -384,10 +384,12 @@ export function HouseholdsPage() {
           ) : canEdit ? (
             <>
               <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImport} />
+              {canImport && (
               <Button variant="secondary" onClick={() => fileInputRef.current?.click()}>
                 <FileUp className="h-4 w-4" />
                 Import
               </Button>
+              )}
               <Button
                 onClick={() => {
                   setEditing(null);
